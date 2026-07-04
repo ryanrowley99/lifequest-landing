@@ -46,19 +46,37 @@ body {
   mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 100%);
 }
 
-/* Mountain silhouette — very faint, adventure feel, bottom of hero */
+/* Mountain range — three jagged layers, faint, bottom of hero */
 .starfield::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 260px;
+  height: 300px;
   pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'><path d='M0,215 L110,150 L205,195 L330,115 L455,185 L575,105 L700,175 L830,95 L965,170 L1090,125 L1215,190 L1330,150 L1440,200 L1440,320 L0,320 Z' fill='rgba(168,196,138,0.045)'/><path d='M0,265 L150,205 L295,245 L465,180 L630,240 L810,165 L985,230 L1150,190 L1310,245 L1440,210 L1440,320 L0,320 Z' fill='rgba(168,196,138,0.07)'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'><path d='M0,190 L90,90 L150,150 L230,60 L310,140 L370,100 L450,170 L520,80 L610,160 L680,120 L760,180 L840,70 L930,150 L1010,110 L1090,170 L1170,90 L1260,160 L1330,130 L1440,180 L1440,320 L0,320 Z' fill='rgba(168,196,138,0.035)'/><path d='M0,235 L120,160 L210,205 L330,130 L430,195 L560,145 L660,210 L790,150 L900,205 L1020,165 L1140,215 L1260,175 L1360,220 L1440,195 L1440,320 L0,320 Z' fill='rgba(168,196,138,0.055)'/><path d='M0,275 L160,225 L300,255 L470,210 L640,250 L820,215 L990,255 L1160,225 L1320,260 L1440,235 L1440,320 L0,320 Z' fill='rgba(168,196,138,0.085)'/></svg>");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
+/* Quest path — winding ribbon, narrow at the mountains, wide at the page foot */
+body { position: relative; }
+
+.quest-path {
+  position: absolute;
+  top: 780px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 3000' preserveAspectRatio='none'><path d='M492,0 C460,170 355,330 335,500 C315,670 480,930 550,1100 C620,1270 335,1630 290,1800 C245,1970 390,2230 440,2400 C490,2570 330,2830 310,3000 L650,3000 C620,2820 540,2560 680,2400 C645,2230 415,1960 470,1800 C525,1630 745,1270 670,1100 C595,930 430,670 405,500 C380,330 495,170 508,0 Z' fill='rgba(168,196,138,0.05)'/></svg>");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+header.site, section, .ps, footer, .starfield { position: relative; z-index: 1; }
 
 .starfield > * { position: relative; z-index: 1; }
 

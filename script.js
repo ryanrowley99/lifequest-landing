@@ -101,6 +101,16 @@ if (surveyForm) {
     if (answer && email) {
       try { result = await updateSurvey(email, answer); }
       catch (err) { result = { ok: false, status: 0, body: String(err) }; }
+      if (!result.ok) {
+        try {
+          const res2 = await fetch(`${SUPABASE_URL}/rest/v1/signups`, {
+            method: 'POST',
+            headers: sbHeaders(),
+            body: JSON.stringify({ email, survey_response: answer, source: 'survey-fallback' })
+          });
+          result = { ok: res2.status === 201, status: res2.status, body: 'saved via fallback insert (update matched 0 rows — see task)' };
+        } catch (e2) { /* original result stands */ }
+      }
     }
     if (debugMode) {
       const pre = document.createElement('pre');
