@@ -4,14 +4,19 @@
 
 :root {
   --bg-top: #080b0a;
-  --bg-bottom: #161b1a;
-  --card: rgba(255, 255, 255, 0.04);
-  --card-border: rgba(255, 255, 255, 0.09);
+  --bg-bottom: #121a13;
+  --accent: #a8c48a;
+  --accent-border: rgba(138, 173, 106, 0.22);
+  --accent-faint: rgba(138, 173, 106, 0.07);
+  --card: rgba(138, 173, 106, 0.05);
+  --card-border: rgba(138, 173, 106, 0.16);
   --text-heading: #ffffff;
   --text-body: rgba(255, 255, 255, 0.75);
   --text-muted: rgba(255, 255, 255, 0.5);
   --input-border: rgba(255, 255, 255, 0.2);
 }
+
+.accent { color: var(--accent); }
 
 html { scroll-behavior: smooth; }
 
@@ -111,7 +116,7 @@ header.site { padding: 28px 0 0; text-align: center; }
 
 .signup-form input[type="email"]:focus {
   outline: none;
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(168, 196, 138, 0.6);
 }
 
 .btn {
@@ -170,7 +175,7 @@ header.site { padding: 28px 0 0; text-align: center; }
   font-family: "Inria Serif", Georgia, serif;
   font-weight: 400;
   font-size: 21px;
-  color: var(--text-heading);
+  color: var(--accent);
   margin-bottom: 12px;
 }
 
@@ -194,7 +199,7 @@ header.site { padding: 28px 0 0; text-align: center; }
 .stat-number {
   font-family: "Inria Serif", Georgia, serif;
   font-size: 44px;
-  color: var(--text-heading);
+  color: var(--accent);
   line-height: 1;
   margin-bottom: 14px;
 }
@@ -240,7 +245,7 @@ header.site { padding: 28px 0 0; text-align: center; }
   margin-bottom: 12px;
 }
 
-.pitch-list li::before { content: "→"; position: absolute; left: 0; color: var(--text-heading); }
+.pitch-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
 
 /* PS block */
 .ps {
@@ -271,7 +276,7 @@ textarea {
   text-align: left;
 }
 
-textarea:focus { outline: none; border-color: rgba(255, 255, 255, 0.5); }
+textarea:focus { outline: none; border-color: rgba(168, 196, 138, 0.6); }
 
 .char-count { font-size: 13px; color: var(--text-muted); text-align: right; margin-bottom: 20px; }
 
