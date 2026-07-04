@@ -1,9 +1,9 @@
 // LifeQuest landing — form submit + smooth scroll + thank-you survey
 // Anon key is public-safe by design (INSERT/UPDATE-only RLS on signups table).
 
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';           // e.g. https://abcd1234.supabase.co
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // Supabase → Settings → API → anon public
-const STRIPE_PAYMENT_LINK = 'YOUR_STRIPE_PAYMENT_LINK'; // Stripe → Payment Links → £5 deposit
+const SUPABASE_URL = 'https://rfltqamrgldxckcdgbhl.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmbHRxYW1yZ2xkeGNrY2RnYmhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NTk2MjcsImV4cCI6MjA4NzMzNTYyN30.FN8Z9rbpFpEVDAqP7WgV88ICmCSC33ovc4ClHw32kCA';
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/test_cNi9AS0XLbth7RD1wG9IQ00'; // TEST MODE — swap to live link before marketing traffic
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
