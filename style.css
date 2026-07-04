@@ -4,7 +4,7 @@
 
 :root {
   --bg-top: #080b0a;
-  --bg-bottom: #121a13;
+  --bg-bottom: #1b231c;
   --accent: #a8c48a;
   --accent-border: rgba(138, 173, 106, 0.22);
   --accent-faint: rgba(138, 173, 106, 0.07);
@@ -21,7 +21,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-top) 35%, var(--bg-bottom) 100%);
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-top) 25%, var(--bg-bottom) 100%);
   color: var(--text-body);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -44,6 +44,20 @@ body {
   background-repeat: repeat;
   -webkit-mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 100%);
   mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 100%);
+}
+
+/* Mountain silhouette — very faint, adventure feel, bottom of hero */
+.starfield::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 260px;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'><path d='M0,215 L110,150 L205,195 L330,115 L455,185 L575,105 L700,175 L830,95 L965,170 L1090,125 L1215,190 L1330,150 L1440,200 L1440,320 L0,320 Z' fill='rgba(168,196,138,0.045)'/><path d='M0,265 L150,205 L295,245 L465,180 L630,240 L810,165 L985,230 L1150,190 L1310,245 L1440,210 L1440,320 L0,320 Z' fill='rgba(168,196,138,0.07)'/></svg>");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .starfield > * { position: relative; z-index: 1; }

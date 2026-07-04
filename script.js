@@ -28,12 +28,15 @@ async function insertSignup(email) {
 async function updateSurvey(email, surveyResponse) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/signups?email=eq.${encodeURIComponent(email)}`, {
     method: 'PATCH',
-    headers: sbHeaders(),
+    headers: { ...sbHeaders(), 'Prefer': 'return=representation' },
     body: JSON.stringify({ survey_response: surveyResponse })
   });
   const body = await res.text().catch(() => '');
-  if (!res.ok) console.error('Survey PATCH failed:', res.status, body);
-  return { ok: res.ok, status: res.status, body };
+  let matched = 0;
+  try { matched = JSON.parse(body).length; } catch (e) { /* non-JSON body */ }
+  const ok = res.ok && matched > 0;
+  if (!ok) console.error('Survey PATCH problem:', res.status, 'rows matched:', matched, body.slice(0, 300));
+  return { ok, status: res.status, body: res.ok ? `rows updated: ${matched}` : body.slice(0, 300) };
 }
 
 // ---- Landing page: signup forms ----
