@@ -34,7 +34,7 @@ CLAUDE.md       ← this file
 
 ## Copy source
 
-Copy is LOCKED. Port verbatim from `../landing-page-copy-v1.0.md`. Do not rewrite, do not summarise, do not "improve". The exact wording has been validated.
+Copy is LOCKED. Port verbatim from `../landing-page-copy-v2.0.md`. Do not rewrite, do not summarise, do not "improve". The exact wording has been validated. (v2.0 supersedes v1.0 — FFC framework rewrite, S15.)
 
 Sections:
 1. **Hero** — H1: "You don't have a discipline problem. You have an escape habit." + sub + email form

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You're on the list — LifeQuest</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site">
+    <div class="container">
+      <a href="/" class="wordmark">LifeQuest</a>
+    </div>
+  </header>
+
+  <section class="thanks">
+    <div class="container">
+      <h1>You're on the list.</h1>
+      <h2>One question before you go.</h2>
+      <form id="survey-form" novalidate>
+        <p><strong>What's the one thing in your life you keep meaning to start — and haven't?</strong></p>
+        <textarea id="survey-text" maxlength="200" placeholder="Be honest. Nobody's grading this."></textarea>
+        <p class="char-count" id="char-count">0 / 200</p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" id="skip-btn">Skip</button>
+          <button type="submit" class="btn" id="send-btn">Send it</button>
+        </div>
+      </form>
+      <p class="form-note" style="margin-top: 20px;">Your answer shapes what we build first. We read every single one.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 LifeQuest · <a href="/privacy">Privacy</a> · <a href="mailto:ryanlrowley99@gmail.com">Contact</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
