@@ -17,6 +17,7 @@
 </head>
 <body>
 
+  <div class="starfield">
   <header class="site">
     <div class="container">
       <a href="/" class="wordmark">LifeQuest</a>
@@ -27,7 +28,7 @@
   <section id="hero">
     <div class="container">
       <h1>You don't have a discipline problem.<br>You have an escape habit.</h1>
-      <p>You've tried Notion. Habitica. Streaks. They all failed for the same reason.<br>LifeQuest is the first AI life coach built around that reason.</p>
+      <p class="sub">You've tried Notion. Habitica. Streaks. They all failed for the same reason.<br>LifeQuest is the first AI life coach built around that reason.</p>
       <form class="signup-form" novalidate>
         <input type="email" name="email" placeholder="Your email" required autocomplete="email">
         <button type="submit" class="btn">Reserve my spot</button>
@@ -36,17 +37,28 @@
       <p class="form-note">50 founding spots. £5 refundable deposit locks your place and your lifetime rate.</p>
     </div>
   </section>
+  </div>
 
   <!-- BLOCK 2 — AGITATION -->
   <section id="problem">
-    <div class="container">
+    <div class="container-wide">
       <h2>Here's why everything else failed.</h2>
-      <p class="stat-lead">67% of people who download a gamified habit app quit within four weeks. Nearly double the dropout rate of plain, boring apps.</p>
-      <p>Think about that. The apps designed to be <em>more</em> engaging are <em>more</em> likely to make you quit. Not because the apps are bad. Because they give you points and streaks with no connection to anything you actually care about. You're playing a game you don't know why you're playing.</p>
-      <p>92% of habit-tracking attempts collapse before 60 days. Not because people are lazy. Because external rewards crowd out the internal motivation that makes things stick. The research has known this for 40 years. The apps haven't caught up.</p>
-      <p>And the thing that actually works? Human life coaching. The kind where someone sits with you, understands your specific situation, and helps you see why you keep escaping.</p>
-      <p>That costs £150–300 an hour.</p>
-      <p><strong>LifeQuest is the AI that changes this equation.</strong></p>
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-number">67%</div>
+          <p>of people who download a gamified habit app quit within four weeks — nearly double the dropout rate of plain, boring apps.</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">92%</div>
+          <p>of habit-tracking attempts collapse before 60 days. External rewards crowd out the internal motivation that makes things stick.</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">£150–300/hr</div>
+          <p>is what human life coaching costs — the one thing that actually works, priced out of reach.</p>
+        </div>
+      </div>
+      <p class="bridge">Think about that. The apps designed to be <em>more</em> engaging are <em>more</em> likely to make you quit — because they give you points and streaks with no connection to anything you actually care about. The research has known this for 40 years. The apps haven't caught up.</p>
+      <p class="bridge"><strong>LifeQuest is the AI that changes this equation.</strong></p>
       <p class="sources">Sources: Gamification Hub retention synthesis (2026); University of Rochester SDT lab; UK coaching market data (2025).</p>
     </div>
   </section>
@@ -55,7 +67,7 @@
   <section id="method">
     <div class="container">
       <h2>How LifeQuest actually works.</h2>
-      <p>It's not a tracker. It's not a streak counter. It's a coach that starts with the question no other app has ever asked you — <em>why do you keep escaping?</em> — and builds everything from there.</p>
+      <p class="method-sub">It's not a tracker. It's not a streak counter. It's a coach that starts with the question no other app has ever asked you — <em>why do you keep escaping?</em> — and builds everything from there.</p>
       <div class="cards">
         <div class="card">
           <h3>A coach that gets the why</h3>
@@ -81,6 +93,9 @@
   <section id="founder">
     <div class="container">
       <h2>I built this because I am you.</h2>
+      <div class="founder-grid">
+      <img src="founder.jpg" alt="Ryan Rowley, founder of LifeQuest" class="founder-photo" onerror="this.style.display='none'">
+      <div class="founder-text">
       <p>I'm Ryan. I have a good job. I'm not lazy. I know exactly what I should be doing.</p>
       <p>And for years, I wasn't doing it.</p>
       <p>Every time the task got boring — or hard — or just slightly inconvenient — I found something else to do. Instagram. YouTube. Anything but the thing. I tried Notion. Built the perfect system. Used it for three days. I tried Habitica. Liked the idea. Quit when the game started feeling like a chore.</p>
@@ -90,6 +105,8 @@
       <p>If that's you, get on the list.</p>
       <p>One more thing: this is my first app. I'm not a seasoned founder — I'm someone who got frustrated enough to build the thing that didn't exist. That means your feedback genuinely matters. Not as a courtesy. The people who sign up early will shape what this becomes.</p>
       <p>— Ryan</p>
+      </div>
+      </div>
     </div>
   </section>
 
@@ -97,14 +114,14 @@
   <section id="form">
     <div class="container">
       <h2>Get in before it launches.</h2>
-      <p>LifeQuest launches late 2026. The first 50 people who join the founding cohort get:</p>
+      <p class="pitch-body">LifeQuest launches late 2026. The first 50 people who join the founding cohort get:</p>
       <ul class="pitch-list">
         <li>Lifetime pricing locked in — never pay more than the founding rate, whatever the app costs at launch</li>
         <li>Direct input into what we build first — your answer to the post-signup question shapes the product</li>
         <li>First access on launch day, before anyone on the public waitlist</li>
       </ul>
-      <p>Reserve your spot with a fully refundable £5 deposit. If LifeQuest isn't ready, doesn't ship, or isn't what you hoped — you get it back in full. No questions, no pressure.</p>
-      <p>The £5 isn't the price. It's the signal. It tells us you're serious — and it tells you we're serious too.</p>
+      <p class="pitch-body">Reserve your spot with a fully refundable £5 deposit. If LifeQuest isn't ready, doesn't ship, or isn't what you hoped — you get it back in full. No questions, no pressure.</p>
+      <p class="pitch-body">The £5 isn't the price. It's the signal. It tells us you're serious — and it tells you we're serious too.</p>
       <form class="signup-form" novalidate>
         <input type="email" name="email" placeholder="Your email" required autocomplete="email">
         <button type="submit" class="btn">Reserve my spot — £5 refundable deposit</button>

@@ -31,7 +31,9 @@ async function updateSurvey(email, surveyResponse) {
     headers: sbHeaders(),
     body: JSON.stringify({ survey_response: surveyResponse })
   });
-  return res.ok;
+  const body = await res.text().catch(() => '');
+  if (!res.ok) console.error('Survey PATCH failed:', res.status, body);
+  return { ok: res.ok, status: res.status, body };
 }
 
 // ---- Landing page: signup forms ----
@@ -85,13 +87,26 @@ if (surveyForm) {
 
   skipBtn.addEventListener('click', goToStripe);
 
+  const debugMode = params.get('debug') === '1';
+
   surveyForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const answer = textarea.value.trim().slice(0, 200);
     const sendBtn = document.getElementById('send-btn');
     sendBtn.disabled = true;
+    let result = null;
     if (answer && email) {
-      try { await updateSurvey(email, answer); } catch (err) { /* don't block the redirect */ }
+      try { result = await updateSurvey(email, answer); }
+      catch (err) { result = { ok: false, status: 0, body: String(err) }; }
+    }
+    if (debugMode) {
+      const pre = document.createElement('pre');
+      pre.style.cssText = 'text-align:left;white-space:pre-wrap;font-size:13px;color:#f09595;margin-top:20px;';
+      pre.textContent = 'DEBUG\nemail param: ' + email + '\nanswer sent: ' + (answer ? 'yes' : 'NO — empty') +
+        '\nresult: ' + JSON.stringify(result, null, 2);
+      surveyForm.appendChild(pre);
+      sendBtn.disabled = false;
+      return;
     }
     goToStripe();
   });
