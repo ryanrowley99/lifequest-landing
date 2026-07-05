@@ -39,6 +39,16 @@ async function updateSurvey(email, surveyResponse) {
   return { ok, status: res.status, body: res.ok ? `rows updated: ${matched}` : body.slice(0, 300) };
 }
 
+// ---- Quest path: start at the base of the mountain range ----
+function alignQuestPath() {
+  const path = document.querySelector('.quest-path');
+  const hero = document.querySelector('.starfield');
+  if (path && hero) path.style.top = (hero.offsetHeight - 70) + 'px';
+}
+window.addEventListener('load', alignQuestPath);
+window.addEventListener('resize', alignQuestPath);
+alignQuestPath();
+
 // ---- Landing page: signup forms ----
 document.querySelectorAll('.signup-form').forEach((form) => {
   form.addEventListener('submit', async (e) => {
