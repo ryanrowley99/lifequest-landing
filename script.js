@@ -43,7 +43,7 @@ async function updateSurvey(email, surveyResponse) {
 function alignQuestPath() {
   const path = document.querySelector('.quest-path');
   const hero = document.querySelector('.starfield');
-  if (path && hero) path.style.top = (hero.offsetHeight - 70) + 'px';
+  if (path && hero) path.style.top = hero.offsetHeight + 'px';
 }
 window.addEventListener('load', alignQuestPath);
 window.addEventListener('resize', alignQuestPath);
