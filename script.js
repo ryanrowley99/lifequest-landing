@@ -25,18 +25,18 @@ async function insertSignup(email) {
   return res.status === 201;
 }
 
-async function updateSurvey(email, surveyResponse) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/signups?email=eq.${encodeURIComponent(email)}`, {
-    method: 'PATCH',
-    headers: { ...sbHeaders(), 'Prefer': 'return=representation' },
-    body: JSON.stringify({ survey_response: surveyResponse })
+// Root cause of the old PATCH bug: RLS requires a SELECT policy for UPDATE's
+// WHERE to see rows; anon has none (correctly — open SELECT would expose all
+// emails). Fix: security-definer RPC updates server-side. SQL in project notes.
+async function submitSurvey(email, surveyResponse) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/submit_survey`, {
+    method: 'POST',
+    headers: sbHeaders(),
+    body: JSON.stringify({ p_email: email, p_answer: surveyResponse })
   });
   const body = await res.text().catch(() => '');
-  let matched = 0;
-  try { matched = JSON.parse(body).length; } catch (e) { /* non-JSON body */ }
-  const ok = res.ok && matched > 0;
-  if (!ok) console.error('Survey PATCH problem:', res.status, 'rows matched:', matched, body.slice(0, 300));
-  return { ok, status: res.status, body: res.ok ? `rows updated: ${matched}` : body.slice(0, 300) };
+  if (!res.ok) console.error('Survey RPC problem:', res.status, body.slice(0, 300));
+  return { ok: res.ok, status: res.status, body: res.ok ? 'saved via rpc' : body.slice(0, 300) };
 }
 
 // ---- Quest path: start at the base of the mountain range ----
@@ -109,7 +109,7 @@ if (surveyForm) {
     sendBtn.disabled = true;
     let result = null;
     if (answer && email) {
-      try { result = await updateSurvey(email, answer); }
+      try { result = await submitSurvey(email, answer); }
       catch (err) { result = { ok: false, status: 0, body: String(err) }; }
       if (!result.ok) {
         try {
