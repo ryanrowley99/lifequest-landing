@@ -3,7 +3,7 @@
 
 const SUPABASE_URL = 'https://rfltqamrgldxckcdgbhl.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmbHRxYW1yZ2xkeGNrY2RnYmhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NTk2MjcsImV4cCI6MjA4NzMzNTYyN30.FN8Z9rbpFpEVDAqP7WgV88ICmCSC33ovc4ClHw32kCA';
-const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/test_cNi9AS0XLbth7RD1wG9IQ00'; // TEST MODE — swap to live link before marketing traffic
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/3cI8wO8rpfyn1QSfex6sw00'; // LIVE — real £5 charges (capped at 50 payments)
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
