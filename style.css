@@ -18,7 +18,7 @@
 
 .accent { color: var(--accent); }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background-color: var(--bg-top); }
 
 body {
   background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-top) 25%, var(--bg-bottom) 100%);
@@ -257,6 +257,9 @@ header.site { padding: 28px 0 0; text-align: center; }
 
 .founder-photo {
   width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: top;
   border-radius: 12px;
   border: 1px solid var(--card-border);
 }
