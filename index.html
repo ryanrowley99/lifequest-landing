@@ -13,12 +13,24 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="quest-path" aria-hidden="true"></div>
+  <div class="quest-path" aria-hidden="true">
+    <svg viewBox="0 0 1000 3000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="#a8bdc9" stroke-width="6" stroke-linecap="round" opacity="0.18" vector-effect="non-scaling-stroke">
+        <path vector-effect="non-scaling-stroke" stroke-dasharray="0.1 24" d="M500,0 C520,140 330,280 310,440 C292,590 640,700 660,860 C678,1010 300,1140 280,1300 C262,1450 680,1570 700,1730 C718,1880 320,2010 300,2170 C282,2320 620,2440 640,2600 C655,2720 480,2850 470,3000"/>
+        <circle vector-effect="non-scaling-stroke" cx="310" cy="440" r="9"/>
+        <circle vector-effect="non-scaling-stroke" cx="660" cy="860" r="9"/>
+        <circle vector-effect="non-scaling-stroke" cx="280" cy="1300" r="9"/>
+        <circle vector-effect="non-scaling-stroke" cx="700" cy="1730" r="9"/>
+        <circle vector-effect="non-scaling-stroke" cx="300" cy="2170" r="9"/>
+        <circle vector-effect="non-scaling-stroke" cx="640" cy="2600" r="9"/>
+      </g>
+    </svg>
+  </div>
 
   <div class="starfield">
   <header class="site">
@@ -30,7 +42,7 @@
   <!-- BLOCK 1 — HERO -->
   <section id="hero">
     <div class="container">
-      <h1>Finally finish<br><span class="accent">what you keep starting.</span></h1>
+      <h1>Finally finish<br>what you keep starting.</h1>
       <p class="sub">An AI life coach that builds you <strong>daily quests</strong> and <strong>skill trees for your life</strong> — and <strong>keeps you on track</strong>.</p>
       <form class="signup-form" novalidate>
         <input type="email" name="email" placeholder="Your email" required autocomplete="email">
@@ -42,7 +54,36 @@
   </section>
   </div>
 
-  <!-- BLOCK 2 — AGITATION -->
+  <!-- BLOCK 2 — THE METHOD + PREVIEW -->
+  <section id="method">
+    <div class="container-wide">
+      <h2>Your life, <span class="accent">mapped.</span></h2>
+      <p class="method-sub">An app that starts with the question no one has ever asked you — <em>why do you keep escaping?</em></p>
+      <div class="method-grid">
+        <img src="skill-tree.png" alt="LifeQuest app preview — a Health skill tree showing a meditation habit 18 of 30 days in, growing from 'You began' through 'First week' towards Reading and 10k steps" class="preview-shot" loading="lazy" onerror="this.style.display='none'">
+        <div class="cards">
+          <div class="card">
+            <h3>A coach that gets the why</h3>
+            <p>Every quest connects to something you actually care about.</p>
+          </div>
+          <div class="card">
+            <h3>Your life as a skill tree</h3>
+            <p>Health, career, growth, relationships — watch today's tiny action build tomorrow's life.</p>
+          </div>
+          <div class="card">
+            <h3>No punishment. Ever.</h3>
+            <p>Miss a day? That's data, not failure — so you come back.</p>
+          </div>
+          <div class="card">
+            <h3>Built for the moment you escape</h3>
+            <p>We fix why you reach for your phone — not just when.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOCK 3 — AGITATION -->
   <section id="problem">
     <div class="container-wide">
       <h2>Here's why everything else failed.</h2>
@@ -60,34 +101,8 @@
           <p>is what human life coaching costs — the thing that works, priced out of reach.</p>
         </div>
       </div>
-      <p class="bridge">The more engaging the app, the faster you quit — because the points connect to nothing you actually care about. <strong>LifeQuest exists to flip that: coaching that connects your daily actions to what matters to you, at app prices instead of £200 an hour.</strong></p>
+      <p class="bridge">The points connect to nothing you actually care about — so you quit. <strong>LifeQuest flips that: coaching that ties daily actions to what matters, at app prices — not £200 an hour.</strong></p>
       <p class="sources">Sources: Gamification Hub retention synthesis (2026); University of Rochester SDT lab; UK coaching market data (2025).</p>
-    </div>
-  </section>
-
-  <!-- BLOCK 3 — THE METHOD -->
-  <section id="method">
-    <div class="container">
-      <h2>How LifeQuest actually works.</h2>
-      <p class="method-sub">An app that starts with the question no one has ever asked you — <em>why do you keep escaping?</em></p>
-      <div class="cards">
-        <div class="card">
-          <h3>A coach that gets the why</h3>
-          <p>Every quest connects to something you actually care about.</p>
-        </div>
-        <div class="card">
-          <h3>Your life as a skill tree</h3>
-          <p>Health, career, growth, relationships — watch today's tiny action build tomorrow's life.</p>
-        </div>
-        <div class="card">
-          <h3>No punishment. Ever.</h3>
-          <p>Miss a day? That's data, not failure — so you come back.</p>
-        </div>
-        <div class="card">
-          <h3>Built for the moment you escape</h3>
-          <p>We fix why you reach for your phone — not just when.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -99,7 +114,7 @@
       <img src="founder.jpg" alt="Ryan Rowley, founder of LifeQuest" class="founder-photo" onerror="this.style.display='none'">
       <div class="founder-text">
       <p>I'm Ryan. I have a good job. I'm not lazy. I know exactly what I should be doing — but the moment a task gets boring or life gets hard, I escape to anything but the thing. My perfect Notion system lasted three days. Habitica felt like a chore. And after one bad week, whatever had stuck fell apart.</p>
-      <p>No tool ever asked <em>why do I keep escaping?</em> The answer wasn't discipline — it was meaning. LifeQuest is the coach for the person who already knows, already cares, and keeps stopping anyway. It's my first app, and I'm building it because it didn't exist. Sign up early and you shape what it becomes.</p>
+      <p>No tool ever asked <em>why do I keep escaping?</em> LifeQuest is the coach for the person who already knows, already cares, and keeps stopping anyway. It's my first app, and I'm building it because it didn't exist. Sign up early and you shape what it becomes.</p>
       <p>— Ryan</p>
       </div>
       </div>

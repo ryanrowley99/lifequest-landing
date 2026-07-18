@@ -1,4 +1,4 @@
-/* LifeQuest landing — dark, centered, starfield hero, Inria Serif headings */
+/* LifeQuest landing — dark, centered, starfield hero, Lora headings */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -29,7 +29,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Starfield — static, hero area only, fades out downward */
+/* Hero scene — sky gradient + layered ridges, fades into page bg */
 .starfield {
   position: relative;
 }
@@ -39,25 +39,22 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><g fill='white'><circle cx='42' cy='38' r='1' opacity='0.4'/><circle cx='131' cy='104' r='0.7' opacity='0.25'/><circle cx='219' cy='55' r='1.1' opacity='0.45'/><circle cx='303' cy='142' r='0.6' opacity='0.2'/><circle cx='388' cy='72' r='0.9' opacity='0.35'/><circle cx='465' cy='27' r='0.7' opacity='0.3'/><circle cx='540' cy='118' r='1.2' opacity='0.5'/><circle cx='623' cy='64' r='0.6' opacity='0.2'/><circle cx='704' cy='139' r='0.9' opacity='0.35'/><circle cx='771' cy='42' r='0.8' opacity='0.3'/><circle cx='86' cy='197' r='0.8' opacity='0.3'/><circle cx='174' cy='251' r='1' opacity='0.4'/><circle cx='262' cy='210' r='0.5' opacity='0.18'/><circle cx='349' cy='287' r='0.9' opacity='0.32'/><circle cx='430' cy='224' r='0.7' opacity='0.25'/><circle cx='512' cy='299' r='1.1' opacity='0.42'/><circle cx='597' cy='233' r='0.6' opacity='0.2'/><circle cx='678' cy='305' r='0.8' opacity='0.3'/><circle cx='752' cy='249' r='1' opacity='0.38'/><circle cx='58' cy='341' r='0.7' opacity='0.24'/><circle cx='149' cy='398' r='0.9' opacity='0.33'/><circle cx='240' cy='352' r='0.6' opacity='0.2'/><circle cx='327' cy='420' r='1' opacity='0.36'/><circle cx='415' cy='369' r='0.7' opacity='0.26'/><circle cx='498' cy='441' r='0.8' opacity='0.28'/><circle cx='583' cy='387' r='1.1' opacity='0.4'/><circle cx='665' cy='452' r='0.6' opacity='0.2'/><circle cx='741' cy='401' r='0.9' opacity='0.32'/><circle cx='103' cy='489' r='0.8' opacity='0.28'/><circle cx='195' cy='530' r='0.6' opacity='0.2'/><circle cx='284' cy='497' r='1' opacity='0.34'/><circle cx='371' cy='548' r='0.7' opacity='0.24'/><circle cx='455' cy='508' r='0.9' opacity='0.3'/><circle cx='541' cy='556' r='0.6' opacity='0.18'/><circle cx='629' cy='514' r='0.8' opacity='0.27'/><circle cx='713' cy='561' r='1' opacity='0.33'/><circle cx='25' cy='75' r='0.8' opacity='0.35'/><circle cx='97' cy='22' r='1.1' opacity='0.5'/><circle cx='168' cy='58' r='0.6' opacity='0.25'/><circle cx='255' cy='18' r='0.9' opacity='0.4'/><circle cx='340' cy='40' r='0.7' opacity='0.3'/><circle cx='422' cy='110' r='1' opacity='0.45'/><circle cx='497' cy='68' r='0.6' opacity='0.22'/><circle cx='575' cy='20' r='0.9' opacity='0.38'/><circle cx='655' cy='95' r='1.2' opacity='0.5'/><circle cx='735' cy='15' r='0.7' opacity='0.3'/><circle cx='790' cy='90' r='0.6' opacity='0.25'/><circle cx='60' cy='130' r='1' opacity='0.42'/><circle cx='205' cy='170' r='0.8' opacity='0.32'/><circle cx='290' cy='95' r='0.7' opacity='0.28'/><circle cx='365' cy='165' r='0.6' opacity='0.22'/><circle cx='450' cy='35' r='0.8' opacity='0.34'/><circle cx='530' cy='160' r='0.7' opacity='0.26'/><circle cx='610' cy='128' r='0.9' opacity='0.36'/><circle cx='690' cy='180' r='0.6' opacity='0.22'/><circle cx='765' cy='170' r='0.8' opacity='0.3'/><circle cx='15' cy='225' r='0.7' opacity='0.26'/><circle cx='118' cy='265' r='0.9' opacity='0.34'/><circle cx='233' cy='300' r='0.6' opacity='0.2'/><circle cx='478' cy='250' r='0.8' opacity='0.3'/></g></svg>");
-  background-size: 800px 600px;
-  background-repeat: repeat;
-  -webkit-mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 100%);
-  mask-image: linear-gradient(180deg, black 0%, black 55%, transparent 100%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 640' preserveAspectRatio='xMidYMax slice'><defs><linearGradient id='sky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%234d5559'/><stop offset='0.55' stop-color='%2341494d'/><stop offset='1' stop-color='%233c4448'/></linearGradient><linearGradient id='fade' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23080b0a' stop-opacity='0'/><stop offset='1' stop-color='%23080b0a'/></linearGradient></defs><rect width='1600' height='640' fill='url(%23sky)'/><path fill='%2339424a' d='M0 258 C40 246 90 232 150 234 C210 236 250 252 300 260 C340 266 370 258 410 268 C470 282 520 300 590 322 C680 350 780 382 880 406 C960 424 1030 434 1100 442 L1100 640 L0 640 Z'/><path fill='%23313a43' d='M0 420 C120 408 240 388 350 356 C430 332 500 300 570 288 C620 279 660 278 710 290 C780 306 850 336 930 372 C1030 414 1140 448 1260 468 C1380 486 1500 494 1600 498 L1600 640 L0 640 Z'/><path fill='%2329323b' d='M1600 330 C1540 344 1480 364 1410 392 C1330 424 1250 456 1160 480 C1060 506 950 522 840 532 C700 544 550 550 400 556 L0 566 L0 640 L1600 640 Z'/><path fill='%2310171e' d='M0 462 C70 470 150 490 240 518 C330 546 430 580 520 606 C570 620 610 630 650 640 L0 640 Z'/><path fill='%2305080c' d='M1600 268 C1540 300 1480 340 1410 392 C1330 452 1250 516 1160 572 C1120 597 1080 620 1040 640 L1600 640 Z'/><rect y='470' width='1600' height='170' fill='url(%23fade)'/></svg>");
 }
 
-/* Mountain range — three jagged layers, faint, bottom of hero */
+/* Stars — above the sky, fade out downward */
 .starfield::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 300px;
+  inset: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'><path d='M0,190 L90,90 L150,150 L230,60 L310,140 L370,100 L450,170 L520,80 L610,160 L680,120 L760,180 L840,70 L930,150 L1010,110 L1090,170 L1170,90 L1260,160 L1330,130 L1440,180 L1440,320 L0,320 Z' fill='rgba(168,196,138,0.035)'/><path d='M0,235 L120,160 L210,205 L330,130 L430,195 L560,145 L660,210 L790,150 L900,205 L1020,165 L1140,215 L1260,175 L1360,220 L1440,195 L1440,320 L0,320 Z' fill='rgba(168,196,138,0.055)'/><path d='M0,275 L160,225 L300,255 L470,210 L640,250 L820,215 L990,255 L1160,225 L1320,260 L1440,235 L1440,320 L0,320 Z' fill='rgba(168,196,138,0.085)'/></svg>");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><g fill='white'><circle cx='42' cy='38' r='1' opacity='0.4'/><circle cx='131' cy='104' r='0.7' opacity='0.25'/><circle cx='219' cy='55' r='1.1' opacity='0.45'/><circle cx='303' cy='142' r='0.6' opacity='0.2'/><circle cx='388' cy='72' r='0.9' opacity='0.35'/><circle cx='465' cy='27' r='0.7' opacity='0.3'/><circle cx='540' cy='118' r='1.2' opacity='0.5'/><circle cx='623' cy='64' r='0.6' opacity='0.2'/><circle cx='704' cy='139' r='0.9' opacity='0.35'/><circle cx='771' cy='42' r='0.8' opacity='0.3'/><circle cx='86' cy='197' r='0.8' opacity='0.3'/><circle cx='174' cy='251' r='1' opacity='0.4'/><circle cx='262' cy='210' r='0.5' opacity='0.18'/><circle cx='349' cy='287' r='0.9' opacity='0.32'/><circle cx='430' cy='224' r='0.7' opacity='0.25'/><circle cx='512' cy='299' r='1.1' opacity='0.42'/><circle cx='597' cy='233' r='0.6' opacity='0.2'/><circle cx='678' cy='305' r='0.8' opacity='0.3'/><circle cx='752' cy='249' r='1' opacity='0.38'/><circle cx='58' cy='341' r='0.7' opacity='0.24'/><circle cx='149' cy='398' r='0.9' opacity='0.33'/><circle cx='240' cy='352' r='0.6' opacity='0.2'/><circle cx='327' cy='420' r='1' opacity='0.36'/><circle cx='415' cy='369' r='0.7' opacity='0.26'/><circle cx='498' cy='441' r='0.8' opacity='0.28'/><circle cx='583' cy='387' r='1.1' opacity='0.4'/><circle cx='665' cy='452' r='0.6' opacity='0.2'/><circle cx='741' cy='401' r='0.9' opacity='0.32'/><circle cx='103' cy='489' r='0.8' opacity='0.28'/><circle cx='195' cy='530' r='0.6' opacity='0.2'/><circle cx='284' cy='497' r='1' opacity='0.34'/><circle cx='371' cy='548' r='0.7' opacity='0.24'/><circle cx='455' cy='508' r='0.9' opacity='0.3'/><circle cx='541' cy='556' r='0.6' opacity='0.18'/><circle cx='629' cy='514' r='0.8' opacity='0.27'/><circle cx='713' cy='561' r='1' opacity='0.33'/><circle cx='25' cy='75' r='0.8' opacity='0.35'/><circle cx='97' cy='22' r='1.1' opacity='0.5'/><circle cx='168' cy='58' r='0.6' opacity='0.25'/><circle cx='255' cy='18' r='0.9' opacity='0.4'/><circle cx='340' cy='40' r='0.7' opacity='0.3'/><circle cx='422' cy='110' r='1' opacity='0.45'/><circle cx='497' cy='68' r='0.6' opacity='0.22'/><circle cx='575' cy='20' r='0.9' opacity='0.38'/><circle cx='655' cy='95' r='1.2' opacity='0.5'/><circle cx='735' cy='15' r='0.7' opacity='0.3'/><circle cx='790' cy='90' r='0.6' opacity='0.25'/><circle cx='60' cy='130' r='1' opacity='0.42'/><circle cx='205' cy='170' r='0.8' opacity='0.32'/><circle cx='290' cy='95' r='0.7' opacity='0.28'/><circle cx='365' cy='165' r='0.6' opacity='0.22'/><circle cx='450' cy='35' r='0.8' opacity='0.34'/><circle cx='530' cy='160' r='0.7' opacity='0.26'/><circle cx='610' cy='128' r='0.9' opacity='0.36'/><circle cx='690' cy='180' r='0.6' opacity='0.22'/><circle cx='765' cy='170' r='0.8' opacity='0.3'/><circle cx='15' cy='225' r='0.7' opacity='0.26'/><circle cx='118' cy='265' r='0.9' opacity='0.34'/><circle cx='233' cy='300' r='0.6' opacity='0.2'/><circle cx='478' cy='250' r='0.8' opacity='0.3'/></g></svg>");
+  background-size: 800px 600px;
+  background-repeat: repeat;
+  -webkit-mask-image: linear-gradient(180deg, black 0%, black 25%, transparent 42%);
+  mask-image: linear-gradient(180deg, black 0%, black 25%, transparent 42%);
 }
 
 /* Quest path — winding ribbon, narrow at the mountains, wide at the page foot */
@@ -71,10 +68,9 @@ body { position: relative; }
   right: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 3000' preserveAspectRatio='none'><path d='M492,0 C480,150 310,300 299,450 C288,600 590,750 597,900 C604,1050 230,1200 224,1350 C218,1500 576,1650 582,1800 C588,1950 205,2100 199,2250 C193,2390 490,2510 499,2650 C508,2790 300,2900 292,3000 L608,3000 C616,2895 772,2790 781,2650 C790,2510 447,2390 441,2250 C435,2100 786,1950 778,1800 C770,1650 382,1500 376,1350 C370,1200 710,1050 703,900 C696,750 372,600 361,450 C350,300 516,150 508,0 Z' fill='rgba(168,196,138,0.05)'/></svg>");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
 }
+
+.quest-path svg { width: 100%; height: 100%; display: block; }
 
 header.site, section, .ps, footer, .starfield { position: relative; z-index: 1; }
 
@@ -95,7 +91,7 @@ header.site, section, .ps, footer, .starfield { position: relative; z-index: 1; 
 section { padding: 80px 0; text-align: center; }
 
 h1, h2 {
-  font-family: "Inria Serif", Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   font-weight: 400;
   color: var(--text-heading);
   line-height: 1.25;
@@ -113,7 +109,7 @@ strong { color: var(--text-heading); font-weight: 600; }
 a { color: var(--text-heading); }
 
 .wordmark {
-  font-family: "Inria Serif", Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   font-size: 20px;
   color: var(--text-heading);
   text-decoration: none;
@@ -122,6 +118,16 @@ a { color: var(--text-heading); }
 header.site { padding: 28px 0 0; text-align: center; }
 
 #hero { padding-top: 96px; }
+
+#hero h1 {
+  font-family: "Lora", Georgia, serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 44px;
+  letter-spacing: 0.05em;
+  color: var(--text-heading);
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.28);
+}
 
 #hero p.sub { max-width: 600px; margin-left: auto; margin-right: auto; font-size: 19px; color: rgba(255, 255, 255, 0.92); }
 
@@ -213,7 +219,7 @@ header.site { padding: 28px 0 0; text-align: center; }
 .card h3 { text-shadow: 0 0 14px rgba(255, 255, 255, 0.28); }
 
 .card h3 {
-  font-family: "Inria Serif", Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   font-weight: 400;
   font-size: 23px;
   color: var(--text-heading);
@@ -221,6 +227,28 @@ header.site { padding: 28px 0 0; text-align: center; }
 }
 
 .card p { font-size: 16px; margin: 0; }
+
+/* Method grid — phone preview beside the cards */
+.method-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-top: 40px;
+  text-align: left;
+}
+
+.preview-shot {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  border-radius: 32px;
+  border: 1px solid rgba(168, 196, 138, 0.28);
+  box-shadow: 0 0 40px rgba(168, 196, 138, 0.12);
+}
+
+.method-grid .cards { margin-top: 0; }
 
 /* Stat cards */
 .stats {
@@ -232,13 +260,20 @@ header.site { padding: 28px 0 0; text-align: center; }
 
 .stat-card {
   background: var(--card);
-  border: 1px solid var(--card-border);
+  border: 1px solid rgba(168, 196, 138, 0.28);
   border-radius: 12px;
   padding: 32px 24px;
+  box-shadow: 0 0 22px rgba(168, 196, 138, 0.09), inset 0 0 18px rgba(168, 196, 138, 0.04);
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.stat-card:hover {
+  border-color: rgba(168, 196, 138, 0.5);
+  box-shadow: 0 0 34px rgba(168, 196, 138, 0.18), inset 0 0 22px rgba(168, 196, 138, 0.06);
 }
 
 .stat-number {
-  font-family: "Inria Serif", Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   font-size: 44px;
   color: var(--accent);
   line-height: 1;
@@ -255,7 +290,7 @@ header.site { padding: 28px 0 0; text-align: center; }
 .method-sub {
   max-width: 640px;
   margin: 0 auto;
-  font-family: "Inria Serif", Georgia, serif;
+  font-family: "Lora", Georgia, serif;
   font-size: 24px;
   line-height: 1.45;
   color: var(--text-heading);
@@ -354,6 +389,7 @@ footer a { color: var(--text-muted); }
 /* Mobile */
 @media (max-width: 640px) {
   h1 { font-size: 38px; }
+  #hero h1 { font-size: 28px; }
   h2 { font-size: 28px; }
   .method-sub { font-size: 20px; }
   section { padding: 56px 0; }
@@ -361,6 +397,8 @@ footer a { color: var(--text-muted); }
   .signup-form { flex-direction: column; }
   .signup-form input[type="email"], .btn { width: 100%; }
   .cards { grid-template-columns: 1fr; }
+  .method-grid { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+  .preview-shot { max-width: 220px; }
   .stats { grid-template-columns: 1fr; }
   .founder-grid { grid-template-columns: 1fr; gap: 28px; }
   .founder-photo { max-width: 260px; margin: 0 auto; display: block; }
