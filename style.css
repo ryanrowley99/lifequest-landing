@@ -90,6 +90,16 @@ header.site, section, .ps, footer, .starfield { position: relative; z-index: 1; 
 
 section { padding: 80px 0; text-align: center; }
 
+/* Section separators — subtle sage hairline above every section except the hero */
+section:not(#hero)::before {
+  content: "";
+  display: block;
+  width: min(320px, 60%);
+  height: 1px;
+  margin: 0 auto 72px;
+  background: linear-gradient(90deg, transparent, rgba(168, 196, 138, 0.35), transparent);
+}
+
 h1, h2 {
   font-family: "Lora", Georgia, serif;
   font-weight: 400;
@@ -395,6 +405,7 @@ footer a { color: var(--text-muted); }
   h2 { font-size: 26px; margin-bottom: 16px; }
   .method-sub { font-size: 18px; }
   section { padding: 40px 0; }
+  section:not(#hero)::before { margin-bottom: 36px; }
   #hero { padding-top: 56px; }
   #hero p.sub { font-size: 17px; }
   p { margin-bottom: 14px; }
