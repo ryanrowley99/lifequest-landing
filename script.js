@@ -94,11 +94,19 @@ if (surveyForm) {
     counter.textContent = `${textarea.value.length} / 200`;
   });
 
-  function goToStripe() {
-    window.location.href = STRIPE_PAYMENT_LINK;
+  function showFoundingStep() {
+    surveyForm.hidden = true;
+    document.getElementById('survey-note').hidden = true;
+    document.getElementById('founding-step').hidden = false;
   }
 
-  skipBtn.addEventListener('click', goToStripe);
+  document.getElementById('founding-btn').href = STRIPE_PAYMENT_LINK;
+  document.getElementById('no-thanks-btn').addEventListener('click', () => {
+    document.getElementById('founding-step').hidden = true;
+    document.getElementById('all-set').hidden = false;
+  });
+
+  skipBtn.addEventListener('click', showFoundingStep);
 
   const debugMode = params.get('debug') === '1';
 
@@ -131,6 +139,6 @@ if (surveyForm) {
       sendBtn.disabled = false;
       return;
     }
-    goToStripe();
+    showFoundingStep();
   });
 }
