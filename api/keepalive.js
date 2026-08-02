@@ -11,7 +11,11 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 export default async function handler(req, res) {
   try {
-    const r = await fetch(`${SUPABASE_URL}/rest/v1/`, {
+    // A real table read, not the PostgREST root (which 401s) and not
+    // /auth/v1/health (which answers without touching the database).
+    // RLS is INSERT/UPDATE-only on signups, so this returns 200 with [] —
+    // the empty array is expected and is not a failure.
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/signups?select=id&limit=1`, {
       headers: {
         apikey: SUPABASE_ANON_KEY,
         Authorization: `Bearer ${SUPABASE_ANON_KEY}`
