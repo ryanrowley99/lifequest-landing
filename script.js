@@ -1,9 +1,8 @@
-// LifeQuest landing — form submit + smooth scroll + thank-you survey
+// Questree landing — form submit + smooth scroll + thank-you survey
 // Anon key is public-safe by design (INSERT/UPDATE-only RLS on signups table).
 
 const SUPABASE_URL = 'https://rfltqamrgldxckcdgbhl.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmbHRxYW1yZ2xkeGNrY2RnYmhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NTk2MjcsImV4cCI6MjA4NzMzNTYyN30.FN8Z9rbpFpEVDAqP7WgV88ICmCSC33ovc4ClHw32kCA';
-const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/3cI8wO8rpfyn1QSfex6sw00'; // LIVE — real £5 charges (capped at 50 payments)
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -60,7 +59,7 @@ document.querySelectorAll('.signup-form').forEach((form) => {
 
     error.classList.remove('visible');
     if (!EMAIL_RE.test(email)) {
-      error.textContent = 'That email doesn’t look right — give it another go.';
+      error.textContent = 'That email doesn’t look right. Check it and try again.';
       error.classList.add('visible');
       return;
     }
@@ -74,7 +73,7 @@ document.querySelectorAll('.signup-form').forEach((form) => {
       }
       throw new Error('insert failed');
     } catch (err) {
-      error.textContent = 'Something went wrong — please try again in a moment.';
+      error.textContent = 'That didn’t go through. Try again in a moment.';
       error.classList.add('visible');
       button.disabled = false;
     }
@@ -97,14 +96,8 @@ if (surveyForm) {
   function showFoundingStep() {
     surveyForm.hidden = true;
     document.getElementById('survey-note').hidden = true;
-    document.getElementById('founding-step').hidden = false;
-  }
-
-  document.getElementById('founding-btn').href = STRIPE_PAYMENT_LINK;
-  document.getElementById('no-thanks-btn').addEventListener('click', () => {
-    document.getElementById('founding-step').hidden = true;
     document.getElementById('all-set').hidden = false;
-  });
+  }
 
   skipBtn.addEventListener('click', showFoundingStep);
 

@@ -3,52 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b0a">
-  <title>You're on the list — LifeQuest</title>
+  <meta name="theme-color" content="#4a3fd8">
+  <title>You're on the list · Questree</title>
   <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header class="site">
     <div class="container">
-      <a href="/" class="wordmark">LifeQuest</a>
+      <a href="/" class="wordmark"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 L14.3 9.7 L24 12 L14.3 14.3 L12 24 L9.7 14.3 L0 12 L9.7 9.7Z" fill="#e3e2bf"/></svg>Questree</a>
     </div>
   </header>
 
   <section class="thanks">
     <div class="container">
       <h1>You're on the list.</h1>
-      <h2>One question before you go.</h2>
+      <h2 class="accent">One question before you go.</h2>
       <form id="survey-form" novalidate>
-        <p><strong>What's the one thing in your life you keep meaning to start — or can't seem to finish?</strong></p>
-        <textarea id="survey-text" maxlength="200" placeholder="Be honest. Nobody's grading this."></textarea>
+        <p><strong>What's the one thing in your life you keep meaning to start, or can't seem to finish?</strong></p>
+        <textarea id="survey-text" maxlength="200" placeholder="Be honest. Nobody's grading this." aria-label="Your answer"></textarea>
         <p class="char-count" id="char-count">0 / 200</p>
         <div class="btn-row">
           <button type="button" class="btn btn-secondary" id="skip-btn">Skip</button>
           <button type="submit" class="btn" id="send-btn">Send it</button>
         </div>
       </form>
-      <p class="form-note" id="survey-note" style="margin-top: 20px;">Your answer shapes what we build first. We read every single one.</p>
-
-      <div id="founding-step" hidden>
-        <h2>Want one of the 50 founding spots?</h2>
-        <p>Totally optional. £5 holds your spot and locks the founding rate for life — <strong>fully refundable</strong>, no questions asked. Either way, you're on the list and you'll hear from us at launch.</p>
-        <div class="btn-row">
-          <a class="btn" id="founding-btn" href="#">Reserve my founding spot — £5, refundable</a>
-          <button type="button" class="btn btn-secondary" id="no-thanks-btn">Stay on the free list</button>
-        </div>
-      </div>
-      <p class="form-note" id="all-set" hidden style="margin-top: 20px;">You're all set. See you at launch.</p>
+      <p class="form-note" id="survey-note" style="margin-top: 20px;">Your answer shapes what gets built first. I read every one.</p>
+      <p class="form-note" id="all-set" hidden style="margin-top: 20px;">You're all set. You'll get one email when Questree is on the App Store.</p>
     </div>
   </section>
 
   <footer>
     <div class="container">
-      <p>© 2026 LifeQuest · <a href="/privacy">Privacy</a> · <a href="mailto:ryanlrowley99@gmail.com">Contact</a></p>
+      <p>© 2026 Questree · <a href="/privacy">Privacy</a> · <a href="mailto:support@getquestree.com">support@getquestree.com</a></p>
+      <p>Questree is a trading name of Rowley Labs Ltd, registered in England and Wales, company no. 17527212. Registered office: 42 Beaumaris Road, Bournemouth, BH11 9FX.</p>
     </div>
   </footer>
 

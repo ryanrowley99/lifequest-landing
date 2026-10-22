@@ -1,3 +1,5 @@
+> **S77 (21 Oct 2026): REBRANDED TO QUESTREE.** Domain getquestree.com (thelifequest.app redirects). Style now matches the app: violet->teal gradient #4A3FD8->#0A8AA0, cream #E3E2BF only accent, Barlow Condensed uppercase titles, system body, rounded rows rgba(0,0,0,0.18). No Lora, no sage, no starfield. £5 deposit REMOVED (waitlist only). Footer carries the Rowley Labs Ltd trading disclosure (legally required). Design rules below are HISTORY.
+
 # CLAUDE.md — LifeQuest Landing Page
 
 ## What this is

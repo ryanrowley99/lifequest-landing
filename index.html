@@ -3,81 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b0a">
-  <title>LifeQuest — finally finish what you keep starting</title>
-  <meta name="description" content="Finally finish what you keep starting. The coaching app that gamifies your life to keep you on track.">
-  <meta property="og:title" content="LifeQuest — finally finish what you keep starting">
-  <meta property="og:description" content="Finally finish what you keep starting. The coaching app that gamifies your life to keep you on track.">
-  <meta property="og:image" content="https://thelifequest.app/og.png">
-  <meta property="og:url" content="https://thelifequest.app">
+  <meta name="theme-color" content="#4a3fd8">
+  <title>Questree: finally finish what you keep starting</title>
+  <meta name="description" content="Questree turns your goals into a meaningful game. Pick the one thing that matters, and every small daily quest points back to it. Coming to iPhone this winter.">
+  <link rel="canonical" href="https://getquestree.com/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Questree: finally finish what you keep starting">
+  <meta property="og:description" content="Turn your goals into a meaningful game. Coming to iPhone this winter.">
+  <meta property="og:image" content="https://getquestree.com/og.png">
+  <meta property="og:url" content="https://getquestree.com/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="quest-path" aria-hidden="true">
-    <svg viewBox="0 0 1000 3000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" stroke="#a8bdc9" stroke-width="6" stroke-linecap="round" opacity="0.18" vector-effect="non-scaling-stroke">
-        <path vector-effect="non-scaling-stroke" stroke-dasharray="0.1 24" d="M500,0 C520,140 330,280 310,440 C292,590 640,700 660,860 C678,1010 300,1140 280,1300 C262,1450 680,1570 700,1730 C718,1880 320,2010 300,2170 C282,2320 620,2440 640,2600 C655,2720 480,2850 470,3000"/>
-      </g>
-    </svg>
-  </div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="star" viewBox="0 0 24 24"><path d="M12 0 L14.3 9.7 L24 12 L14.3 14.3 L12 24 L9.7 14.3 L0 12 L9.7 9.7Z" fill="#e3e2bf"/><path d="M12 0 L14.3 9.7 L24 12 L12 12Z" fill="#f4f3dc"/></symbol>
+  </svg>
 
-  <div class="starfield">
   <header class="site">
     <div class="container">
-      <a href="/" class="wordmark">LifeQuest</a>
+      <a href="/" class="wordmark"><svg class="star" aria-hidden="true"><use href="#star"/></svg>Questree</a>
     </div>
   </header>
 
-  <!-- BLOCK 1 — HERO -->
+  <!-- HERO -->
   <section id="hero">
     <div class="container">
+      <svg class="star" aria-hidden="true"><use href="#star"/></svg>
       <h1>Finally finish<br>what you keep starting.</h1>
-      <p class="sub">The coaching app that gamifies your life to <strong>keep you on track</strong>.</p>
+      <p class="sub">Questree turns your goals into a meaningful game, so <strong>today's small action</strong> counts toward the thing you actually want.</p>
       <form class="signup-form" novalidate>
-        <input type="email" name="email" placeholder="Your email" required autocomplete="email">
-        <button type="submit" class="btn">Reserve my spot</button>
+        <input type="email" name="email" placeholder="Your email" aria-label="Your email" required autocomplete="email">
+        <button type="submit" class="btn">Join the waitlist</button>
       </form>
-      <p class="form-error">Something went wrong — check your email and try again.</p>
-      <p class="form-note">Sign up for early access.</p>
+      <p class="form-error" role="alert"></p>
+      <p class="form-note">Coming to iPhone this winter. One email at launch, nothing else.</p>
     </div>
   </section>
-  </div>
 
-  <!-- BLOCK 2 — THE METHOD + PREVIEW -->
+  <!-- METHOD -->
   <section id="method">
     <div class="container-wide">
+      <p class="label">How it works</p>
       <h2>Your life, <span class="accent">mapped.</span></h2>
-      <p class="method-sub">An app that starts with the questions no one has ever asked you — <em>What is your ultimate goal? And why do you keep escaping?</em></p>
+      <p class="method-sub">It starts with the questions no app has asked you. <em>What do you actually want? And what keeps getting in the way?</em></p>
       <div class="method-grid">
-        <img src="skill-tree.png" alt="LifeQuest app preview — a Health skill tree showing a meditation habit 18 of 30 days in, growing from 'You began' through 'First week' towards Reading and 10k steps" class="preview-shot" loading="lazy" onerror="this.style.display='none'">
+        <div class="phone" role="img" aria-label="The Questree Quests screen: two quests, Stretch for 5 min at 2 of 7 days and Review my budget for 10 min at 1 of 7 days">
+          <div class="ph-top"><span class="ph-title">Quests</span><span class="ph-xp"><svg width="10" height="14" viewBox="0 0 10 14" aria-hidden="true" style="vertical-align:-1px;margin-right:4px"><path d="M6 0 L0 8 H4 L3 14 L10 5 H6 Z" fill="#fff"/></svg>40</span></div>
+          <p class="ph-area label"><span class="dot" style="background:var(--health)"></span>Health · Level 1</p>
+          <div class="q-row">
+            <div class="ring" style="--p:0.29"></div>
+            <div class="q-text"><div class="q-name">Stretch for 5 min</div><div class="q-sub">2 of 7 days</div><div class="bar"><span style="width:29%;background:var(--health)"></span></div></div>
+          </div>
+          <p class="ph-area label"><span class="dot" style="background:var(--work)"></span>Work · Level 1</p>
+          <div class="q-row">
+            <div class="ring" style="--p:0.14"></div>
+            <div class="q-text"><div class="q-name">Review my budget for 10 min</div><div class="q-sub">1 of 7 days</div><div class="bar"><span style="width:14%;background:var(--work)"></span></div></div>
+          </div>
+        </div>
         <div class="cards">
           <div class="card">
-            <h3>Your life as a skill tree</h3>
-            <p>Health, career, growth, relationships — watch today's tiny action build tomorrow's life.</p>
+            <h3>One main objective</h3>
+            <p>Pick the one thing that matters this year. Everything else points back to it.</p>
           </div>
           <div class="card">
-            <h3>A coach that gets the why</h3>
-            <p>Every quest connects to something you actually care about.</p>
+            <h3>Every quest has a why</h3>
+            <p>Small weekly quests, each tied to the goal it serves, so ten minutes doesn't feel like nothing.</p>
+          </div>
+          <div class="card">
+            <h3>Your life as a skill tree</h3>
+            <p>Health, social, growth, work. Watch each area level up as the days add up.</p>
           </div>
           <div class="card">
             <h3>No punishment. Ever.</h3>
-            <p>Miss a day? That's data, not failure — so you come back.</p>
-          </div>
-          <div class="card">
-            <h3>Built for the moment you escape</h3>
-            <p>We fix why you reach for your phone — not just when.</p>
+            <p>Miss a day? Nothing breaks. Coming back is the win.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BLOCK 3 — AGITATION -->
+  <!-- PROBLEM -->
   <section id="problem">
     <div class="container-wide">
       <h2>Here's why everything else failed.</h2>
@@ -88,63 +98,57 @@
         </div>
         <div class="stat-card">
           <div class="stat-number">92%</div>
-          <p>of habit attempts collapse before 60 days — points and streaks alone don't make things stick.</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">£150–300/hr</div>
-          <p>is what human life coaching costs — the thing that works, priced out of reach.</p>
+          <p>of habit attempts collapse before 60 days. Points and streaks alone don't make things stick.</p>
         </div>
       </div>
-      <p class="bridge">The points connect to nothing you actually care about — so you quit. <strong>LifeQuest flips that: coaching that ties daily actions to what matters, at app prices — not £200 an hour.</strong></p>
-      <p class="sources">Sources: Gamification Hub retention synthesis (2026); University of Rochester SDT lab; UK coaching market data (2025).</p>
+      <p class="bridge">The points connect to nothing you care about, so you quit. <strong>Questree flips that: every point you earn is tied to the one thing you actually want.</strong></p>
+      <p class="sources">Sources: Gamification Hub retention synthesis (2026); University of Rochester SDT lab.</p>
     </div>
   </section>
 
-  <!-- BLOCK 4 — FOUNDER NOTE -->
+  <!-- FOUNDER -->
   <section id="founder">
     <div class="container">
       <h2>I built this because I am you.</h2>
       <div class="founder-grid">
-      <img src="founder.jpg" alt="Ryan Rowley, founder of LifeQuest" class="founder-photo" onerror="this.style.display='none'">
-      <div class="founder-text">
-      <p>I'm Ryan. I have a good job. I'm not lazy. I know exactly what I should be doing — but the moment a task gets boring or life gets hard, I escape to anything but the thing. My perfect Notion system lasted three days. Habitica felt like a chore. And after one bad week, whatever had stuck fell apart.</p>
-      <p>No tool ever asked <em>why do I keep escaping?</em> LifeQuest is the coach for the person who already knows, already cares, and keeps stopping anyway. It's my first app, and I'm building it because it didn't exist. Sign up early and you shape what it becomes.</p>
-      <p>— Ryan</p>
-      </div>
+        <img src="founder.jpg" alt="Ryan Rowley, founder of Questree" class="founder-photo" onerror="this.style.display='none'">
+        <div class="founder-text">
+          <p>I'm Ryan. I have a good job. I'm not lazy. I know exactly what I should be doing, but the moment a task gets boring or life gets hard, I escape to anything but the thing. My perfect Notion system lasted three days. Habitica felt like a chore. And after one bad week, whatever had stuck fell apart.</p>
+          <p>No tool ever asked <em>why do I keep escaping?</em> Questree is for the person who already knows, already cares, and keeps stopping anyway. It's my first app, and I'm building it because it didn't exist. Join early and you shape what it becomes.</p>
+          <p class="signoff">— Ryan</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- BLOCK 5 — PITCH + CTA -->
+  <!-- CTA -->
   <section id="form">
     <div class="container">
       <h2>Get in before it launches.</h2>
-      <p class="pitch-body">LifeQuest launches late 2026. The first 50 founders get:</p>
+      <p class="pitch-body">Questree is coming to iPhone this winter. Join the waitlist and you get:</p>
       <div class="perks">
-        <p><span class="accent">→</span> Founding rate locked for life</p>
-        <p><span class="accent">→</span> Your answer shapes what we build first</p>
-        <p><span class="accent">→</span> First access on launch day</p>
+        <p><svg class="star" aria-hidden="true"><use href="#star"/></svg>First access on launch day</p>
+        <p><svg class="star" aria-hidden="true"><use href="#star"/></svg>Your answer shapes what we build first</p>
       </div>
-      <p class="pitch-body">Hold your spot with a <strong>fully refundable £5 deposit</strong>. Not for you? Full refund, no questions. The £5 isn't the price — it's the signal: <em>you're serious, and so are we.</em></p>
       <form class="signup-form" novalidate>
-        <input type="email" name="email" placeholder="Your email" required autocomplete="email">
-        <button type="submit" class="btn">Reserve my spot — £5 refundable deposit</button>
+        <input type="email" name="email" placeholder="Your email" aria-label="Your email" required autocomplete="email">
+        <button type="submit" class="btn">Join the waitlist</button>
       </form>
-      <p class="form-error">Something went wrong — check your email and try again.</p>
-      <p class="form-note">Fully refundable if you don't activate at launch. Founding rate locked for life.</p>
+      <p class="form-error" role="alert"></p>
+      <p class="form-note">Free. One email at launch. Unsubscribe any time.</p>
     </div>
   </section>
 
-  <!-- P.S. -->
   <div class="ps">
     <div class="container">
-      <p><strong>P.S.</strong> You already know what you want to do this year. Stop bouncing off systems built for someone else — try the one that starts with you. 50 spots. £5. Refundable. <a href="#form">Reserve your spot.</a></p>
+      <p><strong>P.S.</strong> You already know what you want to do this year. Stop bouncing off systems built for someone else and try the one that starts with you. <a href="#form">Join the waitlist.</a></p>
     </div>
   </div>
 
   <footer>
     <div class="container">
-      <p>© 2026 LifeQuest · <a href="/privacy">Privacy</a> · <a href="mailto:ryanlrowley99@gmail.com">Contact</a></p>
+      <p>© 2026 Questree · <a href="/privacy">Privacy</a> · <a href="/app-privacy">App privacy</a> · <a href="mailto:support@getquestree.com">support@getquestree.com</a></p>
+      <p>Questree is a trading name of Rowley Labs Ltd, registered in England and Wales, company no. 17527212. Registered office: 42 Beaumaris Road, Bournemouth, BH11 9FX.</p>
     </div>
   </footer>
 
