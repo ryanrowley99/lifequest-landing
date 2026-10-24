@@ -1,0 +1,31 @@
+/* Starforge variant: onboarding look (navy -> slate blue, cream star, line-work) */
+:root{--top:#0d111c;--row:rgba(255,255,255,0.05);--row-strong:rgba(255,255,255,0.08);--track:rgba(255,255,255,0.16);--line:rgba(255,255,255,0.09)}
+html{background:#0d111c}
+body{background:linear-gradient(180deg,#0d111c 0%,#141b2c 20%,#1f2a44 55%,#52709a 100%);position:relative;overflow-x:hidden}
+/* page-length line-work: two vertical rules + one diagonal, like the onboarding screens */
+body::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+ background:
+  linear-gradient(var(--line),var(--line)) calc(50% - 470px) 0/1px 100% no-repeat,
+  linear-gradient(var(--line),var(--line)) calc(50% + 470px) 0/1px 100% no-repeat,
+  linear-gradient(var(--line),var(--line)) 18px 0/1px 100% no-repeat,
+  linear-gradient(var(--line),var(--line)) calc(100% - 18px) 0/1px 100% no-repeat;}
+header.site,section,.ps,footer{position:relative;z-index:1}
+/* hero: concentric circles behind the star, as on the opening screen */
+#hero{overflow:hidden}
+#hero::before{content:"";position:absolute;left:50%;top:150px;width:620px;height:620px;transform:translate(-50%,-50%);pointer-events:none;
+ background:
+  radial-gradient(circle,transparent 59px,var(--line) 60px,transparent 61px),
+  radial-gradient(circle,transparent 209px,rgba(255,255,255,0.07) 210px,transparent 211px),
+  radial-gradient(circle,transparent 309px,var(--line) 310px,transparent 311px);}
+#hero::after{content:"";position:absolute;left:50%;top:150px;width:500px;height:500px;transform:translate(-50%,-50%);border-radius:50%;border:1px dashed rgba(255,255,255,0.10);pointer-events:none}
+#hero .container{position:relative;z-index:1}
+#hero .star{filter:drop-shadow(0 0 18px rgba(227,226,191,0.35))}
+/* rows/cards: glassy on navy, hairline edge */
+.card,.stat-card,.perks p{background:var(--row);box-shadow:inset 0 0 0 1px var(--line)}
+.signup-form input[type="email"]{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.14)}
+.label{color:#d9d2b4}
+footer{border-top-color:var(--line)}
+@media (max-width:720px){#hero::before{width:440px;height:440px;top:110px}#hero::after{width:340px;height:340px;top:110px}}
+/* App-screen mock keeps the IN-APP colours (Home/Quests gradient), not Starforge */
+.phone{--track:rgba(255,255,255,0.22);background:linear-gradient(180deg,#4a3fd8,#0a8aa0);border-color:#232c40}
+.phone .q-row{background:rgba(0,0,0,0.28)}
