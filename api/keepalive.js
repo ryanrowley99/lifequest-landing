@@ -7,7 +7,7 @@
 // INSERT/UPDATE-only RLS on the signups table. No new exposure here.
 
 const SUPABASE_URL = 'https://rfltqamrgldxckcdgbhl.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJmbHRxYW1yZ2xkeGNrY2RnYmhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3NTk2MjcsImV4cCI6MjA4NzMzNTYyN30.FN8Z9rbpFpEVDAqP7WgV88ICmCSC33ovc4ClHw32kCA';
+const SUPABASE_ANON_KEY = 'sb_publishable_0Uu9MVVwXE4-T8YQimQ-aA_SR5G589O';
 
 export default async function handler(req, res) {
   try {
@@ -17,8 +17,7 @@ export default async function handler(req, res) {
     // the empty array is expected and is not a failure.
     const r = await fetch(`${SUPABASE_URL}/rest/v1/signups?select=id&limit=1`, {
       headers: {
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+        apikey: SUPABASE_ANON_KEY
       }
     });
 
