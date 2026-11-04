@@ -1,159 +1,681 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-GB">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0d111c">
-  <title>Questree: finally finish what you keep starting</title>
-  <meta name="description" content="Questree turns your goals into a meaningful game. Pick the one thing that matters, and every small daily quest points back to it. Coming to iPhone this winter.">
-  <link rel="canonical" href="https://getquestree.com/">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <meta property="og:title" content="Questree: finally finish what you keep starting">
-  <meta property="og:description" content="Turn your goals into a meaningful game. Coming to iPhone this winter.">
-  <meta property="og:image" content="https://getquestree.com/og.png">
-  <meta property="og:url" content="https://getquestree.com/">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="starforge.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questree — Your life is the adventure</title>
+<meta name="description" content="Pick one goal. Questree turns it into small daily quests that earn XP, unlock skills and grow your tree. Miss a week, lose nothing. Early access on iPhone.">
+<meta name="theme-color" content="#111A2E">
+<meta property="og:title" content="Questree — Your life is the adventure">
+<meta property="og:description" content="One goal, small daily quests, a tree that grows with you. Miss a week, lose nothing.">
+<meta property="og:image" content="https://www.getquestree.com/og.png">
+<meta property="og:url" content="https://www.getquestree.com/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=Barlow+Condensed:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#111A2E}
+a{color:#ECE7CF}a:hover{color:#FFB547}
+@keyframes qspin{to{transform:rotate(360deg)}}
+@keyframes qblink{50%{opacity:.25}}
+.join-in{flex:1 1 240px;min-width:0;padding:18px 20px;border:2px solid #ECE7CF;background:transparent;color:#ECE7CF;font:500 17px Figtree,system-ui,sans-serif;border-radius:0}.join-in::placeholder{color:#8C95AB}.join-in:focus{outline:2px solid #FFB547;outline-offset:2px}
+summary{list-style:none}summary::-webkit-details-marker{display:none}details[open] .faq-plus{transform:rotate(45deg)}
+</style>
 </head>
 <body>
+<div id="app"></div>
+<script type="module">
+import { html, render } from './vendor/htm-preact-3.1.1.module.js';
 
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="star" viewBox="0 0 24 24"><path d="M12 0 L14.3 9.7 L24 12 L14.3 14.3 L12 24 L9.7 14.3 L0 12 L9.7 9.7Z" fill="#e3e2bf"/><path d="M12 0 L14.3 9.7 L24 12 L12 12Z" fill="#f4f3dc"/></symbol>
-  </svg>
+// Minimal base class: the page logic below was written against it.
+// setState merges state and re-renders on the next frame (Preact diffs the DOM).
+class DCLogic {
+  constructor(props) { this.props = props || {}; this.state = {}; }
+  setState(patch) { Object.assign(this.state, typeof patch === 'function' ? patch(this.state) : patch); schedule(); }
+  forceUpdate() { schedule(); }
+}
 
-  <header class="site">
-    <div class="container">
-      <a href="/" class="wordmark"><svg class="star" aria-hidden="true"><use href="#star"/></svg>Questree</a>
-    </div>
-  </header>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+const cream = '#ECE7CF', ink = '#111A2E', amber = '#FFB547', red = '#E0402B';
+this.months = [
+{ m: 'January', head: 'Pick one goal.', sub: 'Run a half marathon by December. That’s the quest.', tag: 'Set up', quest: 'Write your main quest', pct: 0, br: 0,
+st: [{ t: 'ONE GOAL', k: 'pill', bg: cream, c: ink, x: 170, y: 40, r: 8 }, { t: 'NEW YEAR, NEW TREE', k: 'circle', bg: amber, c: ink, x: -60, y: 400, r: -12, s: 120 }] },
+{ m: 'February', head: 'Everyone else quits here.', sub: 'Not you. First quest, logged.', tag: 'Today', quest: '20-minute easy run', pct: 8, br: 1,
+st: [{ k: 'smiley', x: 190, y: 90, r: 10, s: 104 }, { t: 'STILL HERE.', k: 'circle', bg: red, c: cream, x: -60, y: 420, r: -14, s: 118 }] },
+{ m: 'March', head: 'Missed a week. Fine.', sub: 'Nothing you built is gone.', tag: 'Welcome back', quest: 'Pick up where you left off', pct: 12, br: 2,
+st: [{ t: 'NOTHING LOST', k: 'circle', bg: cream, c: ink, x: 180, y: 60, r: 12, s: 116 }, { t: 'OOPS.', k: 'pill', bg: 'transparent', c: cream, x: -50, y: 470, r: -8 }] },
+{ m: 'April', head: 'Drink the water.', sub: 'The boring quests count too.', tag: 'Today', quest: 'Drink a glass of water', pct: 20, br: 3,
+st: [{ t: 'HYDRATED.', k: 'pill', bg: cream, c: ink, x: 160, y: 110, r: -6 }, { t: 'GLUG.', k: 'circle', bg: amber, c: ink, x: -50, y: 390, r: 10, s: 96 }] },
+{ m: 'May', head: 'First 5k.', sub: 'A new skill unlocks.', tag: 'Today', quest: 'Run 5k without stopping', pct: 31, br: 4,
+st: [{ t: 'YA!', k: 'circle', bg: red, c: cream, x: 190, y: 50, r: -14, s: 104 }, { t: 'UNLOCKED', k: 'pill', bg: cream, c: ink, x: -60, y: 450, r: 6 }] },
+{ m: 'June', head: 'Halfway up.', sub: 'And you can actually see it.', tag: 'Today', quest: 'Read 10 pages', pct: 45, br: 6,
+st: [{ t: 'HALF WAY', k: 'circle', bg: amber, c: ink, x: 185, y: 70, r: 12, s: 110 }] },
+{ m: 'July', head: 'Holiday. Life happens.', sub: 'Your tree waits. No streak to save.', tag: 'Paused', quest: 'Out of office. Tree’s fine.', pct: 48, br: 6,
+st: [{ t: 'OUT OF OFFICE', k: 'pill', bg: cream, c: ink, x: 140, y: 60, r: 8 }, { k: 'smiley', x: -50, y: 400, r: -10, s: 96 }] },
+{ m: 'August', head: 'Back on it.', sub: 'Like you never left.', tag: 'Today', quest: '30-minute run', pct: 57, br: 7,
+st: [{ t: 'YOU’RE BACK.', k: 'circle', bg: amber, c: ink, x: 180, y: 80, r: -10, s: 118 }] },
+{ m: 'September', head: '10k.', sub: 'Didn’t see that coming, did you?', tag: 'Today', quest: 'Run 10k', pct: 68, br: 8,
+st: [{ t: 'WHO ARE YOU?', k: 'circle', bg: red, c: cream, x: 185, y: 50, r: 12, s: 116 }, { t: 'UNLOCKED', k: 'pill', bg: cream, c: ink, x: -60, y: 450, r: -6 }] },
+{ m: 'October', head: 'The boring bit.', sub: 'Stretch. Sleep. It all counts.', tag: 'Today', quest: 'Stretch for 10 minutes', pct: 79, br: 9,
+st: [{ t: 'STILL COUNTS', k: 'pill', bg: 'transparent', c: cream, x: 150, y: 100, r: 7 }] },
+{ m: 'November', head: 'Almost there.', sub: 'Ease off. Don’t stop.', tag: 'Today', quest: 'Taper week: easy 5k', pct: 90, br: 10,
+st: [{ t: 'ALMOST', k: 'circle', bg: cream, c: ink, x: 185, y: 70, r: -12, s: 104 }] },
+{ m: 'December', head: 'Half marathon. Done.', sub: 'Whole tree, grown. What’s next?', tag: 'Race day', quest: 'Run 21.1 km', pct: 92, br: 11,
+st: [{ t: 'QUEST COMPLETE', k: 'circle', bg: amber, c: ink, x: 175, y: 40, r: 10, s: 128 }, { k: 'smiley', x: -60, y: 410, r: -8, s: 104 }] }
+];
+const opts = [
+['WRITE YOUR GOAL', 'PICK A DEADLINE', 'TELL A FRIEND'],
+['20-MIN EASY RUN', 'DRINK WATER', 'SLEEP BY 11'],
+'continue',
+['DRINK WATER', '10-MIN WALK', 'STRETCH'],
+['RUN 5K', 'REST DAY', 'NEW SHOES'],
+['READ 10 PAGES', 'LONG RUN', 'MEAL PREP'],
+['TAKE A BREAK', 'SHORT JOG', 'DO NOTHING'],
+'continue',
+['RUN 10K', 'ICE BATH', 'SLEEP IN'],
+['STRETCH 10 MIN', 'EARLY NIGHT', 'FOAM ROLL'],
+['EASY 5K', 'CARB UP', 'REST'],
+['RACE DAY', 'CELEBRATE', 'PICK NEXT GOAL']
+];
+this.months.forEach((mo, i) => {
+mo.opts = opts[i] === 'continue'
+? [{ t: 'CONTINUE' }, { t: 'NEW GAME', off: true }]
+: opts[i].map((t) => ({ t: t }));
+mo.isContinue = opts[i] === 'continue';
+});
+this.state = { p: 0, pi: 0, ready: false, vw: 1440, vh: 900, done: {}, sel: {}, chosen: {} };
+let sd = 11;
+const rnd = () => { sd = (sd * 16807) % 2147483647; return (sd - 1) / 2147483646; };
+const segs = [];
+const maxD = 6;
+const grow = (x, y, ang, len, d, area) => {
+const r = ang * Math.PI / 180;
+const x2 = x + Math.sin(r) * len, y2 = y - Math.cos(r) * len;
+segs.push({ x1: x, y1: y, x2: x2, y2: y2, d: d, area: area });
+if (d === maxD) return;
+const sp = d < 2 ? 32 : 20 + rnd() * 14;
+const nl = len * (0.76 + rnd() * 0.08);
+const kids = [ang * 0.6 - sp * (0.75 + rnd() * 0.5), ang * 0.6 + sp * (0.75 + rnd() * 0.5)];
+kids.forEach((a, i) => grow(x2, y2, a, nl, d + 1, d === 0 ? i : (d === 1 ? area * 2 + i : area)));
+};
+grow(400, 700, 0, 130, 0, 0);
+let minX = 400, maxX = 400, minY = 700;
+segs.forEach((s) => { minX = Math.min(minX, s.x2); maxX = Math.max(maxX, s.x2); minY = Math.min(minY, s.y2); });
+const half = Math.max(400 - minX, maxX - 400) + 40;
+this.tree = { segs: segs, maxD: maxD, vb: (400 - half).toFixed(0) + ' ' + (minY - 40).toFixed(0) + ' ' + (half * 2).toFixed(0) + ' ' + (720 - minY + 40).toFixed(0) };
+const cum = [];
+let acc = 0, l = 130;
+for (let d = 0; d <= maxD; d++) { acc += l; cum.push(acc); l *= 0.8; }
+this.treeCum = cum;
+this.letterPaths = [
+'M207 49 V110 A50 50 0 0 0 307 110 V49 M307 110 V171',
+'M355 110 H455 A50 50 0 1 0 443.3 142.1',
+'M545.2 69 A25 25 0 1 0 526 110 A25 25 0 1 1 506.8 151.1',
+'M611 20 V130 A30 30 0 0 0 641 160 M586 60 H646',
+'M681 171 V49 M681 110 A50 50 0 0 1 731 60',
+'M766 110 H866 A50 50 0 1 0 854.3 142.1',
+'M912 110 H1012 A50 50 0 1 0 1000.3 142.1'
+];
+}
+componentDidMount() {
+const prog = (id, vh) => {
+const el = document.getElementById(id);
+if (!el) return 0;
+const rect = el.getBoundingClientRect();
+const total = rect.height - vh;
+return total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
+};
+this.onScroll = () => {
+const vw = window.innerWidth, vh = window.innerHeight;
+const p = Math.round(prog('wheel-track', vh) * 500) / 500;
+const pi = Math.round(prog('intro-track', vh) * 500) / 500;
+const te = document.getElementById('tree-sec');
+let pt = 0;
+if (te) { const r = te.getBoundingClientRect(); pt = Math.max(0, Math.min(1, (vh * 0.9 - r.top) / (r.height * 0.7))); }
+pt = Math.round(pt * 100) / 100;
+if (p !== this.state.p || pi !== this.state.pi || pt !== this.state.pt || vw !== this.state.vw || vh !== this.state.vh) this.setState({ p: p, pi: pi, pt: pt, vw: vw, vh: vh });
+};
+window.addEventListener('scroll', this.onScroll, { passive: true });
+window.addEventListener('resize', this.onScroll);
+this.onScroll();
+this.readyTimer = setTimeout(() => this.setState({ ready: true }), 1600);
+}
+componentWillUnmount() {
+window.removeEventListener('scroll', this.onScroll);
+window.removeEventListener('resize', this.onScroll);
+clearTimeout(this.readyTimer);
+}
+introVals(vw, vh) {
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const pi = this.state.pi;
+const spinning = pi < 0.02;
+const len = 0.3 + 0.7 * clamp((pi - 0.02) / 0.38);
+const tail = clamp((pi - 0.4) / 0.1);
+const glow = 1 - clamp((pi - 0.36) / 0.08);
+const reveal = clamp((pi - 0.5) / 0.22);
+const fin = clamp((pi - 0.76) / 0.2);
+const ang = (-90 + len * 360) * Math.PI / 180;
+const headX = (85 + 74.5 * Math.cos(ang)).toFixed(1);
+const headY = (96.5 + 74.5 * Math.sin(ang)).toFixed(1);
+const s = 1 + (1 - reveal) * 1.4;
+const tx = (1 - reveal) * 434;
+const W = Math.min(vw * (vw < 760 ? 0.88 : 0.8), 900);
+const qR = (85.5 / 1040) * W * s;
+const sc = 1 - fin * 0.55;
+const ty = -fin * vh * 0.3;
+const letters = this.letterPaths.map((d, k) => {
+const r = clamp(reveal * 1.7 - k * 0.1);
+return { d: d, style: 'opacity: ' + r.toFixed(2) + '; transform: translateY(' + ((1 - r) * 30).toFixed(1) + 'px)' };
+});
+return {
+groupTf: 'translate(' + tx.toFixed(1) + ' 0) translate(85 96.5) scale(' + s.toFixed(3) + ') translate(-85 -96.5)',
+spinStyle: spinning ? 'transform-box: view-box; transform-origin: 85px 96.5px; animation: qspin 1.3s linear infinite' : '',
+arcStyle: 'stroke-dasharray: ' + len.toFixed(3) + ' 1',
+headX: headX, headY: headY,
+glowStyle: 'opacity: ' + glow.toFixed(2),
+tailStyle: 'stroke-dasharray: 1; stroke-dashoffset: ' + (1 - tail).toFixed(3),
+letters: letters,
+logoBoxStyle: 'position: absolute; left: 50%; top: 50%; width: ' + W.toFixed(0) + 'px; transform: translate(-50%, -50%) translateY(' + ty.toFixed(0) + 'px) scale(' + sc.toFixed(3) + ')',
+loadText: this.state.ready ? 'SCROLL TO START' : 'LOADING...',
+loadStyle: 'position: absolute; left: 0; right: 0; top: ' + (vh / 2 + qR + 36).toFixed(0) + 'px; text-align: center; font-family: Space Mono, ui-monospace, monospace; font-size: 15px; letter-spacing: 3px; opacity: ' + (1 - clamp(pi / 0.06)).toFixed(2) + (this.state.ready ? '; animation: qblink 1.2s steps(2) infinite' : ''),
+explainStyle: 'position: absolute; left: 50%; top: ' + (vh * 0.36).toFixed(0) + 'px; width: ' + Math.min(720, vw - 48).toFixed(0) + 'px; transform: translate(-50%, ' + ((1 - fin) * 24).toFixed(0) + 'px); opacity: ' + fin.toFixed(2) + '; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; pointer-events: ' + (fin > 0.5 ? 'auto' : 'none')
+};
+}
+async join(e) {
+e.preventDefault();
+const email = (e.currentTarget.email.value || '').trim();
+if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { this.setState({ joinState: 'error' }); return; }
+this.setState({ joinState: 'sending' });
+try {
+const res = await fetch('https://rfltqamrgldxckcdgbhl.supabase.co/rest/v1/signups', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json', apikey: 'sb_publishable_0Uu9MVVwXE4-T8YQimQ-aA_SR5G589O', Prefer: 'return=minimal' },
+body: JSON.stringify({ email: email })
+});
+// 201 = new, 409 = already on the list: both are a yes for the visitor.
+this.setState({ joinState: res.status === 201 || res.status === 409 ? 'done' : 'error' });
+} catch (err) { this.setState({ joinState: 'error' }); }
+}
+scrollToPos(pos, smooth) {
+const el = document.getElementById('wheel-track');
+if (!el) return;
+const n = this.months.length;
+const rect = el.getBoundingClientRect();
+const total = rect.height - window.innerHeight;
+const trackTop = window.scrollY + rect.top;
+const q = Math.max(0, Math.min(n - 1, pos)) / (n - 1);
+window.scrollTo({ top: trackTop + q * total, behavior: smooth ? 'smooth' : 'auto' });
+}
+renderVals() {
+const cream = '#ECE7CF', amber = '#FFB547';
+const n = this.months.length;
+const p = this.state.p, vw = this.state.vw, vh = this.state.vh;
+const mobile = vw < 760;
+const pos = mobile ? (this.state.mPos != null ? this.state.mPos : (this.state.m || 0)) : p * (n - 1);
+const active = Math.round(pos);
+const cur = this.months[active];
+const isDone = !!this.state.done[active];
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="container">
-      <svg class="star" aria-hidden="true"><use href="#star"/></svg>
-      <h1>Finally finish<br>what you keep starting.</h1>
-      <p class="sub">Questree turns your goals into a meaningful game, so <strong>today's small action</strong> counts toward the thing you actually want.</p>
-      <form class="signup-form" novalidate>
-        <input type="email" name="email" placeholder="Your email" aria-label="Your email" required autocomplete="email">
-        <button type="submit" class="btn">Join the waitlist</button>
-      </form>
-      <p class="form-error" role="alert"></p>
-      <p class="form-note">Coming to iPhone this winter. One email at launch, nothing else.</p>
-    </div>
-  </section>
+const step = mobile ? 14 : 22;
+const rot = -pos * step;
+let R, cX, cY, dialAreaStyle, nowStyle;
+const dialH = 190;
+if (mobile) {
+R = 430;
+cX = vw / 2;
+cY = R + 50;
+dialAreaStyle = 'position: absolute; left: 0; right: 0; top: ' + (vh - dialH) + 'px; height: ' + dialH + 'px; z-index: 3; touch-action: pan-y; cursor: grab';
+nowStyle = 'position: absolute; left: ' + (vw / 2 - 1.5) + 'px; top: ' + (vh - dialH + 50 - 34) + 'px; width: 3px; height: 14px; background: ' + amber + '; z-index: 3';
+} else {
+R = Math.max(420, Math.min(760, vh * 0.8));
+const nowX = Math.min(vw * 0.26, 380);
+cX = nowX - R;
+cY = vh / 2;
+dialAreaStyle = 'position: absolute; left: 0; top: 0; bottom: 0; width: ' + (nowX + 200) + 'px; z-index: 3; touch-action: none; cursor: grab';
+nowStyle = 'position: absolute; left: ' + (nowX - 48) + 'px; top: ' + (cY - 1) + 'px; width: 34px; height: 3px; background: ' + amber;
+}
+const wheelStyle = 'position: absolute; left: ' + cX + 'px; top: ' + cY + 'px; width: 0; height: 0; transform: rotate(' + rot.toFixed(2) + 'deg); transition: transform ' + (mobile && this.state.mPos == null ? '.35s ease' : '.12s linear');
 
-  <!-- METHOD -->
-  <section id="method">
-    <div class="container-wide">
-      <p class="label">How it works</p>
-      <h2>Your life, <span class="accent">mapped.</span></h2>
-      <p class="method-sub">It starts with the questions no app has asked you. <em>What do you actually want? And what keeps getting in the way?</em></p>
-      <div class="method-grid">
-        <div class="phone" role="img" aria-label="The Questree Quests screen: two quests, Stretch for 5 min at 2 of 7 days and Review my budget for 10 min at 1 of 7 days">
-          <div class="ph-top"><span class="ph-title">Quests</span><span class="ph-xp"><svg width="10" height="14" viewBox="0 0 10 14" aria-hidden="true" style="vertical-align:-1px;margin-right:4px"><path d="M6 0 L0 8 H4 L3 14 L10 5 H6 Z" fill="#fff"/></svg>40</span></div>
-          <p class="ph-area label"><span class="dot" style="background:var(--health)"></span>Health · Level 1</p>
-          <div class="q-row">
-            <div class="ring" style="--p:0.29"></div>
-            <div class="q-text"><div class="q-name">Stretch for 5 min</div><div class="q-sub">2 of 7 days</div><div class="bar"><span style="width:29%;background:var(--health)"></span></div></div>
-          </div>
-          <p class="ph-area label"><span class="dot" style="background:var(--work)"></span>Work · Level 1</p>
-          <div class="q-row">
-            <div class="ring" style="--p:0.14"></div>
-            <div class="q-text"><div class="q-name">Review my budget for 10 min</div><div class="q-sub">1 of 7 days</div><div class="bar"><span style="width:14%;background:var(--work)"></span></div></div>
-          </div>
-        </div>
-        <div class="cards">
-          <div class="card">
-            <h3>One main objective</h3>
-            <p>Pick the one thing that matters this year. Everything else points back to it.</p>
-          </div>
-          <div class="card">
-            <h3>Every quest has a why</h3>
-            <p>Small weekly quests, each tied to the goal it serves, so ten minutes doesn't feel like nothing.</p>
-          </div>
-          <div class="card">
-            <h3>Your life as a skill tree</h3>
-            <p>Health, social, growth, work. Watch each area level up as the days add up.</p>
-          </div>
-          <div class="card">
-            <h3>No punishment. Ever.</h3>
-            <p>Miss a day? Nothing breaks. Coming back is the win.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+const base = mobile ? -90 : 0;
+const btnReset = 'position: absolute; left: 0; top: 0; transform-origin: 0 0; background: none; border: 0; padding: 10px 6px; margin: 0; cursor: pointer; font-family: Figtree, system-ui, sans-serif; white-space: nowrap; letter-spacing: 1px;';
+const labels = this.months.map((mo, i) => {
+const ang = base + i * step;
+const d = Math.abs(i * step + rot);
+const op = Math.max(mobile ? 0 : 0.12, 1 - d / (mobile ? 40 : 75));
+const on = i === active;
+const tf = mobile
+? 'rotate(' + ang + 'deg) translate(' + R + 'px, 0) rotate(90deg) translate(-50%, -50%)'
+: 'rotate(' + ang + 'deg) translate(' + R + 'px, -50%)';
+return {
+text: mo.m.toUpperCase(),
+go: () => { if (this.dragMoved) return; if (mobile) this.setState({ m: i }); else this.scrollToPos(i, true); },
+style: btnReset + ' transform: ' + tf + '; font-size: ' + (mobile ? 13 : 16) + 'px; font-weight: ' + (on ? 600 : 400) + '; color: ' + (on ? '#111A2E' : '#8C95AB') + '; opacity: ' + op.toFixed(2) + '; transition: color .2s, opacity .2s'
+};
+});
+const ticks = [];
+const per = mobile ? 1 : 3;
+for (let i = 0; i < n - 1; i++) {
+for (let j = 1; j <= per; j++) {
+const off = i * step + j * step / (per + 1);
+const ang = base + off;
+const d = Math.abs(off + rot);
+const op = Math.max(mobile ? 0 : 0.08, 0.8 - d / (mobile ? 40 : 80));
+const tf = mobile
+? 'rotate(' + ang + 'deg) translate(' + (R + 34) + 'px, 0) rotate(90deg) translate(-50%, -50%)'
+: 'rotate(' + ang + 'deg) translate(' + (R - 72) + 'px, -1px)';
+const size = mobile ? 'width: 2px; height: 14px;' : 'width: 38px; height: 2px;';
+ticks.push({ style: 'position: absolute; left: 0; top: 0; ' + size + ' background: ' + cream + '; transform-origin: 0 0; transform: ' + tf + '; opacity: ' + op.toFixed(2) });
+}
+}
 
-  <!-- PROBLEM -->
-  <section id="problem">
-    <div class="container-wide">
-      <h2>Here's why everything else failed.</h2>
-      <div class="stats">
-        <div class="stat-card">
-          <div class="stat-number">67%</div>
-          <p>of people quit a gamified habit app within four weeks. The novelty is the product.</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">92%</div>
-          <p>of habit attempts collapse before 60 days. Points and streaks alone don't make things stick.</p>
-        </div>
-      </div>
-      <p class="bridge">The points connect to nothing you care about, so you quit. <strong>Questree flips that: every point you earn is tied to the one thing you actually want.</strong></p>
-      <p class="sources">Sources: Gamification Hub retention synthesis (2026); University of Rochester SDT lab.</p>
-    </div>
-  </section>
+let scale, phoneLeft, phoneTop, headStyle;
+if (mobile) {
+const bandTop = 190, bandBottom = vh - 236;
+scale = Math.max(0.42, Math.min((bandBottom - bandTop) / 560, (vw - 150) / 270));
+phoneLeft = (vw - 270 * scale) / 2;
+phoneTop = bandTop + Math.max(0, (bandBottom - bandTop - 560 * scale) / 2);
+headStyle = 'position: absolute; left: 24px; top: 64px; width: ' + (vw - 48) + 'px; display: flex; flex-direction: column; gap: 10px';
+} else {
+const nowX = Math.min(vw * 0.26, 380);
+scale = Math.min(1, (vh - 120) / 560);
+phoneLeft = vw - Math.min(vw * 0.08, 120) - 270 * scale;
+phoneTop = (vh - 560 * scale) / 2;
+const headLeft = nowX + 220;
+const headW = Math.max(260, phoneLeft - 120 - headLeft);
+headStyle = 'position: absolute; left: ' + headLeft.toFixed(0) + 'px; top: ' + (vh / 2).toFixed(0) + 'px; width: ' + headW.toFixed(0) + 'px; transform: translateY(-50%); display: flex; flex-direction: column; gap: 16px';
+}
+const phoneWrapStyle = 'position: absolute; left: ' + phoneLeft.toFixed(0) + 'px; top: ' + phoneTop.toFixed(0) + 'px; width: 270px; height: 560px; transform-origin: 0 0; transform: scale(' + scale.toFixed(3) + ')';
 
-  <!-- FOUNDER -->
-  <section id="founder">
-    <div class="container">
-      <h2>I built this because I am you.</h2>
-      <div class="founder-grid">
-        <img src="founder.jpg" alt="Ryan Rowley, founder of Questree" class="founder-photo" onerror="this.style.display='none'">
-        <div class="founder-text">
-          <p>I'm Ryan. I have a good job. I'm not lazy. I know exactly what I should be doing, but the moment a task gets boring or life gets hard, I escape to anything but the thing. My perfect Notion system lasted three days. Habitica felt like a chore. And after one bad week, whatever had stuck fell apart.</p>
-          <p>No tool ever asked <em>why do I keep escaping?</em> Questree is for the person who already knows, already cares, and keeps stopping anyway. It's my first app, and I'm building it because it didn't exist. Join early and you shape what it becomes.</p>
-          <p class="signoff">— Ryan</p>
-        </div>
-      </div>
-    </div>
-  </section>
+const stickers = [];
+this.months.forEach((mo, i) => {
+mo.st.forEach((s) => {
+const on = i === active;
+const size = s.s || 0;
+let st = 'position: absolute; left: ' + s.x + 'px; top: ' + s.y + 'px; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 600; z-index: 2; pointer-events: none; transition: transform .35s cubic-bezier(.3,1.6,.5,1), opacity .2s; opacity: ' + (on ? 1 : 0) + '; transform: rotate(' + s.r + 'deg) scale(' + (on ? 1 : 0.4) + ');';
+if (s.k === 'smiley') st += ' width: ' + size + 'px; height: ' + size + 'px;';
+else if (s.k === 'circle') st += ' width: ' + size + 'px; height: ' + size + 'px; border-radius: 50%; background: ' + s.bg + '; color: ' + s.c + '; font-size: ' + Math.round(size / 6.2) + 'px; line-height: 1.05; padding: 12px; box-sizing: border-box;';
+else st += ' padding: 12px 22px; border-radius: 999px; background: ' + s.bg + '; color: ' + s.c + '; border: 2px solid ' + s.c + '; font-size: 18px; white-space: nowrap;';
+stickers.push({ t: s.t || '', smiley: s.k === 'smiley', isText: s.k !== 'smiley', style: st });
+});
+});
+const plusStyle = 'position: absolute; left: 150px; top: 436px; padding: 12px 20px; border-radius: 999px; background: ' + amber + '; color: #111A2E; font-weight: 600; font-size: 18px; white-space: nowrap; z-index: 3; pointer-events: none; transition: transform .35s cubic-bezier(.3,1.6,.5,1), opacity .2s; opacity: ' + (isDone ? 1 : 0) + '; transform: rotate(-8deg) scale(' + (isDone ? 1 : 0.4) + ')';
 
-  <!-- CTA -->
-  <section id="form">
-    <div class="container">
-      <h2>Get in before it launches.</h2>
-      <p class="pitch-body">Questree is coming to iPhone this winter. Join the waitlist and you get:</p>
-      <div class="perks">
-        <p><svg class="star" aria-hidden="true"><use href="#star"/></svg>First access on launch day</p>
-        <p><svg class="star" aria-hidden="true"><use href="#star"/></svg>Your answer shapes what we build first</p>
-      </div>
-      <form class="signup-form" novalidate>
-        <input type="email" name="email" placeholder="Your email" aria-label="Your email" required autocomplete="email">
-        <button type="submit" class="btn">Join the waitlist</button>
-      </form>
-      <p class="form-error" role="alert"></p>
-      <p class="form-note">Free. One email at launch. Unsubscribe any time.</p>
-    </div>
-  </section>
+const br = Math.min(12, cur.br + (isDone ? 1 : 0));
+const pct = isDone ? Math.min(100, cur.pct + 8) : cur.pct;
+const dots = [];
+for (let k = 0; k < 12; k++) {
+const lit = k < br;
+dots.push({ style: 'width: 22px; height: 22px; border-radius: 50%; box-sizing: border-box; background: ' + (lit ? amber : 'transparent') + '; border: 2px solid ' + (lit ? amber : '#34425F') + '; transition: background .3s, border-color .3s' });
+}
 
-  <div class="ps">
-    <div class="container">
-      <p><strong>P.S.</strong> You already know what you want to do this year. Stop bouncing off systems built for someone else and try the one that starts with you. <a href="#form">Join the waitlist.</a></p>
-    </div>
-  </div>
+const areaData = [
+{ name: 'HEALTH', text: 'Move more. Sleep better. Actually feel it.', color: '#a8c48a', icon: 'M3 12h4l2.5-6 4 12 2.5-6H21' },
+{ name: 'SOCIAL', text: 'Call them back. Show up. Keep your people close.', color: '#c48aa8', icon: 'M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6 M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6 M16 10a2.5 2.5 0 1 0 0-5 M17.5 14c2.2.6 3.5 2.8 3.5 6' },
+{ name: 'GROWTH', text: 'Learn the thing you keep saying you will learn.', color: '#8ab4c4', icon: 'M12 21V11 M12 11c0-4 3-6 7-6 0 4-3 6-7 6 M12 14c0-3-2.5-5-6-5 0 3 2.5 5 6 5' },
+{ name: 'WORK', text: 'Small moves on the big career thing.', color: '#c4b48a', icon: 'M3 8h18v12H3z M8 8V5h8v3 M3 13h18' }
+];
+const fanRot = [-14, -5, 5, 14], fanTop = [70, 26, 26, 70], fanCx = [140, 300, 460, 620];
+const areas = areaData.map((a, k) => ({
+name: a.name, text: a.text, color: a.color, icon: a.icon,
+iconStyle: '',
+style: 'position: absolute; left: ' + (fanCx[k] - 115) + 'px; top: ' + fanTop[k] + 'px; width: 230px; height: 320px; box-sizing: border-box; padding: 30px 24px; border-radius: 28px; border: 1px solid rgba(255,255,255,.09); background: #1A2439; border-top: 4px solid ' + a.color + '; box-shadow: 0 24px 48px rgba(0,0,0,.5); display: flex; flex-direction: column; justify-content: space-between; transform-origin: 50% 100%; transform: rotate(' + fanRot[k] + 'deg); z-index: ' + (k === 1 || k === 2 ? 2 : 1)
+}));
+const fanScale = Math.min(1, (vw - 24) / 760);
+const fanWrapStyle = 'position: relative; width: ' + (760 * fanScale).toFixed(0) + 'px; height: ' + (420 * fanScale).toFixed(0) + 'px';
+const fanBoxStyle = 'position: absolute; left: 0; top: 0; width: 760px; height: 420px; transform-origin: 0 0; transform: scale(' + fanScale.toFixed(3) + ')';
+const pt = this.state.pt || 0;
+const T = this.tree;
+const areaCols = ['#a8c48a', '#c48aa8', '#8ab4c4', '#c4b48a'];
+const shown = (d) => pt > (d + 0.3) / (T.maxD + 1.6);
+const segs = T.segs.map((s) => {
+const col = s.d < 2 ? '#ECE7CF' : areaCols[s.area];
+const on = shown(s.d);
+return { d: 'M' + s.x1.toFixed(1) + ' ' + s.y1.toFixed(1) + ' L' + s.x2.toFixed(1) + ' ' + s.y2.toFixed(1), style: 'stroke: ' + col + '; stroke-width: ' + Math.max(2, 8 - s.d * 1.1).toFixed(1) + '; stroke-dasharray: 1; stroke-dashoffset: ' + (on ? 0 : 1) + '; transition: stroke-dashoffset .55s ease' };
+});
+const tipsOn = pt > (T.maxD + 1.1) / (T.maxD + 1.6);
+const tips = T.segs.filter((s) => s.d === T.maxD).map((s, i) => ({ x: s.x2.toFixed(1), y: s.y2.toFixed(1), style: 'fill: ' + areaCols[s.area] + '; opacity: ' + (tipsOn ? 1 : 0) + '; transition: opacity .4s ease ' + (i * 8) + 'ms' }));
+const fib = [1, 1, 2, 3, 5, 8, 13];
+const levels = this.treeCum.slice(0, 6).map((rr, k) => {
+const r0 = rr * 0.93;
+const on = shown(k);
+return { d: 'M' + (400 - r0).toFixed(1) + ' 700 A' + r0.toFixed(1) + ' ' + r0.toFixed(1) + ' 0 0 1 ' + (400 + r0).toFixed(1) + ' 700', tx: (412).toString(), ty: (700 - r0 - 8).toFixed(1), label: String(fib[k]), style: 'opacity: ' + (on ? 1 : 0) + '; transition: opacity .5s ease' };
+});
+const sel = this.state.sel[active] || 0;
+const chosen = this.state.chosen[active];
+const menu = cur.opts.map((o, idx) => {
+const on = idx === sel;
+const picked = isDone && chosen === idx;
+return {
+text: o.t,
+disabled: !!o.off,
+style: 'display: flex; align-items: center; justify-content: center; gap: 16px; min-height: 54px; padding: 0 12px; border: 0; margin: 0; font-family: Space Mono, ui-monospace, monospace; font-size: 18px; letter-spacing: 1px; white-space: nowrap; cursor: ' + (o.off ? 'not-allowed' : 'pointer') + '; background: ' + (on && !o.off ? '#ECE7CF' : 'transparent') + '; color: ' + (o.off ? '#56607A' : (on ? '#111A2E' : '#8C95AB')) + '; font-weight: ' + (on ? 700 : 400) + '; transition: background .12s, color .12s',
+tstyle: o.off ? 'text-decoration: line-through' : '',
+bstyle: 'font-weight: 400; color: ' + (picked ? amber : (on && !o.off ? '#111A2E' : '#56607A')),
+hover: () => { if (o.off) return; if ((this.state.sel[active] || 0) === idx) return; const s = Object.assign({}, this.state.sel); s[active] = idx; this.setState({ sel: s }); },
+pick: () => {
+if (o.off) return;
+const d = Object.assign({}, this.state.done), c = Object.assign({}, this.state.chosen), s = Object.assign({}, this.state.sel);
+const undo = d[active] && c[active] === idx;
+d[active] = !undo; c[active] = idx; s[active] = idx;
+this.setState({ done: d, chosen: c, sel: s });
+}
+};
+});
+const shownIdx = isDone && chosen !== undefined ? chosen : sel;
+const phoneQuest = cur.isContinue ? cur.quest : cur.opts[shownIdx].t.charAt(0) + cur.opts[shownIdx].t.slice(1).toLowerCase();
+const menuHint = isDone ? (cur.isContinue ? 'Right where you left off. +10 XP.' : 'Quest done. +10 XP.') : (cur.isContinue ? 'Other apps make you start a new game. Not here.' : cur.sub);
 
-  <footer>
-    <div class="container">
-      <p>© 2026 Questree · <a href="/privacy">Privacy</a> · <a href="/app-privacy">App privacy</a> · <a href="mailto:support@getquestree.com">support@getquestree.com</a></p>
-      <p>Questree is a trading name of Rowley Labs Ltd, registered in England and Wales, company no. 17527212. Registered office: 42 Beaumaris Road, Bournemouth, BH11 9FX.</p>
-    </div>
-  </footer>
+return Object.assign(this.introVals(vw, vh), {
+joinState: this.state.joinState || 'idle', join: (e) => this.join(e),
+areas: areas, fanWrapStyle: fanWrapStyle, fanBoxStyle: fanBoxStyle,
+treeVB: T.vb, segs: segs, tips: tips, levels: levels,
+desktop: !mobile, mobile: mobile, menu: menu, menuHint: menuHint, phoneQuest: mobile ? cur.quest : phoneQuest,
+trackH: mobile ? '100vh' : (100 + (n - 1) * 70) + 'vh',
+swipeStyle: 'position: absolute; left: 0; right: 0; top: ' + (vh - 40) + 'px; text-align: center; font-family: Space Mono, ui-monospace, monospace; font-size: 11px; letter-spacing: 2px; color: #8C95AB; z-index: 3; pointer-events: none',
+counter: String(active + 1).padStart(2, '0') + ' / 12',
+dialAreaStyle: dialAreaStyle, wheelStyle: wheelStyle, labels: labels, ticks: ticks, nowStyle: nowStyle,
+headStyle: headStyle, head: cur.head, sub: cur.sub,
+headSize: mobile ? '30px' : 'clamp(36px, 4.2vw, 64px)',
+subSize: mobile ? '15px' : '19px',
+phoneWrapStyle: phoneWrapStyle, cur: cur, br: br, pct: pct,
+tag: isDone ? 'Logged · +10 XP' : 'Tap the circle to log it',
+tagColor: isDone ? 'rgba(13,17,23,0.75)' : 'rgba(13,17,23,0.55)', isDone: isDone, xp: 40 + cur.br * 120 + (isDone ? 10 : 0), monthIdx: active,
+doneAria: isDone ? 'Mark quest as not done' : 'Mark quest as done',
+barStyle: 'width: ' + pct + '%; height: 6px; border-radius: 3px; background: ' + amber + '; transition: width .4s ease',
+checkStyle: 'flex: 0 0 40px; width: 40px; height: 40px; padding: 0; border-radius: 50%; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: center; border: 3px solid ' + (isDone ? '#0D1117' : 'rgba(168,196,138,0.55)') + '; background: ' + (isDone ? '#0D1117' : 'rgba(168,196,138,0.16)') + '; transition: background .2s, border-color .2s',
+toggleDone: () => { const d = Object.assign({}, this.state.done); d[active] = !d[active]; this.setState({ done: d }); },
+stickers: mobile ? [] : stickers, plusStyle: mobile ? 'display: none' : plusStyle, dots: dots,
+dialDown: (e) => {
+this.dragMoved = false;
+this.drag = { x: e.clientX, y: e.clientY, pos: pos, mobile: mobile, id: e.pointerId, target: e.currentTarget };
+},
+dialMove: (e) => {
+if (!this.drag) return;
+const dx = e.clientX - this.drag.x, dy = e.clientY - this.drag.y;
+const delta = this.drag.mobile ? dx : dy;
+if (!this.dragMoved && Math.abs(delta) > 6) {
+this.dragMoved = true;
+if (this.drag.target && this.drag.target.setPointerCapture) this.drag.target.setPointerCapture(this.drag.id);
+}
+if (this.dragMoved) {
+const target = this.drag.pos - delta / (this.drag.mobile ? 80 : 90);
+if (this.drag.mobile) this.setState({ mPos: Math.max(0, Math.min(n - 1, target)) });
+else this.scrollToPos(target, false);
+}
+},
+dialUp: () => {
+if (!this.drag) return;
+const moved = this.dragMoved;
+this.drag = null;
+if (moved) {
+if (mobile) this.setState({ m: Math.round(this.state.mPos != null ? this.state.mPos : (this.state.m || 0)), mPos: null });
+else this.scrollToPos(Math.round(this.state.p * (n - 1)), true);
+setTimeout(() => { this.dragMoved = false; }, 50);
+}
+}
+});
+}
+}
 
-  <script src="script.js"></script>
-  <script defer src="/_vercel/insights/script.js"></script>
+const app = new Component({});
+const root = document.getElementById('app');
+let queued = false;
+function draw() { queued = false; const v = app.renderVals(); render(view(v), root); }
+function schedule() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
+
+function view(v) {
+  return html`
+<div style="position: relative; z-index: 0; background: #111A2E; color: #ECE7CF; font-family: Figtree, system-ui, sans-serif">
+<div aria-hidden="true" style="position: fixed; left: 0; top: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1">
+<svg width="100%" height="100%" viewBox="0 0 400 860" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<g fill="none" stroke="#ECE7CF" stroke-opacity="0.07" stroke-width="0.8">
+<circle cx="300" cy="190" r="150"></circle>
+</g>
+</svg>
+</div>
+
+<section id="intro-track" style="height: 300vh; position: relative">
+<div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
+<div style=${v.logoBoxStyle}>
+<svg viewBox="-6 -6 1040 206" width="100%" role="img" aria-label="Questree" style="overflow: visible; display: block">
+<defs><filter id="qglow" x="-300%" y="-300%" width="700%" height="700%"><feGaussianBlur stdDeviation="9"></feGaussianBlur></filter></defs>
+<g transform=${v.groupTf}>
+<g style=${v.spinStyle}>
+<circle cx="85" cy="96.5" r="74.5" fill="none" stroke="#ECE7CF" stroke-width="22" pathLength="1" transform="rotate(-90 85 96.5)" style=${v.arcStyle}></circle>
+<circle cx=${v.headX} cy=${v.headY} r="24" fill="#FFD891" filter="url(#qglow)" style=${v.glowStyle}></circle>
+<circle cx=${v.headX} cy=${v.headY} r="11" fill="#FFF4DE" style=${v.glowStyle}></circle>
+</g>
+<path d="M128 138 L178 188" fill="none" stroke="#ECE7CF" stroke-width="22" pathLength="1" style=${v.tailStyle}></path>
+${(v.letters || []).map((lt, _i1) => html`
+<path d=${lt.d} fill="none" stroke="#ECE7CF" stroke-width="22" style=${lt.style}></path>
+`)}
+</g>
+</svg>
+</div>
+<div style=${v.loadStyle}>${v.loadText}</div>
+<div style=${v.explainStyle}>
+<h2 style="margin: 0; font-size: clamp(34px, 5vw, 64px); line-height: 1.02; font-weight: 600; letter-spacing: -1px">Your life is the adventure.</h2>
+<p style="margin: 0; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.55">Questree turns the one thing you want into small daily quests. Every quest earns XP, XP unlocks skills, and your tree grows with them, so you can actually see the climb. Miss a week? Nothing's lost. Pick up right where you left off.</p>
+<span style="font-family: Space Mono, ui-monospace, monospace; font-size: 13px; letter-spacing: 2px">FREE IN EARLY ACCESS · IPHONE · DECEMBER</span>
+</div>
+</div>
+</section>
+
+<section id="wheel-track" style="height: ${v.trackH}; position: relative">
+<div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
+
+<div style="position: absolute; left: 24px; right: 24px; top: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 4; font-size: 14px">
+<svg viewBox="-6 -6 1040 206" width="124" role="img" aria-label="Questree" style="display: block"><g fill="none" stroke="#ECE7CF" stroke-width="22"><circle cx="85" cy="96.5" r="74.5"></circle><path d="M128 138 L178 188"></path><path d="M207 49 V110 A50 50 0 0 0 307 110 V49 M307 110 V171"></path><path d="M355 110 H455 A50 50 0 1 0 443.3 142.1"></path><path d="M545.2 69 A25 25 0 1 0 526 110 A25 25 0 1 1 506.8 151.1"></path><path d="M611 20 V130 A30 30 0 0 0 641 160 M586 60 H646"></path><path d="M681 171 V49 M681 110 A50 50 0 0 1 731 60"></path><path d="M766 110 H866 A50 50 0 1 0 854.3 142.1"></path><path d="M912 110 H1012 A50 50 0 1 0 1000.3 142.1"></path></g></svg>
+<span>${v.counter}</span>
+</div>
+
+<div style=${v.dialAreaStyle} onPointerDown=${v.dialDown} onPointerMove=${v.dialMove} onPointerUp=${v.dialUp} onPointerCancel=${v.dialUp}>
+<div style=${v.wheelStyle}>
+${(v.ticks || []).map((t, _i2) => html`
+<span style=${t.style}></span>
+`)}
+${(v.labels || []).map((l, _i3) => html`
+<button type="button" onClick=${l.go} aria-label="Go to ${l.text}" style=${l.style}>${l.text}</button>
+`)}
+</div>
+</div>
+<span style=${v.nowStyle}></span>
+${v.mobile ? html`
+<span style=${v.swipeStyle}>SWIPE THE DIAL</span>
+` : null}
+
+${v.desktop ? html`
+<div style=${v.headStyle}>
+<h2 style="margin: 0; font-size: clamp(28px, 2.6vw, 40px); line-height: 1.05; font-weight: 600; letter-spacing: -1px">${v.head}</h2>
+<div role="menu" aria-label="Quests for ${v.cur.m}" style="padding: 28px 16px; display: flex; flex-direction: column; gap: 10px; background-color: #16203A; border: 1px solid #2A3756">
+${(v.menu || []).map((o, _i4) => html`
+<button type="button" role="menuitem" onClick=${o.pick} onMouseEnter=${o.hover} onFocus=${o.hover} disabled=${o.disabled} aria-disabled=${o.disabled} style=${o.style}><span aria-hidden="true" style=${o.bstyle}>[</span><span style=${o.tstyle}>${o.text}</span><span aria-hidden="true" style=${o.bstyle}>]</span></button>
+`)}
+</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.45; color: #A8B0C3">${v.menuHint}</p>
+</div>
+` : null}
+${v.mobile ? html`
+<div style=${v.headStyle}>
+<h2 style="margin: 0; font-size: ${v.headSize}; line-height: 1; font-weight: 600; letter-spacing: -1px">${v.head}</h2>
+<p style="margin: 0; font-size: ${v.subSize}; line-height: 1.45">${v.sub}</p>
+</div>
+` : null}
+
+<div style=${v.phoneWrapStyle}>
+<div style="position: absolute; left: 0; top: 0; width: 270px; height: 560px; box-sizing: border-box; border-radius: 44px; background: linear-gradient(180deg, #4a3fd8 0%, #0a8aa0 100%); border: 6px solid #0B1222; box-shadow: 0 30px 60px rgba(0,0,0,.45); padding: 26px 16px 14px; display: flex; flex-direction: column; gap: 14px; color: #fff; overflow: hidden">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-size: 12px; color: rgba(255,255,255,.75)">Good morning, Sam</span>
+<span style="display: flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 999px; background: rgba(0,0,0,.18); font-size: 11px; font-weight: 600"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M12 2c1 4 5 5.5 5 11a5 5 0 0 1-10 0c0-3 1.5-4.5 2.5-6 .3 2 1.3 3 2.5 3 0-3-1-5 0-8z" fill="#E3E2BF"></path></svg>${v.xp} XP</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 9px; color: rgba(255,255,255,.6)">
+${['M','T','W','T','F','S','S'].map((d, k) => html`<div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><span>${d}</span><span style="width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; color: ${k === 2 ? '#fff' : 'rgba(255,255,255,.55)'}; border: ${k === 2 ? '2px solid #E3E2BF' : '2px solid transparent'}">${12 + k}</span></div>`)}
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 1.6px; color: rgba(255,255,255,.7)">MAIN QUEST · ${v.cur.m.toUpperCase()}</span>
+<strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 27px; line-height: 1; letter-spacing: .3px">RUN A HALF MARATHON</strong>
+<div style="position: relative; height: 22px; margin-top: 4px">
+<div style="position: absolute; left: 0; right: 0; top: 4px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.22)"></div>
+<div style="position: absolute; left: 0; top: 4px; height: 3px; border-radius: 2px; width: ${v.pct}%; background: #E3E2BF; box-shadow: 0 0 6px rgba(227,226,191,.6); transition: width .4s ease"></div>
+<div style="position: absolute; top: 0; width: 11px; height: 11px; margin-left: -5px; border-radius: 50%; left: ${v.pct}%; background: #E3E2BF; box-shadow: 0 0 8px rgba(227,226,191,.7); transition: left .4s ease"></div>
+<div style="position: absolute; left: 0; right: 0; top: 12px; display: flex; justify-content: space-between; font-size: 8px; color: rgba(255,255,255,.6)">${['J','F','M','A','M','J','J','A','S','O','N','D'].map((mm, k) => html`<span style="color: ${k === v.monthIdx ? '#fff' : 'rgba(255,255,255,.55)'}; font-weight: ${k === v.monthIdx ? 700 : 400}">${mm}</span>`)}</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; margin-top: 2px">
+<div style="display: flex; justify-content: space-between; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 1.6px; color: rgba(255,255,255,.7)"><span>TODAY</span><span>${v.isDone ? 2 : 1} / 2</span></div>
+<div style="height: 5px; border-radius: 3px; background: rgba(255,255,255,.22)"><div style="height: 5px; border-radius: 3px; width: ${v.isDone ? 100 : 50}%; background: #E3E2BF; transition: width .4s ease"></div></div>
+</div>
+<div style="padding: 12px; border-radius: 22px; background: #F1F0DF; color: #0D1117; display: flex; align-items: center; gap: 12px; box-shadow: 0 6px 16px rgba(5,10,30,.32)">
+<button type="button" onClick=${v.toggleDone} aria-label=${v.doneAria} style=${v.checkStyle}>${v.isDone ? html`<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#E3E2BF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>` : html`<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 12h4l2.5-6 4 12 2.5-6H21" fill="none" stroke="#6f8a52" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`}</button>
+<div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 17px; line-height: 1.05; text-transform: uppercase">${v.phoneQuest}</strong><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1.1px; color: ${v.tagColor}; text-transform: uppercase">${v.tag}</span></div>
+</div>
+<div style="padding: 12px; border-radius: 22px; background: #F1F0DF; color: #0D1117; display: flex; align-items: center; gap: 12px; box-shadow: 0 6px 16px rgba(5,10,30,.32)">
+<span style="flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; box-sizing: border-box; border: 3px solid rgba(138,180,196,.55); background: rgba(138,180,196,.16); display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" fill="none" stroke="#4f7d8e" stroke-width="2" stroke-linejoin="round"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 3px"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 17px; line-height: 1.05">SLEEP BY 11</strong><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1.1px; color: rgba(13,17,23,.55)">GROWTH · TONIGHT</span></div>
+</div>
+<div style="flex: 1 1 auto"></div>
+<div style="position: relative; height: 50px; border-radius: 26px; background: rgba(10,14,28,.55); border: 1px solid rgba(255,255,255,.14); display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; text-align: center; font-size: 9px; color: rgba(255,255,255,.62)">
+<span style="margin: 0 4px; padding: 7px 0; border-radius: 18px; background: rgba(255,255,255,.14); color: #fff; font-weight: 600">Home</span>
+<span>Quests</span>
+<span style="display: flex; justify-content: center"><span style="width: 36px; height: 36px; margin-top: -26px; border-radius: 8px; transform: rotate(45deg); background: #E3E2BF; box-shadow: 0 0 14px rgba(227,226,191,.55); display: flex; align-items: center; justify-content: center"><span style="transform: rotate(-45deg); color: #0D1117; font-size: 22px; font-weight: 500; line-height: 1">+</span></span></span>
+<span>Skills</span>
+<span>You</span>
+</div>
+</div>
+${(v.stickers || []).map((s, _i6) => html`
+<div style=${s.style}>
+${s.smiley ? html`
+<svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="#F5C518"></circle><path d="M36 34 L34 46" stroke="#111A2E" stroke-width="5" stroke-linecap="round"></path><path d="M62 34 L60 46" stroke="#111A2E" stroke-width="5" stroke-linecap="round"></path><path d="M26 58 Q50 82 76 56" fill="none" stroke="#111A2E" stroke-width="5" stroke-linecap="round"></path></svg>
+` : null}
+${s.isText ? html`
+<span>${s.t}</span>
+` : null}
+</div>
+`)}
+<div style=${v.plusStyle}>+10 XP</div>
+</div>
+
+</div>
+</section>
+
+<section style="padding: 140px 24px 40px; display: flex; flex-direction: column; align-items: center; gap: 56px; overflow: hidden">
+<h2 style="margin: 0; text-align: center; font-size: clamp(36px, 5.5vw, 72px); line-height: 1; font-weight: 600; letter-spacing: -1px">Four branches. One tree.</h2>
+<div style=${v.fanWrapStyle}>
+<div style=${v.fanBoxStyle}>
+${(v.areas || []).map((a, _i7) => html`
+<div style=${a.style}>
+<svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style=${a.iconStyle}><path d=${a.icon} stroke=${a.color}></path></svg>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<strong style="font-size: 26px; font-weight: 700; letter-spacing: 1px">${a.name}</strong>
+<span style="font-size: 16px; line-height: 1.45; color: #BAC0CF">${a.text}</span>
+</div>
+</div>
+`)}
+</div>
+</div>
+</section>
+
+<section id="tree-sec" style="padding: 120px 24px 80px; display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center">
+<h2 style="margin: 0; font-size: clamp(36px, 5.5vw, 72px); line-height: 1; font-weight: 600; letter-spacing: -1px">Watch it grow.</h2>
+<p style="margin: 0; max-width: 520px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: #BAC0CF">Every quest earns XP. XP unlocks skills, and every skill grows a branch. Keep going and the whole tree fills in, level by level.</p>
+<svg viewBox=${v.treeVB} role="img" aria-label="A tree growing from one trunk into four branches: health, social, growth and work" style="width: min(100%, 760px); height: auto; display: block; margin-top: 16px">
+${(v.levels || []).map((lv, _i8) => html`
+<path d=${lv.d} fill="none" stroke="#34425F" stroke-width="1.2" stroke-dasharray="5 7" style=${lv.style}></path>
+<text x=${lv.tx} y=${lv.ty} fill="#8C95AB" font-size="15" font-family="Space Mono, ui-monospace, monospace" style=${lv.style}>${lv.label}</text>
+`)}
+${(v.segs || []).map((sg, _i9) => html`
+<path d=${sg.d} pathLength="1" fill="none" stroke-linecap="round" style=${sg.style}></path>
+`)}
+${(v.tips || []).map((tp, _i10) => html`
+<circle cx=${tp.x} cy=${tp.y} r="5" style=${tp.style}></circle>
+`)}
+</svg>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 28px; font-size: 14px; letter-spacing: 1px">
+${(v.areas || []).map((ar, _i11) => html`
+<span style="display: flex; align-items: center; gap: 8px"><span style="width: 10px; height: 10px; border-radius: 50%; background: ${ar.color}"></span>${ar.name}</span>
+`)}
+</div>
+</section>
+
+<section style="padding: 120px 24px; display: flex; justify-content: center">
+<p style="margin: 0; max-width: 1040px; font-size: clamp(30px, 4.4vw, 60px); line-height: 1.25; font-weight: 400; letter-spacing: -0.5px">pick one goal <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg> get small daily quests <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg> earn XP <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"></path></svg> unlock skills <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 7.5-2"></path></svg> watch your tree grow <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V11 M12 11 L7 6 M12 11 L17 6 M12 15 L8 12 M12 15 L16 12"></path></svg> miss a week, lose nothing <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8 M4 4v4h4"></path></svg> grow new branches <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6 M12 15v6 M3 12h6 M15 12h6"></path></svg> health, social, growth and work <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.5"></circle><circle cx="16" cy="8" r="2.5"></circle><circle cx="8" cy="16" r="2.5"></circle><circle cx="16" cy="16" r="2.5"></circle></svg> <span style="color: #56607A">finally finish what you start</span></p>
+</section>
+
+<section style="padding: 80px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 48px">
+<h2 style="margin: 0; text-align: center; font-size: clamp(40px, 6vw, 84px); line-height: 1; letter-spacing: -1px"><span style="font-weight: 300">questions?</span> <span style="font-weight: 700">answers.</span></h2>
+<div style="width: 100%; max-width: 900px; border-bottom: 1px solid #2A3756">
+<details style="border-top: 1px solid #2A3756; padding: 0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>When can I get it?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">Early access opens in December on iPhone. Join the waitlist and we'll email you the day it's live.</p>
+</details>
+<details style="border-top: 1px solid #2A3756; padding: 0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>Is Questree free?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">Yes, while we're in early access. A paid plan comes later, and we'll tell you well before anything changes.</p>
+</details>
+<details style="border-top: 1px solid #2A3756; padding: 0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>Is it on Android?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">Not yet. Questree is iPhone only for now.</p>
+</details>
+<details style="border-top: 1px solid #2A3756; padding: 0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>How is it different from a habit tracker or Habitica?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">It starts with one goal, not a list of habits. Every quest points at it. Miss a week and nothing resets. And it looks like an adventure for grown-ups, not a cartoon.</p>
+</details>
+<details style="border-top: 1px solid #2A3756; padding: 0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>What happens if I miss a few days?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">Nothing bad. No streaks to break. Your tree stays exactly where you left it.</p>
+</details>
+<details style="border-top: 1px solid #2A3756; padding: 0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>Do I have to set everything up myself?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">No. Sign up, write your goal, answer a few questions, and Questree suggests your first quests. Tweak them or pick your own from the library.</p>
+</details>
+<details style="border-top: 1px solid #2A3756; padding: 0">
+<summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>What do you do with my data?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">Your quests and check-ins are stored securely in the EU. What you type when setting up or creating a quest is sent to Anthropic to suggest quests that fit you, never with your name or email, and never used to train AI. You can switch that off, and delete your account and everything in it, from inside the app. We never sell your data. Full details on our <a href="/app-privacy">App privacy</a> page.</p>
+</details>
+</div>
+</section>
+
+<section id="join" style="min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding: 80px 24px; text-align: center">
+<h2 style="margin: 0; font-size: clamp(44px, 8vw, 112px); line-height: 0.95; font-weight: 600; letter-spacing: -2px">Your year starts now.</h2>
+<p style="margin: 0; max-width: 520px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: #BAC0CF">Early access opens in December. Leave your email and you'll be first in.</p>
+${v.joinState === 'done' ? html`
+<p role="status" style="margin: 0; padding: 18px 28px; border: 2px solid #FFB547; color: #FFB547; font-family: Space Mono, ui-monospace, monospace; font-size: 15px; letter-spacing: 1px">YOU'RE ON THE LIST. SEE YOU IN DECEMBER.</p>
+` : html`
+<form onSubmit=${v.join} style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; width: 100%; max-width: 560px">
+<label for="join-email" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Email address</label>
+<input id="join-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com" class="join-in" />
+<button type="submit" disabled=${v.joinState === 'sending'} style="flex: 0 0 auto; padding: 20px 32px; border: 0; background: #ECE7CF; color: #111A2E; font: 700 18px Figtree, system-ui, sans-serif; cursor: pointer">${v.joinState === 'sending' ? 'Joining…' : 'Join the waitlist'}</button>
+</form>
+${v.joinState === 'error' ? html`<p role="alert" style="margin: 0; color: #E0402B; font-size: 15px">That didn't go through. Check the email and try again.</p>` : null}
+`}
+</section>
+
+
+<footer style="padding: 56px 24px 40px">
+<div style="max-width: 1120px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<svg viewBox="-6 -6 1040 206" width="132" role="img" aria-label="Questree" style="display: block"><g fill="none" stroke="#ECE7CF" stroke-width="22"><circle cx="85" cy="96.5" r="74.5"></circle><path d="M128 138 L178 188"></path><path d="M207 49 V110 A50 50 0 0 0 307 110 V49 M307 110 V171"></path><path d="M355 110 H455 A50 50 0 1 0 443.3 142.1"></path><path d="M545.2 69 A25 25 0 1 0 526 110 A25 25 0 1 1 506.8 151.1"></path><path d="M611 20 V130 A30 30 0 0 0 641 160 M586 60 H646"></path><path d="M681 171 V49 M681 110 A50 50 0 0 1 731 60"></path><path d="M766 110 H866 A50 50 0 1 0 854.3 142.1"></path><path d="M912 110 H1012 A50 50 0 1 0 1000.3 142.1"></path></g></svg>
+<a href="#join" style="align-self: flex-start; padding: 14px 22px; background: #ECE7CF; color: #111A2E; font-weight: 600; font-size: 15px; text-decoration: none">Join the waitlist</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 48px; font-size: 15px">
+<div style="display: flex; flex-direction: column; gap: 12px"><span style="color: #A8B0C3">Legal</span><a href="/privacy" style="color: #ECE7CF">Privacy</a><a href="/app-privacy" style="color: #ECE7CF">App privacy</a><a href="/terms" style="color: #ECE7CF">Terms</a></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><span style="color: #A8B0C3">Help</span><a href="mailto:support@getquestree.com" style="color: #ECE7CF">support@getquestree.com</a></div>
+</div>
+</div>
+<p style="max-width: 1120px; margin: 48px auto 0; font-size: 13px; line-height: 1.6; color: #A8B0C3">© 2026 Questree. Questree is a trading name of Rowley Labs Ltd, registered in England and Wales, company no. 17527212. Registered office: 42 Beaumaris Road, Bournemouth, BH11 9FX.</p>
+</footer>
+
+</div>
+`;
+}
+
+draw();
+if (app.componentDidMount) app.componentDidMount();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
