@@ -16,11 +16,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;family=Barlow+Condensed:wght@600;700&amp;display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#111A2E}
-a{color:#ECE7CF}a:hover{color:#FFB547}
+body{margin:0;background:#0d111c}
+.join-btn{flex:0 0 auto;padding:18px 30px;border:0;background:#E3E2BF;color:#0D111C;font:700 18px Figtree,system-ui,sans-serif;cursor:pointer}
+.join-btn:hover{background:#f4f3dc}
+.qd{stroke-dasharray:1;stroke-dashoffset:1;animation:qdraw .9s cubic-bezier(.6,0,.2,1) forwards}
+@keyframes qdraw{to{stroke-dashoffset:0}}
+@keyframes qrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.rise{opacity:0;animation:qrise .8s ease forwards}
+.glass{background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);border-radius:22px}
+.cond{font-family:'Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.mono{font-family:'Space Mono',ui-monospace,monospace;letter-spacing:2px}
+@media (prefers-reduced-motion:reduce){.qd,.rise{animation:none;opacity:1;stroke-dashoffset:0}}
+a{color:#E3E2BF}a:hover{color:#E3E2BF}
 @keyframes qspin{to{transform:rotate(360deg)}}
 @keyframes qblink{50%{opacity:.25}}
-.join-in{flex:1 1 240px;min-width:0;padding:18px 20px;border:2px solid #ECE7CF;background:transparent;color:#ECE7CF;font:500 17px Figtree,system-ui,sans-serif;border-radius:0}.join-in::placeholder{color:#8C95AB}.join-in:focus{outline:2px solid #FFB547;outline-offset:2px}
+.join-in{flex:1 1 240px;min-width:0;padding:18px 20px;border:2px solid #E3E2BF;background:transparent;color:#E3E2BF;font:500 17px Figtree,system-ui,sans-serif;border-radius:0}.join-in::placeholder{color:#8C95AB}.join-in:focus{outline:2px solid #E3E2BF;outline-offset:2px}
 summary{list-style:none}summary::-webkit-details-marker{display:none}details[open] .faq-plus{transform:rotate(45deg)}
 </style>
 </head>
@@ -40,18 +50,18 @@ class DCLogic {
 class Component extends DCLogic {
 constructor(props) {
 super(props);
-const cream = '#ECE7CF', ink = '#111A2E', amber = '#FFB547', red = '#E0402B';
+const cream = '#E3E2BF', ink = '#0D111C', amber = '#a8c48a', red = '#c48aa8';
 this.months = [
 { m: 'January', head: 'Pick one goal.', sub: 'Run a half marathon by December. That’s the quest.', tag: 'Set up', quest: 'Write your main quest', pct: 0, br: 0,
 st: [{ t: 'ONE GOAL', k: 'pill', bg: cream, c: ink, x: 170, y: 40, r: 8 }, { t: 'NEW YEAR, NEW TREE', k: 'circle', bg: amber, c: ink, x: -60, y: 400, r: -12, s: 120 }] },
 { m: 'February', head: 'Everyone else quits here.', sub: 'Not you. First quest, logged.', tag: 'Today', quest: '20-minute easy run', pct: 8, br: 1,
-st: [{ k: 'smiley', x: 190, y: 90, r: 10, s: 104 }, { t: 'STILL HERE.', k: 'circle', bg: red, c: cream, x: -60, y: 420, r: -14, s: 118 }] },
+st: [{ k: 'smiley', x: 190, y: 90, r: 10, s: 104 }, { t: 'STILL HERE.', k: 'circle', bg: red, c: ink, x: -60, y: 420, r: -14, s: 118 }] },
 { m: 'March', head: 'Missed a week. Fine.', sub: 'Nothing you built is gone.', tag: 'Welcome back', quest: 'Pick up where you left off', pct: 12, br: 2,
 st: [{ t: 'NOTHING LOST', k: 'circle', bg: cream, c: ink, x: 180, y: 60, r: 12, s: 116 }, { t: 'OOPS.', k: 'pill', bg: 'transparent', c: cream, x: -50, y: 470, r: -8 }] },
 { m: 'April', head: 'Drink the water.', sub: 'The boring quests count too.', tag: 'Today', quest: 'Drink a glass of water', pct: 20, br: 3,
 st: [{ t: 'HYDRATED.', k: 'pill', bg: cream, c: ink, x: 160, y: 110, r: -6 }, { t: 'GLUG.', k: 'circle', bg: amber, c: ink, x: -50, y: 390, r: 10, s: 96 }] },
 { m: 'May', head: 'First 5k.', sub: 'A new skill unlocks.', tag: 'Today', quest: 'Run 5k without stopping', pct: 31, br: 4,
-st: [{ t: 'YA!', k: 'circle', bg: red, c: cream, x: 190, y: 50, r: -14, s: 104 }, { t: 'UNLOCKED', k: 'pill', bg: cream, c: ink, x: -60, y: 450, r: 6 }] },
+st: [{ t: 'YA!', k: 'circle', bg: red, c: ink, x: 190, y: 50, r: -14, s: 104 }, { t: 'UNLOCKED', k: 'pill', bg: cream, c: ink, x: -60, y: 450, r: 6 }] },
 { m: 'June', head: 'Halfway up.', sub: 'And you can actually see it.', tag: 'Today', quest: 'Read 10 pages', pct: 45, br: 6,
 st: [{ t: 'HALF WAY', k: 'circle', bg: amber, c: ink, x: 185, y: 70, r: 12, s: 110 }] },
 { m: 'July', head: 'Holiday. Life happens.', sub: 'Your tree waits. No streak to save.', tag: 'Paused', quest: 'Out of office. Tree’s fine.', pct: 48, br: 6,
@@ -59,7 +69,7 @@ st: [{ t: 'OUT OF OFFICE', k: 'pill', bg: cream, c: ink, x: 140, y: 60, r: 8 }, 
 { m: 'August', head: 'Back on it.', sub: 'Like you never left.', tag: 'Today', quest: '30-minute run', pct: 57, br: 7,
 st: [{ t: 'YOU’RE BACK.', k: 'circle', bg: amber, c: ink, x: 180, y: 80, r: -10, s: 118 }] },
 { m: 'September', head: '10k.', sub: 'Didn’t see that coming, did you?', tag: 'Today', quest: 'Run 10k', pct: 68, br: 8,
-st: [{ t: 'WHO ARE YOU?', k: 'circle', bg: red, c: cream, x: 185, y: 50, r: 12, s: 116 }, { t: 'UNLOCKED', k: 'pill', bg: cream, c: ink, x: -60, y: 450, r: -6 }] },
+st: [{ t: 'WHO ARE YOU?', k: 'circle', bg: red, c: ink, x: 185, y: 50, r: 12, s: 116 }, { t: 'UNLOCKED', k: 'pill', bg: cream, c: ink, x: -60, y: 450, r: -6 }] },
 { m: 'October', head: 'The boring bit.', sub: 'Stretch. Sleep. It all counts.', tag: 'Today', quest: 'Stretch for 10 minutes', pct: 79, br: 9,
 st: [{ t: 'STILL COUNTS', k: 'pill', bg: 'transparent', c: cream, x: 150, y: 100, r: 7 }] },
 { m: 'November', head: 'Almost there.', sub: 'Ease off. Don’t stop.', tag: 'Today', quest: 'Taper week: easy 5k', pct: 90, br: 10,
@@ -185,20 +195,20 @@ loadStyle: 'position: absolute; left: 0; right: 0; top: ' + (vh / 2 + qR + 36).t
 explainStyle: 'position: absolute; left: 50%; top: ' + (vh * 0.36).toFixed(0) + 'px; width: ' + Math.min(720, vw - 48).toFixed(0) + 'px; transform: translate(-50%, ' + ((1 - fin) * 24).toFixed(0) + 'px); opacity: ' + fin.toFixed(2) + '; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; pointer-events: ' + (fin > 0.5 ? 'auto' : 'none')
 };
 }
-async join(e) {
+async join(e, id) {
 e.preventDefault();
 const email = (e.currentTarget.email.value || '').trim();
-if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { this.setState({ joinState: 'error' }); return; }
-this.setState({ joinState: 'sending' });
+const set = (st) => { const m = Object.assign({}, this.state.joinStates); m[id] = st; this.setState({ joinStates: m }); };
+if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { set('error'); return; }
+set('sending');
 try {
 const res = await fetch('https://rfltqamrgldxckcdgbhl.supabase.co/rest/v1/signups', {
 method: 'POST',
 headers: { 'Content-Type': 'application/json', apikey: 'sb_publishable_0Uu9MVVwXE4-T8YQimQ-aA_SR5G589O', Prefer: 'return=minimal' },
 body: JSON.stringify({ email: email })
 });
-// 201 = new, 409 = already on the list: both are a yes for the visitor.
-this.setState({ joinState: res.status === 201 || res.status === 409 ? 'done' : 'error' });
-} catch (err) { this.setState({ joinState: 'error' }); }
+set(res.status === 201 || res.status === 409 ? 'done' : 'error');
+} catch (err) { set('error'); }
 }
 scrollToPos(pos, smooth) {
 const el = document.getElementById('wheel-track');
@@ -211,7 +221,7 @@ const q = Math.max(0, Math.min(n - 1, pos)) / (n - 1);
 window.scrollTo({ top: trackTop + q * total, behavior: smooth ? 'smooth' : 'auto' });
 }
 renderVals() {
-const cream = '#ECE7CF', amber = '#FFB547';
+const cream = '#E3E2BF', amber = '#E3E2BF';
 const n = this.months.length;
 const p = this.state.p, vw = this.state.vw, vh = this.state.vh;
 const mobile = vw < 760;
@@ -322,7 +332,7 @@ const fanRot = [-14, -5, 5, 14], fanTop = [70, 26, 26, 70], fanCx = [140, 300, 4
 const areas = areaData.map((a, k) => ({
 name: a.name, text: a.text, color: a.color, icon: a.icon,
 iconStyle: '',
-style: 'position: absolute; left: ' + (fanCx[k] - 115) + 'px; top: ' + fanTop[k] + 'px; width: 230px; height: 320px; box-sizing: border-box; padding: 30px 24px; border-radius: 28px; border: 1px solid rgba(255,255,255,.09); background: #1A2439; border-top: 4px solid ' + a.color + '; box-shadow: 0 24px 48px rgba(0,0,0,.5); display: flex; flex-direction: column; justify-content: space-between; transform-origin: 50% 100%; transform: rotate(' + fanRot[k] + 'deg); z-index: ' + (k === 1 || k === 2 ? 2 : 1)
+style: 'position: absolute; left: ' + (fanCx[k] - 115) + 'px; top: ' + fanTop[k] + 'px; width: 230px; height: 320px; box-sizing: border-box; padding: 30px 24px; border-radius: 28px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.05); backdrop-filter: blur(6px); border-top: 4px solid ' + a.color + '; box-shadow: 0 24px 48px rgba(0,0,0,.5); display: flex; flex-direction: column; justify-content: space-between; transform-origin: 50% 100%; transform: rotate(' + fanRot[k] + 'deg); z-index: ' + (k === 1 || k === 2 ? 2 : 1)
 }));
 const fanScale = Math.min(1, (vw - 24) / 760);
 const fanWrapStyle = 'position: relative; width: ' + (760 * fanScale).toFixed(0) + 'px; height: ' + (420 * fanScale).toFixed(0) + 'px';
@@ -332,7 +342,7 @@ const T = this.tree;
 const areaCols = ['#a8c48a', '#c48aa8', '#8ab4c4', '#c4b48a'];
 const shown = (d) => pt > (d + 0.3) / (T.maxD + 1.6);
 const segs = T.segs.map((s) => {
-const col = s.d < 2 ? '#ECE7CF' : areaCols[s.area];
+const col = s.d < 2 ? '#E3E2BF' : areaCols[s.area];
 const on = shown(s.d);
 return { d: 'M' + s.x1.toFixed(1) + ' ' + s.y1.toFixed(1) + ' L' + s.x2.toFixed(1) + ' ' + s.y2.toFixed(1), style: 'stroke: ' + col + '; stroke-width: ' + Math.max(2, 8 - s.d * 1.1).toFixed(1) + '; stroke-dasharray: 1; stroke-dashoffset: ' + (on ? 0 : 1) + '; transition: stroke-dashoffset .55s ease' };
 });
@@ -352,7 +362,7 @@ const picked = isDone && chosen === idx;
 return {
 text: o.t,
 disabled: !!o.off,
-style: 'display: flex; align-items: center; justify-content: center; gap: 16px; min-height: 54px; padding: 0 12px; border: 0; margin: 0; font-family: Space Mono, ui-monospace, monospace; font-size: 18px; letter-spacing: 1px; white-space: nowrap; cursor: ' + (o.off ? 'not-allowed' : 'pointer') + '; background: ' + (on && !o.off ? '#ECE7CF' : 'transparent') + '; color: ' + (o.off ? '#56607A' : (on ? '#111A2E' : '#8C95AB')) + '; font-weight: ' + (on ? 700 : 400) + '; transition: background .12s, color .12s',
+style: 'display: flex; align-items: center; justify-content: center; gap: 16px; min-height: 54px; padding: 0 12px; border: 0; margin: 0; font-family: Space Mono, ui-monospace, monospace; font-size: 18px; letter-spacing: 1px; white-space: nowrap; cursor: ' + (o.off ? 'not-allowed' : 'pointer') + '; background: ' + (on && !o.off ? '#E3E2BF' : 'transparent') + '; color: ' + (o.off ? '#56607A' : (on ? '#111A2E' : '#8C95AB')) + '; font-weight: ' + (on ? 700 : 400) + '; transition: background .12s, color .12s',
 tstyle: o.off ? 'text-decoration: line-through' : '',
 bstyle: 'font-weight: 400; color: ' + (picked ? amber : (on && !o.off ? '#111A2E' : '#56607A')),
 hover: () => { if (o.off) return; if ((this.state.sel[active] || 0) === idx) return; const s = Object.assign({}, this.state.sel); s[active] = idx; this.setState({ sel: s }); },
@@ -370,11 +380,11 @@ const phoneQuest = cur.isContinue ? cur.quest : cur.opts[shownIdx].t.charAt(0) +
 const menuHint = isDone ? (cur.isContinue ? 'Right where you left off. +10 XP.' : 'Quest done. +10 XP.') : (cur.isContinue ? 'Other apps make you start a new game. Not here.' : cur.sub);
 
 return Object.assign(this.introVals(vw, vh), {
-joinState: this.state.joinState || 'idle', join: (e) => this.join(e),
+joinStates: this.state.joinStates || {}, join: (e, id) => this.join(e, id),
 areas: areas, fanWrapStyle: fanWrapStyle, fanBoxStyle: fanBoxStyle,
 treeVB: T.vb, segs: segs, tips: tips, levels: levels,
 desktop: !mobile, mobile: mobile, menu: menu, menuHint: menuHint, phoneQuest: mobile ? cur.quest : phoneQuest,
-trackH: mobile ? '100vh' : (100 + (n - 1) * 70) + 'vh',
+trackH: mobile ? '100vh' : (100 + (n - 1) * 45) + 'vh',
 swipeStyle: 'position: absolute; left: 0; right: 0; top: ' + (vh - 40) + 'px; text-align: center; font-family: Space Mono, ui-monospace, monospace; font-size: 11px; letter-spacing: 2px; color: #8C95AB; z-index: 3; pointer-events: none',
 counter: String(active + 1).padStart(2, '0') + ' / 12',
 dialAreaStyle: dialAreaStyle, wheelStyle: wheelStyle, labels: labels, ticks: ticks, nowStyle: nowStyle,
@@ -427,49 +437,77 @@ let queued = false;
 function draw() { queued = false; const v = app.renderVals(); render(view(v), root); }
 function schedule() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
 
+function joinForm(v, id) {
+const st = v.joinStates[id] || 'idle';
+if (st === 'done') return html`<p role="status" class="mono" style="margin: 0; padding: 18px 26px; border: 2px solid #E3E2BF; color: #E3E2BF; font-size: 14px">YOU'RE ON THE LIST. SEE YOU IN DECEMBER.</p>`;
+return html`<form onSubmit=${(e) => v.join(e, id)} style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; width: 100%; max-width: 560px">
+<label for=${'email-' + id} style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Email address</label>
+<input id=${'email-' + id} name="email" type="email" required autocomplete="email" placeholder="you@email.com" class="join-in" />
+<button type="submit" class="join-btn" disabled=${st === 'sending'}>${st === 'sending' ? 'Joining…' : 'Join the waitlist'}</button>
+</form>
+${st === 'error' ? html`<p role="alert" style="margin: 0; color: #F59E6B; font-size: 15px">That didn't go through. Check the email and try again.</p>` : null}`;
+}
+
+const WORD = ['M207 49 V110 A50 50 0 0 0 307 110 V49 M307 110 V171', 'M355 110 H455 A50 50 0 1 0 443.3 142.1', 'M545.2 69 A25 25 0 1 0 526 110 A25 25 0 1 1 506.8 151.1', 'M611 20 V130 A30 30 0 0 0 641 160 M586 60 H646', 'M681 171 V49 M681 110 A50 50 0 0 1 731 60', 'M766 110 H866 A50 50 0 1 0 854.3 142.1', 'M912 110 H1012 A50 50 0 1 0 1000.3 142.1'];
+
 function view(v) {
   return html`
-<div style="position: relative; z-index: 0; background: #111A2E; color: #ECE7CF; font-family: Figtree, system-ui, sans-serif">
-<div aria-hidden="true" style="position: fixed; left: 0; top: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1">
+<div style="position: relative; z-index: 0; color: #E3E2BF; font-family: Figtree, system-ui, sans-serif">
+<div aria-hidden="true" style="position: fixed; left: 0; top: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; background: linear-gradient(180deg, #0d111c 0%, #141b2c 45%, #1f2a44 100%)">
 <svg width="100%" height="100%" viewBox="0 0 400 860" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-<g fill="none" stroke="#ECE7CF" stroke-opacity="0.07" stroke-width="0.8">
+<g fill="none" stroke="#E3E2BF" stroke-opacity="0.07" stroke-width="0.8">
 <circle cx="300" cy="190" r="150"></circle>
 </g>
 </svg>
 </div>
 
-<section id="intro-track" style="height: 300vh; position: relative">
-<div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
-<div style=${v.logoBoxStyle}>
-<svg viewBox="-6 -6 1040 206" width="100%" role="img" aria-label="Questree" style="overflow: visible; display: block">
-<defs><filter id="qglow" x="-300%" y="-300%" width="700%" height="700%"><feGaussianBlur stdDeviation="9"></feGaussianBlur></filter></defs>
-<g transform=${v.groupTf}>
-<g style=${v.spinStyle}>
-<circle cx="85" cy="96.5" r="74.5" fill="none" stroke="#ECE7CF" stroke-width="22" pathLength="1" transform="rotate(-90 85 96.5)" style=${v.arcStyle}></circle>
-<circle cx=${v.headX} cy=${v.headY} r="24" fill="#FFD891" filter="url(#qglow)" style=${v.glowStyle}></circle>
-<circle cx=${v.headX} cy=${v.headY} r="11" fill="#FFF4DE" style=${v.glowStyle}></circle>
-</g>
-<path d="M128 138 L178 188" fill="none" stroke="#ECE7CF" stroke-width="22" pathLength="1" style=${v.tailStyle}></path>
-${(v.letters || []).map((lt, _i1) => html`
-<path d=${lt.d} fill="none" stroke="#ECE7CF" stroke-width="22" style=${lt.style}></path>
-`)}
+<header style="position: absolute; left: 0; right: 0; top: 0; z-index: 5; padding: 20px 24px; display: flex; justify-content: flex-end; align-items: center">
+<a href="#join" class="mono" style="font-size: 12px; text-decoration: none; padding: 10px 14px; box-shadow: inset 0 0 0 1px rgba(227,226,191,.5)">JOIN THE WAITLIST</a>
+</header>
+
+<section id="top" style="position: relative; min-height: 100svh; box-sizing: border-box; padding: 120px 24px 72px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; text-align: center; overflow: hidden">
+<svg aria-hidden="true" viewBox="0 0 800 800" style="position: absolute; left: 50%; top: 46%; width: min(1100px, 170vw); transform: translate(-50%, -50%); pointer-events: none">
+<g fill="none" stroke="#fff"><circle cx="400" cy="400" r="120" stroke-opacity=".09"></circle><circle cx="400" cy="400" r="250" stroke-opacity=".07" stroke-dasharray="4 8"></circle><circle cx="400" cy="400" r="380" stroke-opacity=".06"></circle></g>
+</svg>
+<svg viewBox="-6 -6 1040 206" role="img" aria-label="Questree" style="position: relative; width: min(560px, 80vw); overflow: visible; display: block">
+<g fill="none" stroke="#E3E2BF" stroke-width="22" stroke-linecap="butt">
+<circle class="qd" pathLength="1" cx="85" cy="96.5" r="74.5" transform="rotate(-90 85 96.5)"></circle>
+<path class="qd" pathLength="1" d="M128 138 L178 188" style="animation-delay: .8s"></path>
+${WORD.map((d, k) => html`<path class="qd" pathLength="1" d=${d} style=${'animation-delay: ' + (0.25 + k * 0.09).toFixed(2) + 's'}></path>`)}
 </g>
 </svg>
+<span class="mono rise" style="position: relative; font-size: 12px; color: rgba(227,226,191,.75); animation-delay: .9s">FREE EARLY ACCESS · IPHONE · DECEMBER</span>
+<h1 class="cond rise" style="position: relative; margin: 0; max-width: 980px; font-size: clamp(46px, 7.6vw, 108px); line-height: .92; animation-delay: 1s">Finally finish what you keep starting.</h1>
+<p class="rise" style="position: relative; margin: 0; max-width: 600px; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.55; color: #C9CCD6; animation-delay: 1.1s">Pick one goal. Questree turns it into small daily quests that earn XP, unlock skills and grow your tree. Miss a week? Nothing's lost.</p>
+<div class="rise" style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; animation-delay: 1.2s">
+${joinForm(v, 'top')}
+<span style="font-size: 14px; color: #8C95AB">One email at launch. Nothing else.</span>
 </div>
-<div style=${v.loadStyle}>${v.loadText}</div>
-<div style=${v.explainStyle}>
-<h2 style="margin: 0; font-size: clamp(34px, 5vw, 64px); line-height: 1.02; font-weight: 600; letter-spacing: -1px">Your life is the adventure.</h2>
-<p style="margin: 0; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.55">Questree turns the one thing you want into small daily quests. Every quest earns XP, XP unlocks skills, and your tree grows with them, so you can actually see the climb. Miss a week? Nothing's lost. Pick up right where you left off.</p>
-<span style="font-family: Space Mono, ui-monospace, monospace; font-size: 13px; letter-spacing: 2px">FREE IN EARLY ACCESS · IPHONE · DECEMBER</span>
-</div>
-</div>
+<span aria-hidden="true" class="mono" style="position: absolute; bottom: 22px; left: 0; right: 0; font-size: 11px; color: #8C95AB; animation: qblink 1.2s steps(2) infinite">SCROLL</span>
 </section>
+
+<section style="padding: 110px 24px 60px; display: flex; flex-direction: column; align-items: center; gap: 40px; text-align: center">
+<h2 class="cond" style="margin: 0; font-size: clamp(36px, 5.2vw, 68px); line-height: .95">Here's why everything else failed.</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px; width: 100%; max-width: 860px; text-align: left">
+<div class="glass" style="padding: 30px 28px"><strong class="cond" style="display: block; font-size: 72px; line-height: 1">67%</strong><p style="margin: 10px 0 0; font-size: 17px; line-height: 1.5; color: #BAC0CF">of people quit a gamified habit app within four weeks. The novelty is the product.</p></div>
+<div class="glass" style="padding: 30px 28px"><strong class="cond" style="display: block; font-size: 72px; line-height: 1">92%</strong><p style="margin: 10px 0 0; font-size: 17px; line-height: 1.5; color: #BAC0CF">of habit attempts collapse before 60 days. Points and streaks alone don't make things stick.</p></div>
+</div>
+<p style="margin: 0; max-width: 680px; font-size: clamp(18px, 1.8vw, 22px); line-height: 1.5">The points connect to nothing you care about, so you quit. <strong>In Questree, every quest points at the one thing you actually want.</strong></p>
+<p style="margin: 0; font-size: 12px; color: #6F7891">Sources: Gamification Hub retention synthesis (2026); University of Rochester SDT lab.</p>
+</section>
+
+<section style="padding: 40px 24px 10px; text-align: center">
+<span class="mono" style="font-size: 12px; color: rgba(227,226,191,.75)">A YEAR IN QUESTREE</span>
+<h2 class="cond" style="margin: 14px 0 0; font-size: clamp(36px, 5.2vw, 68px); line-height: .95">One goal. Twelve months. Try it.</h2>
+<p style="margin: 14px auto 0; max-width: 520px; font-size: 17px; line-height: 1.5; color: #BAC0CF">Scroll through the year. Tap the quest on the phone to log it.</p>
+</section>
+
 
 <section id="wheel-track" style="height: ${v.trackH}; position: relative">
 <div style="position: sticky; top: 0; height: 100vh; overflow: hidden">
 
 <div style="position: absolute; left: 24px; right: 24px; top: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 4; font-size: 14px">
-<svg viewBox="-6 -6 1040 206" width="124" role="img" aria-label="Questree" style="display: block"><g fill="none" stroke="#ECE7CF" stroke-width="22"><circle cx="85" cy="96.5" r="74.5"></circle><path d="M128 138 L178 188"></path><path d="M207 49 V110 A50 50 0 0 0 307 110 V49 M307 110 V171"></path><path d="M355 110 H455 A50 50 0 1 0 443.3 142.1"></path><path d="M545.2 69 A25 25 0 1 0 526 110 A25 25 0 1 1 506.8 151.1"></path><path d="M611 20 V130 A30 30 0 0 0 641 160 M586 60 H646"></path><path d="M681 171 V49 M681 110 A50 50 0 0 1 731 60"></path><path d="M766 110 H866 A50 50 0 1 0 854.3 142.1"></path><path d="M912 110 H1012 A50 50 0 1 0 1000.3 142.1"></path></g></svg>
+<svg viewBox="-6 -6 1040 206" width="124" role="img" aria-label="Questree" style="display: block"><g fill="none" stroke="#E3E2BF" stroke-width="22"><circle cx="85" cy="96.5" r="74.5"></circle><path d="M128 138 L178 188"></path><path d="M207 49 V110 A50 50 0 0 0 307 110 V49 M307 110 V171"></path><path d="M355 110 H455 A50 50 0 1 0 443.3 142.1"></path><path d="M545.2 69 A25 25 0 1 0 526 110 A25 25 0 1 1 506.8 151.1"></path><path d="M611 20 V130 A30 30 0 0 0 641 160 M586 60 H646"></path><path d="M681 171 V49 M681 110 A50 50 0 0 1 731 60"></path><path d="M766 110 H866 A50 50 0 1 0 854.3 142.1"></path><path d="M912 110 H1012 A50 50 0 1 0 1000.3 142.1"></path></g></svg>
 <span>${v.counter}</span>
 </div>
 
@@ -549,7 +587,7 @@ ${['M','T','W','T','F','S','S'].map((d, k) => html`<div style="display: flex; fl
 ${(v.stickers || []).map((s, _i6) => html`
 <div style=${s.style}>
 ${s.smiley ? html`
-<svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="#F5C518"></circle><path d="M36 34 L34 46" stroke="#111A2E" stroke-width="5" stroke-linecap="round"></path><path d="M62 34 L60 46" stroke="#111A2E" stroke-width="5" stroke-linecap="round"></path><path d="M26 58 Q50 82 76 56" fill="none" stroke="#111A2E" stroke-width="5" stroke-linecap="round"></path></svg>
+<svg viewBox="0 0 100 100" width="100%" height="100%" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="#E3E2BF"></circle><path d="M36 34 L34 46" stroke="#111A2E" stroke-width="5" stroke-linecap="round"></path><path d="M62 34 L60 46" stroke="#111A2E" stroke-width="5" stroke-linecap="round"></path><path d="M26 58 Q50 82 76 56" fill="none" stroke="#111A2E" stroke-width="5" stroke-linecap="round"></path></svg>
 ` : null}
 ${s.isText ? html`
 <span>${s.t}</span>
@@ -562,8 +600,21 @@ ${s.isText ? html`
 </div>
 </section>
 
+<section style="padding: 130px 24px 40px; display: flex; flex-direction: column; align-items: center; gap: 44px">
+<div style="text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center">
+<span class="mono" style="font-size: 12px; color: rgba(227,226,191,.75)">HOW IT WORKS</span>
+<h2 class="cond" style="margin: 0; font-size: clamp(36px, 5.2vw, 68px); line-height: .95">Your life, mapped.</h2>
+<p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 1.5; color: #BAC0CF">It starts with the questions no app has asked you. <em>What do you actually want? And what keeps getting in the way?</em></p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; width: 100%; max-width: 1060px">
+${[['01', 'One main objective', 'Pick the one thing that matters this year. Everything else points back to it.'], ['02', 'Every quest has a why', 'Small daily quests, each tied to the goal it serves, so ten minutes never feels like nothing.'], ['03', 'Earn XP, unlock skills', 'Every quest you log earns XP. XP unlocks skills, and skills grow your tree.'], ['04', 'No punishment. Ever.', 'Miss a day, or a week? Nothing breaks. Coming back is the win.']].map((c) => html`
+<div class="glass" style="padding: 26px 24px; display: flex; flex-direction: column; gap: 12px"><span class="mono" style="font-size: 12px; color: #8C95AB">${c[0]}</span><strong class="cond" style="font-size: 26px; line-height: 1">${c[1]}</strong><span style="font-size: 16px; line-height: 1.5; color: #BAC0CF">${c[2]}</span></div>`)}
+</div>
+</section>
+
+
 <section style="padding: 140px 24px 40px; display: flex; flex-direction: column; align-items: center; gap: 56px; overflow: hidden">
-<h2 style="margin: 0; text-align: center; font-size: clamp(36px, 5.5vw, 72px); line-height: 1; font-weight: 600; letter-spacing: -1px">Four branches. One tree.</h2>
+<h2 class="cond" style="margin: 0; text-align: center; font-size: clamp(36px, 5.2vw, 68px); line-height: .95">Four areas. One tree.</h2>
 <div style=${v.fanWrapStyle}>
 <div style=${v.fanBoxStyle}>
 ${(v.areas || []).map((a, _i7) => html`
@@ -580,7 +631,7 @@ ${(v.areas || []).map((a, _i7) => html`
 </section>
 
 <section id="tree-sec" style="padding: 120px 24px 80px; display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center">
-<h2 style="margin: 0; font-size: clamp(36px, 5.5vw, 72px); line-height: 1; font-weight: 600; letter-spacing: -1px">Watch it grow.</h2>
+<h2 class="cond" style="margin: 0; font-size: clamp(36px, 5.2vw, 68px); line-height: .95">Watch it grow.</h2>
 <p style="margin: 0; max-width: 520px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: #BAC0CF">Every quest earns XP. XP unlocks skills, and every skill grows a branch. Keep going and the whole tree fills in, level by level.</p>
 <svg viewBox=${v.treeVB} role="img" aria-label="A tree growing from one trunk into four branches: health, social, growth and work" style="width: min(100%, 760px); height: auto; display: block; margin-top: 16px">
 ${(v.levels || []).map((lv, _i8) => html`
@@ -602,11 +653,23 @@ ${(v.areas || []).map((ar, _i11) => html`
 </section>
 
 <section style="padding: 120px 24px; display: flex; justify-content: center">
-<p style="margin: 0; max-width: 1040px; font-size: clamp(30px, 4.4vw, 60px); line-height: 1.25; font-weight: 400; letter-spacing: -0.5px">pick one goal <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg> get small daily quests <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg> earn XP <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"></path></svg> unlock skills <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 7.5-2"></path></svg> watch your tree grow <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V11 M12 11 L7 6 M12 11 L17 6 M12 15 L8 12 M12 15 L16 12"></path></svg> miss a week, lose nothing <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8 M4 4v4h4"></path></svg> grow new branches <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6 M12 15v6 M3 12h6 M15 12h6"></path></svg> health, social, growth and work <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#FFB547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.5"></circle><circle cx="16" cy="8" r="2.5"></circle><circle cx="8" cy="16" r="2.5"></circle><circle cx="16" cy="16" r="2.5"></circle></svg> <span style="color: #56607A">finally finish what you start</span></p>
+<p style="margin: 0; max-width: 1040px; font-size: clamp(30px, 4.4vw, 60px); line-height: 1.25; font-weight: 400; letter-spacing: -0.5px">pick one goal <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg> get small daily quests <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg> earn XP <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"></path></svg> unlock skills <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 7.5-2"></path></svg> watch your tree grow <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V11 M12 11 L7 6 M12 11 L17 6 M12 15 L8 12 M12 15 L16 12"></path></svg> miss a week, lose nothing <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8 M4 4v4h4"></path></svg> grow new branches <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6 M12 15v6 M3 12h6 M15 12h6"></path></svg> health, social, growth and work <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.5"></circle><circle cx="16" cy="8" r="2.5"></circle><circle cx="8" cy="16" r="2.5"></circle><circle cx="16" cy="16" r="2.5"></circle></svg> <span style="color: #56607A">finally finish what you start</span></p>
+</section>
+
+<section style="padding: 110px 24px; display: flex; justify-content: center">
+<div style="width: 100%; max-width: 900px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 40px; align-items: start">
+<img src="founder.jpg" alt="Ryan Rowley, founder of Questree" width="280" height="340" style="width: 100%; max-width: 300px; height: auto; border-radius: 22px; object-fit: cover; box-shadow: inset 0 0 0 1px rgba(255,255,255,.09)" />
+<div style="display: flex; flex-direction: column; gap: 16px">
+<h2 class="cond" style="margin: 0; font-size: clamp(32px, 4.2vw, 54px); line-height: .95">I built this because I am you.</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C9CCD6">I'm Ryan. I have a good job. I'm not lazy. I know exactly what I should be doing, but the moment a task gets boring or life gets hard, I escape to anything but the thing. My perfect Notion system lasted three days. Habitica felt like a chore. And after one bad week, whatever had stuck fell apart.</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C9CCD6">No tool ever asked <em>why do I keep escaping?</em> Questree is for the person who already knows, already cares, and keeps stopping anyway. It's my first app, and I'm building it because it didn't exist. Join early and you shape what it becomes.</p>
+<span class="mono" style="font-size: 13px">— RYAN</span>
+</div>
+</div>
 </section>
 
 <section style="padding: 80px 24px 120px; display: flex; flex-direction: column; align-items: center; gap: 48px">
-<h2 style="margin: 0; text-align: center; font-size: clamp(40px, 6vw, 84px); line-height: 1; letter-spacing: -1px"><span style="font-weight: 300">questions?</span> <span style="font-weight: 700">answers.</span></h2>
+<h2 class="cond" style="margin: 0; text-align: center; font-size: clamp(40px, 6vw, 80px); line-height: .95"><span style="opacity: .55">Questions?</span> Answers.</h2>
 <div style="width: 100%; max-width: 900px; border-bottom: 1px solid #2A3756">
 <details style="border-top: 1px solid #2A3756; padding: 0">
 <summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>When can I get it?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
@@ -639,31 +702,25 @@ ${(v.areas || []).map((ar, _i11) => html`
 </div>
 </section>
 
-<section id="join" style="min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; padding: 80px 24px; text-align: center">
-<h2 style="margin: 0; font-size: clamp(44px, 8vw, 112px); line-height: 0.95; font-weight: 600; letter-spacing: -2px">Your year starts now.</h2>
-<p style="margin: 0; max-width: 520px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: #BAC0CF">Early access opens in December. Leave your email and you'll be first in.</p>
-${v.joinState === 'done' ? html`
-<p role="status" style="margin: 0; padding: 18px 28px; border: 2px solid #FFB547; color: #FFB547; font-family: Space Mono, ui-monospace, monospace; font-size: 15px; letter-spacing: 1px">YOU'RE ON THE LIST. SEE YOU IN DECEMBER.</p>
-` : html`
-<form onSubmit=${v.join} style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; width: 100%; max-width: 560px">
-<label for="join-email" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Email address</label>
-<input id="join-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com" class="join-in" />
-<button type="submit" disabled=${v.joinState === 'sending'} style="flex: 0 0 auto; padding: 20px 32px; border: 0; background: #ECE7CF; color: #111A2E; font: 700 18px Figtree, system-ui, sans-serif; cursor: pointer">${v.joinState === 'sending' ? 'Joining…' : 'Join the waitlist'}</button>
-</form>
-${v.joinState === 'error' ? html`<p role="alert" style="margin: 0; color: #E0402B; font-size: 15px">That didn't go through. Check the email and try again.</p>` : null}
-`}
+<section id="join" style="min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding: 90px 24px; text-align: center">
+<h2 class="cond" style="margin: 0; font-size: clamp(48px, 8.5vw, 120px); line-height: .9">Your year starts now.</h2>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; font-size: 16px; color: #C9CCD6">
+${['First access in December', 'Free during early access', 'One email at launch, nothing else'].map((t) => html`<span style="display: flex; align-items: center; gap: 8px"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 0 L14.3 9.7 L24 12 L14.3 14.3 L12 24 L9.7 14.3 L0 12 L9.7 9.7Z" fill="#E3E2BF"></path></svg>${t}</span>`)}
+</div>
+${joinForm(v, 'end')}
+<p style="margin: 18px 0 0; max-width: 560px; font-size: 15px; line-height: 1.6; color: #8C95AB"><strong style="color: #C9CCD6">P.S.</strong> You already know what you want to do this year. Stop bouncing off systems built for someone else and try the one that starts with you.</p>
 </section>
 
 
 <footer style="padding: 56px 24px 40px">
 <div style="max-width: 1120px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 40px">
 <div style="display: flex; flex-direction: column; gap: 20px">
-<svg viewBox="-6 -6 1040 206" width="132" role="img" aria-label="Questree" style="display: block"><g fill="none" stroke="#ECE7CF" stroke-width="22"><circle cx="85" cy="96.5" r="74.5"></circle><path d="M128 138 L178 188"></path><path d="M207 49 V110 A50 50 0 0 0 307 110 V49 M307 110 V171"></path><path d="M355 110 H455 A50 50 0 1 0 443.3 142.1"></path><path d="M545.2 69 A25 25 0 1 0 526 110 A25 25 0 1 1 506.8 151.1"></path><path d="M611 20 V130 A30 30 0 0 0 641 160 M586 60 H646"></path><path d="M681 171 V49 M681 110 A50 50 0 0 1 731 60"></path><path d="M766 110 H866 A50 50 0 1 0 854.3 142.1"></path><path d="M912 110 H1012 A50 50 0 1 0 1000.3 142.1"></path></g></svg>
-<a href="#join" style="align-self: flex-start; padding: 14px 22px; background: #ECE7CF; color: #111A2E; font-weight: 600; font-size: 15px; text-decoration: none">Join the waitlist</a>
+<svg viewBox="-6 -6 1040 206" width="132" role="img" aria-label="Questree" style="display: block"><g fill="none" stroke="#E3E2BF" stroke-width="22"><circle cx="85" cy="96.5" r="74.5"></circle><path d="M128 138 L178 188"></path><path d="M207 49 V110 A50 50 0 0 0 307 110 V49 M307 110 V171"></path><path d="M355 110 H455 A50 50 0 1 0 443.3 142.1"></path><path d="M545.2 69 A25 25 0 1 0 526 110 A25 25 0 1 1 506.8 151.1"></path><path d="M611 20 V130 A30 30 0 0 0 641 160 M586 60 H646"></path><path d="M681 171 V49 M681 110 A50 50 0 0 1 731 60"></path><path d="M766 110 H866 A50 50 0 1 0 854.3 142.1"></path><path d="M912 110 H1012 A50 50 0 1 0 1000.3 142.1"></path></g></svg>
+<a href="#join" style="align-self: flex-start; padding: 14px 22px; background: #E3E2BF; color: #111A2E; font-weight: 600; font-size: 15px; text-decoration: none">Join the waitlist</a>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 48px; font-size: 15px">
-<div style="display: flex; flex-direction: column; gap: 12px"><span style="color: #A8B0C3">Legal</span><a href="/privacy" style="color: #ECE7CF">Privacy</a><a href="/app-privacy" style="color: #ECE7CF">App privacy</a><a href="/terms" style="color: #ECE7CF">Terms</a></div>
-<div style="display: flex; flex-direction: column; gap: 12px"><span style="color: #A8B0C3">Help</span><a href="mailto:support@getquestree.com" style="color: #ECE7CF">support@getquestree.com</a></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><span style="color: #A8B0C3">Legal</span><a href="/privacy" style="color: #E3E2BF">Privacy</a><a href="/app-privacy" style="color: #E3E2BF">App privacy</a><a href="/terms" style="color: #E3E2BF">Terms</a></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><span style="color: #A8B0C3">Help</span><a href="mailto:support@getquestree.com" style="color: #E3E2BF">support@getquestree.com</a></div>
 </div>
 </div>
 <p style="max-width: 1120px; margin: 48px auto 0; font-size: 13px; line-height: 1.6; color: #A8B0C3">© 2026 Questree. Questree is a trading name of Rowley Labs Ltd, registered in England and Wales, company no. 17527212. Registered office: 42 Beaumaris Road, Bournemouth, BH11 9FX.</p>
