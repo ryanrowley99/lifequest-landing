@@ -57,21 +57,21 @@ constructor(props) {
 super(props);
 const cream = '#E3E2BF', ink = '#0D111C', amber = '#a8c48a', red = '#c48aa8';
 this.months = [
-{ m: 'January', head: 'Pick one goal.', sub: 'Run a half marathon by December. That’s the quest.', tag: 'Set up', quest: 'Write your main quest', pct: 0, br: 0,
+{ m: 'January', head: 'Pick one goal.', sub: 'Run a half marathon by December. That’s your main objective.', tag: 'Set up', quest: 'Write your main objective', pct: 0, br: 0,
 st: [{ t: 'ONE GOAL', k: 'pill', bg: cream, c: ink, x: 170, y: 40, r: 8 }, { t: 'NEW YEAR, NEW TREE', k: 'circle', bg: amber, c: ink, x: -60, y: 400, r: -12, s: 120 }] },
 { m: 'February', head: 'Everyone else quits here.', sub: 'Not you. First quest, logged.', tag: 'Today', quest: '20-minute easy run', pct: 8, br: 1,
 st: [{ k: 'smiley', x: 190, y: 90, r: 10, s: 104 }, { t: 'STILL HERE.', k: 'circle', bg: red, c: ink, x: -60, y: 420, r: -14, s: 118 }] },
 { m: 'March', head: 'Missed a week. Fine.', sub: 'Nothing you built is gone.', tag: 'Welcome back', quest: 'Pick up where you left off', pct: 12, br: 2,
-st: [{ t: 'NOTHING LOST', k: 'circle', bg: cream, c: ink, x: 180, y: 60, r: 12, s: 116 }, { t: 'OOPS.', k: 'pill', bg: 'transparent', c: cream, x: -50, y: 470, r: -8 }] },
+st: [{ t: 'NOTHING LOST', k: 'circle', bg: cream, c: ink, x: 180, y: 60, r: 12, s: 116 }, { t: 'NO RESET', k: 'pill', bg: 'transparent', c: cream, x: -50, y: 470, r: -8 }] },
 { m: 'April', head: 'Drink the water.', sub: 'The boring quests count too.', tag: 'Today', quest: 'Drink a glass of water', pct: 20, br: 3,
 st: [{ t: 'HYDRATED.', k: 'pill', bg: cream, c: ink, x: 160, y: 110, r: -6 }, { t: 'GLUG.', k: 'circle', bg: amber, c: ink, x: -50, y: 390, r: 10, s: 96 }] },
 { m: 'May', head: 'First 5k.', sub: 'A new skill unlocks.', tag: 'Today', quest: 'Run 5k without stopping', pct: 31, br: 4,
 st: [{ t: 'YA!', k: 'circle', bg: red, c: ink, x: 190, y: 50, r: -14, s: 104 }, { t: 'UNLOCKED', k: 'pill', bg: cream, c: ink, x: -60, y: 450, r: 6 }] },
-{ m: 'June', head: 'Halfway up.', sub: 'And you can actually see it.', tag: 'Today', quest: 'Read 10 pages', pct: 45, br: 6,
+{ m: 'June', head: 'Halfway there.', sub: 'Your timeline shows it.', tag: 'Today', quest: 'Read 10 pages', pct: 45, br: 6,
 st: [{ t: 'HALF WAY', k: 'circle', bg: amber, c: ink, x: 185, y: 70, r: 12, s: 110 }] },
-{ m: 'July', head: 'Holiday. Life happens.', sub: 'Your tree waits. No streak to save.', tag: 'Paused', quest: 'Out of office. Tree’s fine.', pct: 48, br: 6,
+{ m: 'July', head: 'Holiday. Life happens.', sub: 'Your tree waits. No streak to save.', tag: 'Away', quest: 'Short jog', pct: 48, br: 6,
 st: [{ t: 'OUT OF OFFICE', k: 'pill', bg: cream, c: ink, x: 140, y: 60, r: 8 }, { k: 'smiley', x: -50, y: 400, r: -10, s: 96 }] },
-{ m: 'August', head: 'Back on it.', sub: 'Like you never left.', tag: 'Today', quest: '30-minute run', pct: 57, br: 7,
+{ m: 'August', head: 'Back on it.', sub: 'A card shows what you’ve done so far. Carry on.', tag: 'Today', quest: '30-minute run', pct: 57, br: 7,
 st: [{ t: 'YOU’RE BACK.', k: 'circle', bg: amber, c: ink, x: 180, y: 80, r: -10, s: 118 }] },
 { m: 'September', head: '10k.', sub: 'Didn’t see that coming, did you?', tag: 'Today', quest: 'Run 10k', pct: 68, br: 8,
 st: [{ t: 'WHO ARE YOU?', k: 'circle', bg: red, c: ink, x: 185, y: 50, r: 12, s: 116 }, { t: 'UNLOCKED', k: 'pill', bg: cream, c: ink, x: -60, y: 450, r: -6 }] },
@@ -79,7 +79,7 @@ st: [{ t: 'WHO ARE YOU?', k: 'circle', bg: red, c: ink, x: 185, y: 50, r: 12, s:
 st: [{ t: 'STILL COUNTS', k: 'pill', bg: 'transparent', c: cream, x: 150, y: 100, r: 7 }] },
 { m: 'November', head: 'Almost there.', sub: 'Ease off. Don’t stop.', tag: 'Today', quest: 'Taper week: easy 5k', pct: 90, br: 10,
 st: [{ t: 'ALMOST', k: 'circle', bg: cream, c: ink, x: 185, y: 70, r: -12, s: 104 }] },
-{ m: 'December', head: 'Half marathon. Done.', sub: 'Whole tree, grown. What’s next?', tag: 'Race day', quest: 'Run 21.1 km', pct: 92, br: 11,
+{ m: 'December', head: 'Half marathon. Done.', sub: 'Objective reached. What’s next?', tag: 'Race day', quest: 'Run 21.1 km', pct: 92, br: 11,
 st: [{ t: 'QUEST COMPLETE', k: 'circle', bg: amber, c: ink, x: 175, y: 40, r: 10, s: 128 }, { k: 'smiley', x: -60, y: 410, r: -8, s: 104 }] }
 ];
 const opts = [
@@ -98,7 +98,7 @@ const opts = [
 ];
 this.months.forEach((mo, i) => {
 mo.opts = opts[i] === 'continue'
-? [{ t: 'CONTINUE' }, { t: 'NEW GAME', off: true }]
+? [{ t: 'CONTINUE' }, { t: 'START OVER', off: true }]
 : opts[i].map((t) => ({ t: t }));
 mo.isContinue = opts[i] === 'continue';
 });
@@ -382,7 +382,7 @@ this.setState({ done: d, chosen: c, sel: s });
 });
 const shownIdx = isDone && chosen !== undefined ? chosen : sel;
 const phoneQuest = cur.isContinue ? cur.quest : cur.opts[shownIdx].t.charAt(0) + cur.opts[shownIdx].t.slice(1).toLowerCase();
-const menuHint = isDone ? (cur.isContinue ? 'Right where you left off. +10 XP.' : 'Quest done. +10 XP.') : (cur.isContinue ? 'Other apps make you start a new game. Not here.' : cur.sub);
+const menuHint = isDone ? (cur.isContinue ? 'Right where you left off. +10 XP.' : 'Quest done. +10 XP.') : (cur.isContinue ? 'Other apps make you start over. Not here.' : cur.sub);
 
 return Object.assign(this.introVals(vw, vh), {
 joinStates: this.state.joinStates || {}, join: (e, id) => this.join(e, id),
@@ -497,7 +497,7 @@ ${joinForm(v, 'top')}
 <div class="glass" style="padding: 30px 28px"><strong class="cond" style="display: block; font-size: 72px; line-height: 1">67%</strong><p style="margin: 10px 0 0; font-size: 17px; line-height: 1.5; color: #BAC0CF">of people quit a gamified habit app within four weeks. The novelty is the product.</p></div>
 <div class="glass" style="padding: 30px 28px"><strong class="cond" style="display: block; font-size: 72px; line-height: 1">92%</strong><p style="margin: 10px 0 0; font-size: 17px; line-height: 1.5; color: #BAC0CF">of habit attempts collapse before 60 days. Points and streaks alone don't make things stick.</p></div>
 </div>
-<p style="margin: 0; max-width: 680px; font-size: clamp(18px, 1.8vw, 22px); line-height: 1.5">The points connect to nothing you care about, so you quit. <strong>In Questree, every quest points at the one thing you actually want.</strong></p>
+<p style="margin: 0; max-width: 680px; font-size: clamp(18px, 1.8vw, 22px); line-height: 1.5">The points connect to nothing you care about, so you quit. <strong>In Questree, your daily quests move the one goal you picked.</strong></p>
 <p style="margin: 0; font-size: 12px; color: #6F7891">Sources: Gamification Hub retention synthesis (2026); University of Rochester SDT lab.</p>
 </section>
 
@@ -552,14 +552,14 @@ ${v.mobile ? html`
 <div style=${v.phoneWrapStyle}>
 <div style="position: absolute; left: 0; top: 0; width: 270px; height: 560px; box-sizing: border-box; border-radius: 44px; background: linear-gradient(180deg, #4a3fd8 0%, #0a8aa0 100%); border: 6px solid #0B1222; box-shadow: 0 30px 60px rgba(0,0,0,.45); padding: 26px 16px 14px; display: flex; flex-direction: column; gap: 14px; color: #fff; overflow: hidden">
 <div style="display: flex; justify-content: space-between; align-items: center">
-<span style="font-size: 12px; color: rgba(255,255,255,.75)">Good morning, Sam</span>
-<span style="display: flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 999px; background: rgba(0,0,0,.18); font-size: 11px; font-weight: 600"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M12 2c1 4 5 5.5 5 11a5 5 0 0 1-10 0c0-3 1.5-4.5 2.5-6 .3 2 1.3 3 2.5 3 0-3-1-5 0-8z" fill="#E3E2BF"></path></svg>${v.xp} XP</span>
+<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1.4px; color: rgba(255,255,255,.75)">14 ${v.cur.m.toUpperCase()}</span>
+<span style="display: flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 999px; background: rgba(0,0,0,.18); font-size: 11px; font-weight: 600"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="#E3E2BF"></path></svg>${v.xp} XP</span>
 </div>
 <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 9px; color: rgba(255,255,255,.6)">
 ${['M','T','W','T','F','S','S'].map((d, k) => html`<div style="display: flex; flex-direction: column; align-items: center; gap: 4px"><span>${d}</span><span style="width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; color: ${k === 2 ? '#fff' : 'rgba(255,255,255,.55)'}; border: ${k === 2 ? '2px solid #E3E2BF' : '2px solid transparent'}">${12 + k}</span></div>`)}
 </div>
 <div style="display: flex; flex-direction: column; gap: 6px">
-<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 1.6px; color: rgba(255,255,255,.7)">MAIN QUEST · ${v.cur.m.toUpperCase()}</span>
+<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 1.6px; color: rgba(255,255,255,.7)">MAIN OBJECTIVE</span>
 <strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 27px; line-height: 1; letter-spacing: .3px">RUN A HALF MARATHON</strong>
 <div style="position: relative; height: 22px; margin-top: 4px">
 <div style="position: absolute; left: 0; right: 0; top: 4px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.22)"></div>
@@ -577,8 +577,8 @@ ${['M','T','W','T','F','S','S'].map((d, k) => html`<div style="display: flex; fl
 <div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 17px; line-height: 1.05; text-transform: uppercase">${v.phoneQuest}</strong><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1.1px; color: ${v.tagColor}; text-transform: uppercase">${v.tag}</span></div>
 </div>
 <div style="padding: 12px; border-radius: 22px; background: #F1F0DF; color: #0D1117; display: flex; align-items: center; gap: 12px; box-shadow: 0 6px 16px rgba(5,10,30,.32)">
-<span style="flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; box-sizing: border-box; border: 3px solid rgba(138,180,196,.55); background: rgba(138,180,196,.16); display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" fill="none" stroke="#4f7d8e" stroke-width="2" stroke-linejoin="round"></path></svg></span>
-<div style="display: flex; flex-direction: column; gap: 3px"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 17px; line-height: 1.05">SLEEP BY 11</strong><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1.1px; color: rgba(13,17,23,.55)">GROWTH · TONIGHT</span></div>
+<span style="flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; box-sizing: border-box; border: 3px solid rgba(168,196,138,.55); background: rgba(168,196,138,.16); display: flex; align-items: center; justify-content: center"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z" fill="none" stroke="#6f8a52" stroke-width="2" stroke-linejoin="round"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 3px"><strong style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 17px; line-height: 1.05">LIGHTS OUT BY 11</strong><span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 1.1px; color: rgba(13,17,23,.55)">HEALTH</span></div>
 </div>
 <div style="flex: 1 1 auto"></div>
 <div style="position: relative; height: 50px; border-radius: 26px; background: rgba(10,14,28,.55); border: 1px solid rgba(255,255,255,.14); display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; text-align: center; font-size: 9px; color: rgba(255,255,255,.62)">
@@ -637,7 +637,7 @@ ${(v.areas || []).map((a, _i7) => html`
 
 <section id="tree-sec" style="padding: 120px 24px 80px; display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center">
 <h2 class="cond" style="margin: 0; font-size: clamp(36px, 5.2vw, 68px); line-height: .95">Watch it grow.</h2>
-<p style="margin: 0; max-width: 520px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: #BAC0CF">Every quest earns XP. XP unlocks skills, and every skill grows a branch. Keep going and the whole tree fills in, level by level.</p>
+<p style="margin: 0; max-width: 520px; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: #BAC0CF">Every quest you log earns XP. XP unlocks skills, and each skill adds a leaf to your tree. Keep going and it fills in, area by area.</p>
 <svg viewBox=${v.treeVB} role="img" aria-label="A tree growing from one trunk into four branches: health, social, growth and work" style="width: min(100%, 760px); height: auto; display: block; margin-top: 16px">
 ${(v.levels || []).map((lv, _i8) => html`
 <path d=${lv.d} fill="none" stroke="#34425F" stroke-width="1.2" stroke-dasharray="5 7" style=${lv.style}></path>
@@ -658,7 +658,7 @@ ${(v.areas || []).map((ar, _i11) => html`
 </section>
 
 <section style="padding: 120px 24px; display: flex; justify-content: center">
-<p style="margin: 0; max-width: 1040px; font-size: clamp(30px, 4.4vw, 60px); line-height: 1.25; font-weight: 400; letter-spacing: -0.5px">pick one goal <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg> get small daily quests <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg> earn XP <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"></path></svg> unlock skills <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 7.5-2"></path></svg> watch your tree grow <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V11 M12 11 L7 6 M12 11 L17 6 M12 15 L8 12 M12 15 L16 12"></path></svg> miss a week, lose nothing <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8 M4 4v4h4"></path></svg> grow new branches <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6 M12 15v6 M3 12h6 M15 12h6"></path></svg> health, social, growth and work <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.5"></circle><circle cx="16" cy="8" r="2.5"></circle><circle cx="8" cy="16" r="2.5"></circle><circle cx="16" cy="16" r="2.5"></circle></svg> <span style="color: #56607A">finally finish what you start</span></p>
+<p style="margin: 0; max-width: 1040px; font-size: clamp(30px, 4.4vw, 60px); line-height: 1.25; font-weight: 400; letter-spacing: -0.5px">pick one goal <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg> get small daily quests <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path></svg> earn XP <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"></path></svg> unlock skills <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 7.5-2"></path></svg> watch your tree grow <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V11 M12 11 L7 6 M12 11 L17 6 M12 15 L8 12 M12 15 L16 12"></path></svg> miss a week, lose nothing <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.5-5.8 M4 4v4h4"></path></svg> tick off checkpoints <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6 M12 15v6 M3 12h6 M15 12h6"></path></svg> health, social, growth and work <svg style="display: inline-block; width: 0.78em; height: 0.78em; vertical-align: -0.04em; margin: 0 0.18em" viewBox="0 0 24 24" fill="none" stroke="#E3E2BF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.5"></circle><circle cx="16" cy="8" r="2.5"></circle><circle cx="8" cy="16" r="2.5"></circle><circle cx="16" cy="16" r="2.5"></circle></svg> <span style="color: #56607A">no starting over</span></p>
 </section>
 
 <section style="padding: 110px 24px; display: flex; justify-content: center">
@@ -690,15 +690,15 @@ ${(v.areas || []).map((ar, _i11) => html`
 </details>
 <details style="border-top: 1px solid #2A3756; padding: 0">
 <summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>How is it different from a habit tracker or Habitica?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
-<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">It starts with one goal, not a list of habits. Every quest points at it. Miss a week and nothing resets. And it looks like an adventure for grown-ups, not a cartoon.</p>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">It starts with one goal, not a list of habits. Your daily quests are built around it, and a timeline shows how far you are from your target date. Miss a week and nothing resets.</p>
 </details>
 <details style="border-top: 1px solid #2A3756; padding: 0">
 <summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>What happens if I miss a few days?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
-<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">Nothing bad. No streaks to break. Your tree stays exactly where you left it.</p>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">Nothing bad. There is no streak to break. Questree counts the days you showed up, not the days you missed. When you come back, a card shows the progress you have made so far, and you carry on.</p>
 </details>
 <details style="border-top: 1px solid #2A3756; padding: 0">
 <summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>Do I have to set everything up myself?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
-<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">No. Sign up, write your goal, answer a few questions, and Questree suggests your first quests. Tweak them or pick your own from the library.</p>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">No. Pick your main objective, add a second one if you want, and Questree suggests quests that fit. Change them or pick your own from the library.</p>
 </details>
 <details style="border-top: 1px solid #2A3756; padding: 0">
 <summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>What do you do with my data?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
