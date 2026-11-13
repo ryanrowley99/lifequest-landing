@@ -614,6 +614,10 @@ ${s.isText ? html`
 ${[['1', 'Pick your one goal', 'Write the one thing you want and set a target date.'], ['2', 'Daily quests that move it', 'Small quests each day, tied to your goal. Each one you log earns XP.'], ['3', 'Miss a day? Pick up where you left off.', 'There is no streak to lose. A card shows your progress so far.']].map((c) => html`
 <div class="glass" style="padding: 26px 24px; display: flex; flex-direction: column; gap: 12px"><span class="mono" style="font-size: 12px; color: #8C95AB">${c[0]}</span><strong class="cond" style="font-size: 26px; line-height: 1">${c[1]}</strong><span style="font-size: 16px; line-height: 1.5; color: #BAC0CF">${c[2]}</span></div>`)}
 </div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 28px 16px; width: 100%; max-width: 1060px">
+${[['home', 'HOME', 'Questree Home screen: the main objective with its timeline, and today’s quests'], ['quests', 'QUESTS', 'Questree Quests screen: a quest with its days logged'], ['skills', 'SKILLS', 'Questree Skills screen: four skill trees for health, social, growth and work'], ['you', 'YOU', 'Questree You screen: your tree, level and the days you showed up']].map((c) => html`
+<figure style="margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px"><img src=${'screens/' + c[0] + '.jpg'} alt=${c[2]} width="644" height="1400" loading="lazy" style="width: 100%; max-width: 250px; height: auto; display: block; box-sizing: border-box; border-radius: 34px; border: 5px solid #0B1222; box-shadow: 0 24px 48px rgba(0,0,0,.45)" /><figcaption class="mono" style="font-size: 12px; color: #8C95AB">${c[1]}</figcaption></figure>`)}
+</div>
 </section>
 
 
