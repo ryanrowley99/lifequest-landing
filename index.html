@@ -608,11 +608,10 @@ ${s.isText ? html`
 <section style="padding: 130px 24px 40px; display: flex; flex-direction: column; align-items: center; gap: 44px">
 <div style="text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center">
 <span class="mono" style="font-size: 12px; color: rgba(227,226,191,.75)">HOW IT WORKS</span>
-<h2 class="cond" style="margin: 0; font-size: clamp(36px, 5.2vw, 68px); line-height: .95">Your life, mapped.</h2>
-<p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 1.5; color: #BAC0CF">It starts with the questions no app has asked you. <em>What do you actually want? And what keeps getting in the way?</em></p>
+<h2 class="cond" style="margin: 0; font-size: clamp(36px, 5.2vw, 68px); line-height: .95">Three steps.</h2>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 16px; width: 100%; max-width: 1060px">
-${[['01', 'One main objective', 'Pick the one thing that matters this year. Everything else points back to it.'], ['02', 'Every quest has a why', 'Small daily quests, each tied to the goal it serves, so ten minutes never feels like nothing.'], ['03', 'Earn XP, unlock skills', 'Every quest you log earns XP. XP unlocks skills, and skills grow your tree.'], ['04', 'No punishment. Ever.', 'Miss a day, or a week? Nothing breaks. Coming back is the win.']].map((c) => html`
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 16px; width: 100%; max-width: 1060px">
+${[['1', 'Pick your one goal', 'Write the one thing you want and set a target date.'], ['2', 'Daily quests that move it', 'Small quests each day, tied to your goal. Each one you log earns XP.'], ['3', 'Miss a day? Pick up where you left off.', 'There is no streak to lose. A card shows your progress so far.']].map((c) => html`
 <div class="glass" style="padding: 26px 24px; display: flex; flex-direction: column; gap: 12px"><span class="mono" style="font-size: 12px; color: #8C95AB">${c[0]}</span><strong class="cond" style="font-size: 26px; line-height: 1">${c[1]}</strong><span style="font-size: 16px; line-height: 1.5; color: #BAC0CF">${c[2]}</span></div>`)}
 </div>
 </section>
