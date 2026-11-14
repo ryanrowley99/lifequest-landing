@@ -114,7 +114,6 @@
       var title = $(card, '.q-t').textContent;
       card.classList.toggle('done', on);
       card.setAttribute('aria-pressed', on ? 'true' : 'false');
-      card.setAttribute('aria-label', title + (on ? '. Logged. Tap to undo today’s log.' : '. Tap to log it for today.'));
       xp += on ? 10 : -10;
       countTo(xpEl, xp);
       move(card, on ? done : open, !on && cards.indexOf(card) === 0);
@@ -232,7 +231,6 @@
         logged = true;
         side.classList.remove('holding', 'press');
         side.classList.add('logged');
-        side.setAttribute('aria-label', 'Side quest. Read 1 page. Logged.');
         hint.textContent = 'Logged';
         bolts(phone, $(side, '.q-ic'), xpEl);
         xp += 10;
@@ -279,7 +277,6 @@
       logged = false; counted = false; paid = {}; xp = 1240;
       xpEl.textContent = fmt(xp);
       side.classList.remove('logged');
-      side.setAttribute('aria-label', 'Side quest, plus 10 XP. Read 1 page. Hold to log.');
       hint.textContent = 'Hold to log';
       $$(phone, '[data-gem]').forEach(function (g) { g.setAttribute('aria-pressed', 'false'); });
       replay.hidden = true;

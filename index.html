@@ -82,13 +82,13 @@
 <div class="prog" aria-hidden="true"><span data-prog>0/2</span><span class="prog-bar"><i></i></span><span class="prog-ring"></span></div>
 <div class="p-lab q-lab" data-open-lab>Today's quests</div>
 <div class="q-list" data-open>
-<button type="button" class="q" data-quest style="--a:var(--area-health)" aria-pressed="false" aria-label="Easy 20-minute run. Health. Tap to log it for today.">
+<button type="button" class="q" data-quest style="--a:var(--area-health)" aria-pressed="false">
 <span class="q-ic"><span class="glyph"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.5 5.5Q14.3 5.5 14.9 4.9Q15.5 4.3 15.5 3.5Q15.5 2.7 14.9 2.1Q14.3 1.5 13.5 1.5Q12.7 1.5 12.1 2.1Q11.5 2.7 11.5 3.5Q11.5 4.3 12.1 4.9Q12.7 5.5 13.5 5.5ZM9.9 19.4 10.9 15 13 17V23H15V15.5L12.9 13.5L13.5 10.5Q14.5 11.7 15.9 12.3Q17.4 13 19 13V11Q17.6 11 16.5 10.3Q15.3 9.7 14.7 8.6L13.7 7Q13 6 12 6Q11.9 6 11.6 6Q11.3 6.1 11.2 6.1L6 8.3V13H8V9.6L9.8 8.9L8.2 17L3.3 16L2.9 18Z"/></svg></span><svg class="tick" viewBox="0 0 38 38" width="22" height="22" aria-hidden="true" focusable="false"><path pathLength="1" d="M11 19.5 16.5 25 27.5 13.5" fill="none" stroke="#9fd0c0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-<span class="q-tx"><span class="q-t">Easy 20-minute run</span><span class="q-a">health</span></span>
+<span class="q-tx"><span class="q-t">Easy 20-minute run</span><span class="q-a">health</span></span><span class="sr">Tap to log or undo.</span>
 </button>
-<button type="button" class="q" data-quest style="--a:var(--area-growth)" aria-pressed="false" aria-label="Read 10 pages. Growth. Tap to log it for today.">
+<button type="button" class="q" data-quest style="--a:var(--area-growth)" aria-pressed="false">
 <span class="q-ic"><span class="glyph"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 21.5Q11 20.9 9.4 20.4Q7.8 20 6.5 20Q3.7 20 1.7 21Q1.6 21.1 1.5 21.1Q1.3 21.1 1.1 20.9Q1 20.8 1 20.6V6Q1.8 5.4 3 5Q4.6 4.5 6.5 4.5Q8.1 4.5 9.4 4.8Q11 5.2 12 6Q13 5.2 14.6 4.8Q15.9 4.5 17.5 4.5Q19.4 4.5 21 5Q22.2 5.4 23 6V20.6Q23 20.8 22.9 20.9Q22.7 21.1 22.5 21.1Q22.4 21.1 22.3 21Q20.3 20 17.5 20Q16.2 20 14.6 20.4Q13 20.9 12 21.5ZM12 8V19.5Q13 18.9 14.6 18.4Q16.2 18 17.5 18Q19.4 18 21 18.5V7Q19.4 6.5 17.5 6.5Q16.2 6.5 14.6 6.9Q13 7.4 12 8ZM13 11.5Q14.6 10.5 17.5 10.5Q18.9 10.5 20 10.8V9.2Q18.7 9 17.5 9Q14.9 9 13 9.8ZM17.5 11.7Q14.9 11.7 13 12.5V14.2Q14.7 13.2 17.5 13.2Q19.1 13.2 20 13.4V11.9Q18.8 11.7 17.5 11.7ZM20 14.6Q18.7 14.3 17.5 14.3Q14.8 14.3 13 15.1V16.8Q14.7 15.8 17.5 15.8Q19.1 15.8 20 16.1Z"/></svg></span><svg class="tick" viewBox="0 0 38 38" width="22" height="22" aria-hidden="true" focusable="false"><path pathLength="1" d="M11 19.5 16.5 25 27.5 13.5" fill="none" stroke="#9fd0c0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-<span class="q-tx"><span class="q-t">Read 10 pages</span><span class="q-a">growth</span></span>
+<span class="q-tx"><span class="q-t">Read 10 pages</span><span class="q-a">growth</span></span><span class="sr">Tap to log or undo.</span>
 </button>
 </div>
 <div class="p-lab q-lab" data-done-lab hidden>1 done today</div>
@@ -145,7 +145,7 @@
 <div class="p-top" aria-hidden="true"><div class="counters" aria-hidden="true"><span class="counter"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" focusable="false"><path fill="var(--bolt)" d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><span data-xp>1,240</span></span></div></div>
 <div class="p-title">Daily quests</div>
 <div class="d-gap"></div>
-<button type="button" class="q side" data-side style="--a:var(--area-growth)" aria-label="Side quest, plus 10 XP. Read 1 page. Hold to log.">
+<button type="button" class="q side" data-side style="--a:var(--area-growth)">
 <span class="q-ic"><svg class="ring" viewBox="0 0 46 46" aria-hidden="true"><circle class="trk" cx="23" cy="23" r="21.5"/><circle class="arc" pathLength="1" cx="23" cy="23" r="21.5"/></svg><span class="glyph"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 21.5Q11 20.9 9.4 20.4Q7.8 20 6.5 20Q3.7 20 1.7 21Q1.6 21.1 1.5 21.1Q1.3 21.1 1.1 20.9Q1 20.8 1 20.6V6Q1.8 5.4 3 5Q4.6 4.5 6.5 4.5Q8.1 4.5 9.4 4.8Q11 5.2 12 6Q13 5.2 14.6 4.8Q15.9 4.5 17.5 4.5Q19.4 4.5 21 5Q22.2 5.4 23 6V20.6Q23 20.8 22.9 20.9Q22.7 21.1 22.5 21.1Q22.4 21.1 22.3 21Q20.3 20 17.5 20Q16.2 20 14.6 20.4Q13 20.9 12 21.5ZM12 8V19.5Q13 18.9 14.6 18.4Q16.2 18 17.5 18Q19.4 18 21 18.5V7Q19.4 6.5 17.5 6.5Q16.2 6.5 14.6 6.9Q13 7.4 12 8ZM13 11.5Q14.6 10.5 17.5 10.5Q18.9 10.5 20 10.8V9.2Q18.7 9 17.5 9Q14.9 9 13 9.8ZM17.5 11.7Q14.9 11.7 13 12.5V14.2Q14.7 13.2 17.5 13.2Q19.1 13.2 20 13.4V11.9Q18.8 11.7 17.5 11.7ZM20 14.6Q18.7 14.3 17.5 14.3Q14.8 14.3 13 15.1V16.8Q14.7 15.8 17.5 15.8Q19.1 15.8 20 16.1Z"/></svg></span></span>
 <span class="q-tx"><span class="q-a">Side quest · +10 XP</span><span class="q-t">Read 1 page</span><span class="q-a" data-side-hint>Hold to log</span></span>
 </button>
