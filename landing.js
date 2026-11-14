@@ -171,6 +171,33 @@
     mode();
   })();
 
+  // ---- Watch it grow: skills light from the trunk up, a row at a time,
+  // as the section scrolls past. Still (all forty lit) under Reduce Motion. ----
+  (function () {
+    var tree = $(document, '[data-tree]');
+    if (!tree || calm) return;
+    var count = $(document, '[data-tree-count]');
+    var nodes = [];
+    $$(tree, '.tladder').forEach(function (lad, a) {
+      $$(lad, '[data-lv]').forEach(function (li) { nodes.push({ el: li, order: (+li.getAttribute('data-lv') - 1) * 4 + a }); });
+    });
+    var shown = -1, queued = false;
+    function draw() {
+      queued = false;
+      var r = tree.getBoundingClientRect(), vh = window.innerHeight;
+      var t = Math.max(0, Math.min(1, (vh * 0.96 - r.bottom) / (vh * 0.5))); // starts as the trunk comes into view
+      var n = Math.round(t * nodes.length);
+      if (n === shown) return;
+      shown = n;
+      nodes.forEach(function (nd) { nd.el.classList.toggle('lit', nd.order < n); });
+      count.textContent = n;
+    }
+    function ask() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('resize', ask);
+    draw();
+  })();
+
   // ---- Scroll intro: the Q draws, the name appears, the hero settles ----
   (function () {
     var stage = $(document, '[data-intro]');

@@ -250,6 +250,50 @@ button { font: inherit; color: inherit; }
   .js .stick.on { opacity: 1; transform: translate(var(--x), var(--y)) rotate(var(--r)); }
 }
 
+/* Four areas */
+.areas { padding: 110px 20px 30px; display: flex; flex-direction: column; align-items: center; gap: 44px; overflow: hidden; }
+.areas h2, .grow h2 { text-align: center; }
+.fan { list-style: none; margin: 0; padding: 0; width: 100%; max-width: 460px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.area { display: flex; flex-direction: column; gap: 12px; padding: 22px 18px 18px; border-radius: 24px; background: var(--page-mid); border-top: 4px solid var(--a); box-shadow: inset 0 0 0 1px var(--line), 0 22px 44px rgba(0, 0, 0, 0.4); }
+.area svg { color: var(--a); }
+.area h3 { font-size: 28px; line-height: 1; letter-spacing: 1px; }
+.area-q { margin-top: auto; padding: 10px 12px; border-radius: 14px; background: var(--card); box-shadow: 0 3px 0 var(--card-edge); color: var(--card-ink); font-family: var(--display); font-weight: 700; font-size: 17px; line-height: 1.05; text-transform: uppercase; }
+.area-q small { display: block; margin-bottom: 3px; font-weight: 600; font-size: 11px; letter-spacing: 1.6px; color: var(--card-soft); }
+@media (min-width: 860px) {
+  .fan { max-width: none; width: auto; display: flex; justify-content: center; gap: 0; padding: 30px 0 50px; }
+  .area { width: 220px; min-height: 300px; margin: 0 -22px; padding: 28px 22px 22px; transform-origin: 50% 100%; }
+  .area svg { width: 60px; height: 60px; }
+  .area:nth-child(1) { transform: rotate(-12deg) translateY(34px); }
+  .area:nth-child(2) { transform: rotate(-4deg); }
+  .area:nth-child(3) { transform: rotate(4deg); }
+  .area:nth-child(4) { transform: rotate(12deg) translateY(34px); }
+}
+
+/* Watch it grow: the four skill trees, grown by the scroll */
+.grow { padding: 90px 20px 60px; display: flex; flex-direction: column; align-items: center; gap: 40px; }
+.grow-head { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; max-width: 540px; }
+.grow-row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 44px; justify-items: center; align-items: center; width: 100%; max-width: 900px; }
+.tree-fig { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.tree { width: 100%; color: var(--cream); }
+.tladders { display: grid; grid-template-columns: repeat(4, 1fr); }
+.tladder { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.tname { font-family: var(--display); font-weight: 700; font-size: 14px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--cream); }
+.tnodes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; }
+.tnodes li { display: flex; flex-direction: column; align-items: center; }
+.tnodes li + li::before { content: ""; width: 3px; height: 9px; background: var(--on-wash); transition: background 0.3s ease; }
+.tnodes li.lit + li::before { background: var(--a); }
+.tnode { width: 34px; height: 34px; border-radius: 50%; border: 2.5px solid var(--on-track); background: var(--glass); display: grid; place-items: center; color: var(--muted); transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.tnode svg { width: 16px; height: 16px; display: block; fill: currentColor; }
+.tnodes li.lit .tnode { border-color: var(--a); background: var(--a); color: var(--ink); }
+.js .tnodes li:not(.lit) .tnode { transform: scale(0.86); }
+.trunk { display: block; width: 100%; height: 54px; }
+.tree-count { font-family: var(--display); font-weight: 600; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+.tree-count b { color: var(--cream); }
+@media (min-width: 860px) {
+  .grow-row { grid-template-columns: 1fr auto; gap: 80px; }
+  .tree-fig { justify-self: end; }
+}
+
 /* The run-on line */
 .run { padding: 90px 20px; display: flex; justify-content: center; }
 .run p { max-width: 1040px; font-size: clamp(28px, 4.4vw, 58px); line-height: 1.25; letter-spacing: -0.5px; }
