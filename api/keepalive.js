@@ -3,7 +3,7 @@
 // pause means the form fails silently and signups are lost with no error shown.
 //
 // Vercel Cron hits this route once a day, which resets the clock.
-// The anon key is already public — it ships in script.js and is protected by
+// The anon key is already public — it ships in landing.js and is protected by
 // INSERT/UPDATE-only RLS on the signups table. No new exposure here.
 
 const SUPABASE_URL = 'https://rfltqamrgldxckcdgbhl.supabase.co';
