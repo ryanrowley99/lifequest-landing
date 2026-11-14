@@ -65,7 +65,7 @@ st: [{ k: 'smiley', x: 190, y: 90, r: 10, s: 104 }, { t: 'STILL HERE.', k: 'circ
 st: [{ t: 'NOTHING LOST', k: 'circle', bg: cream, c: ink, x: 180, y: 60, r: 12, s: 116 }, { t: 'NO RESET', k: 'pill', bg: 'transparent', c: cream, x: -50, y: 470, r: -8 }] },
 { m: 'April', head: 'Drink the water.', sub: 'The boring quests count too.', tag: 'Today', quest: 'Drink a glass of water', pct: 20, br: 3,
 st: [{ t: 'HYDRATED.', k: 'pill', bg: cream, c: ink, x: 160, y: 110, r: -6 }, { t: 'GLUG.', k: 'circle', bg: amber, c: ink, x: -50, y: 390, r: 10, s: 96 }] },
-{ m: 'May', head: 'First 5k.', sub: 'A new skill unlocks.', tag: 'Today', quest: 'Run 5k without stopping', pct: 31, br: 4,
+{ m: 'May', head: 'First 5k.', sub: 'The XP from it goes toward your next skill point.', tag: 'Today', quest: 'Run 5k without stopping', pct: 31, br: 4,
 st: [{ t: 'YA!', k: 'circle', bg: red, c: ink, x: 190, y: 50, r: -14, s: 104 }, { t: 'UNLOCKED', k: 'pill', bg: cream, c: ink, x: -60, y: 450, r: 6 }] },
 { m: 'June', head: 'Halfway there.', sub: 'Your timeline shows it.', tag: 'Today', quest: 'Read 10 pages', pct: 45, br: 6,
 st: [{ t: 'HALF WAY', k: 'circle', bg: amber, c: ink, x: 185, y: 70, r: 12, s: 110 }] },
@@ -492,13 +492,8 @@ ${joinForm(v, 'top')}
 </section>
 
 <section style="padding: 110px 24px 60px; display: flex; flex-direction: column; align-items: center; gap: 40px; text-align: center">
-<h2 class="cond" style="margin: 0; font-size: clamp(36px, 5.2vw, 68px); line-height: .95">Here's why everything else failed.</h2>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px; width: 100%; max-width: 860px; text-align: left">
-<div class="glass" style="padding: 30px 28px"><strong class="cond" style="display: block; font-size: 72px; line-height: 1">67%</strong><p style="margin: 10px 0 0; font-size: 17px; line-height: 1.5; color: #BAC0CF">of people quit a gamified habit app within four weeks. The novelty is the product.</p></div>
-<div class="glass" style="padding: 30px 28px"><strong class="cond" style="display: block; font-size: 72px; line-height: 1">92%</strong><p style="margin: 10px 0 0; font-size: 17px; line-height: 1.5; color: #BAC0CF">of habit attempts collapse before 60 days. Points and streaks alone don't make things stick.</p></div>
-</div>
-<p style="margin: 0; max-width: 680px; font-size: clamp(18px, 1.8vw, 22px); line-height: 1.5">The points connect to nothing you care about, so you quit. <strong>In Questree, your daily quests move the one goal you picked.</strong></p>
-<p style="margin: 0; font-size: 12px; color: #6F7891">Sources: Gamification Hub retention synthesis (2026); University of Rochester SDT lab.</p>
+<h2 class="cond" style="margin: 0; font-size: clamp(36px, 5.2vw, 68px); line-height: .95">Points that connect to nothing don't last.</h2>
+<p style="margin: 0; max-width: 680px; font-size: clamp(18px, 1.8vw, 22px); line-height: 1.5"><strong>In Questree, your daily quests move the one goal you picked.</strong></p>
 </section>
 
 <section style="padding: 40px 24px 10px; text-align: center">
@@ -684,10 +679,6 @@ ${(v.areas || []).map((ar, _i11) => html`
 <p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">Early access opens in December on iPhone. Join the waitlist and we'll email you the day it's live.</p>
 </details>
 <details style="border-top: 1px solid #2A3756; padding: 0">
-<summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>Is Questree free?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
-<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">Yes, while we're in early access. A paid plan comes later, and we'll tell you well before anything changes.</p>
-</details>
-<details style="border-top: 1px solid #2A3756; padding: 0">
 <summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>Is it on Android?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
 <p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">Not yet. Questree is iPhone only for now.</p>
 </details>
@@ -701,7 +692,7 @@ ${(v.areas || []).map((ar, _i11) => html`
 </details>
 <details style="border-top: 1px solid #2A3756; padding: 0">
 <summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>Do I have to set everything up myself?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
-<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">No. Pick your main objective, add a second one if you want, and Questree suggests quests that fit. Change them or pick your own from the library.</p>
+<p style="margin: 0; padding: 0 4px 28px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #A8B0C3">No. Pick your main objective and Questree suggests quests that fit. Change them or pick your own from the library.</p>
 </details>
 <details style="border-top: 1px solid #2A3756; padding: 0">
 <summary style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 4px; cursor: pointer; font-size: clamp(18px, 1.8vw, 24px)"><span>What do you do with my data?</span><span class="faq-plus" aria-hidden="true" style="font-size: 32px; font-weight: 300; line-height: 1; transition: transform .2s ease">+</span></summary>
