@@ -135,6 +135,36 @@ button { font: inherit; color: inherit; }
   .stat.key { margin: -14px 0; padding: 40px 28px; }
 }
 
+/* A year in Questree: the wheel (a graphic, not an app screen) */
+.year { display: grid; grid-template-columns: minmax(0, 1fr); gap: 26px; justify-items: center; max-width: 1040px; margin: 0 auto; padding: 70px 20px 40px; }
+.year-copy { display: flex; flex-direction: column; gap: 14px; text-align: center; align-items: center; max-width: 460px; }
+.year-copy h2 { font-size: clamp(34px, 4.4vw, 54px); line-height: 0.95; }
+.year-fig { width: 100%; max-width: 440px; margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.wheel { --p: 0.9583; display: block; width: 100%; height: auto; }
+.wheel circle { fill: none; }
+.w-quests { stroke: var(--muted); stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 0.01 1; opacity: 0.55; }
+.w-months { stroke: var(--on-wash); stroke-width: 12; stroke-dasharray: 28 2; }
+.w-fill { stroke: var(--cream); stroke-width: 12; stroke-opacity: 0.5; stroke-dasharray: var(--p) 1; }
+.wheel text { font-family: var(--display); font-weight: 600; text-anchor: middle; text-transform: uppercase; }
+.w-labels text { font-size: 15px; letter-spacing: 1.6px; fill: var(--muted); }
+.w-labels .hi { fill: var(--cream); font-weight: 700; }
+.wheel .w-cp circle { fill: var(--page-mid); stroke: var(--cream); stroke-width: 2.5; transition: fill 0.3s ease; }
+.w-cp text { font-size: 18px; font-weight: 700; fill: var(--cream); transition: fill 0.3s ease; }
+.w-cp path { fill: var(--cream); transition: fill 0.3s ease; }
+.wheel .w-cp.on circle { fill: var(--cream); }
+.w-cp.on text, .w-cp.on path { fill: var(--ink); }
+.w-lab { font-size: 14px; letter-spacing: 2.4px; fill: var(--muted); }
+.w-goal { font-size: 30px; font-weight: 700; letter-spacing: 0.3px; fill: var(--cream); }
+.w-key { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; font-family: var(--display); font-weight: 600; font-size: 14px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--body); }
+.w-key span { display: inline-flex; align-items: center; gap: 8px; }
+.w-key i { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--cream); color: var(--ink); font-style: normal; font-weight: 700; font-size: 13px; letter-spacing: 0; }
+.w-key .k-q { width: 22px; height: 0; border-radius: 0; background: none; border-top: 3px dotted var(--muted); }
+@media (min-width: 860px) {
+  .year { grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; padding: 90px 24px 50px; }
+  .year-copy { text-align: left; align-items: flex-start; justify-self: end; }
+  .year-fig { justify-self: start; }
+}
+
 /* Three steps */
 .steps { padding: 90px 20px 30px; display: flex; flex-direction: column; align-items: center; gap: 36px; }
 .steps-head { text-align: center; display: flex; flex-direction: column; gap: 12px; }

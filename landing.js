@@ -38,6 +38,27 @@
     });
   });
 
+  // ---- Year wheel: the ring fills as the section scrolls past ----
+  (function () {
+    var wheel = $(document, '[data-wheel]');
+    if (!wheel || calm || !('IntersectionObserver' in window)) return; // still: the full year
+    var marks = $$(wheel, '[data-at]').map(function (g) { return { el: g, at: parseFloat(g.getAttribute('data-at')) }; });
+    var END = marks[marks.length - 1].at, queued = false, seen = false;
+    function draw() {
+      queued = false;
+      var r = wheel.getBoundingClientRect(), vh = window.innerHeight;
+      var from = vh * 0.9, to = Math.max(40, vh * 0.45 - r.height / 2);
+      var p = Math.max(0, Math.min(1, (from - r.top) / (from - to))) * END;
+      wheel.style.setProperty('--p', p.toFixed(4));
+      marks.forEach(function (m) { m.el.classList.toggle('on', p >= m.at - 0.002); });
+    }
+    function ask() { if (seen && !queued) { queued = true; requestAnimationFrame(draw); } }
+    new IntersectionObserver(function (en) { seen = en[0].isIntersecting; ask(); }, { rootMargin: '120px' }).observe(wheel);
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('resize', ask);
+    draw();
+  })();
+
   // ---- Replicas animate only while on screen ----
   var phones = $$(document, '[data-phone]');
   if ('IntersectionObserver' in window) {
