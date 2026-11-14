@@ -38,25 +38,137 @@
     });
   });
 
-  // ---- Year wheel: the ring fills as the section scrolls past ----
+  // ---- Quest menu in the year section: tap to log (a tick and the app's
+  // +10 XP), tap again to undo. Works with or without the dial. ----
+  $$(document, '[data-panel]').forEach(function (panel) {
+    var hint = $(panel, '[data-hint]');
+    $$(panel, '[data-q]').forEach(function (q) {
+      q.addEventListener('click', function () {
+        var on = q.getAttribute('aria-pressed') !== 'true';
+        q.setAttribute('aria-pressed', on ? 'true' : 'false');
+        hint.textContent = on ? 'Logged. +10 XP.' : hint.getAttribute('data-idle');
+      });
+    });
+    var cont = $(panel, '[data-continue]');
+    if (cont) cont.addEventListener('click', function () { hint.textContent = 'Right where you left off.'; });
+  });
+
+  // ---- A year in Questree: the dial. Twelve months, three checkpoint stops
+  // and the target date. Desktop: turns with the page scroll (pinned). Mobile:
+  // swipe the dial or use the stop buttons. ----
   (function () {
-    var wheel = $(document, '[data-wheel]');
-    if (!wheel || calm || !('IntersectionObserver' in window)) return; // still: the full year
-    var marks = $$(wheel, '[data-at]').map(function (g) { return { el: g, at: parseFloat(g.getAttribute('data-at')) }; });
-    var END = marks[marks.length - 1].at, queued = false, seen = false;
-    function draw() {
-      queued = false;
-      var r = wheel.getBoundingClientRect(), vh = window.innerHeight;
-      var from = vh * 0.9, to = Math.max(40, vh * 0.45 - r.height / 2);
-      var p = Math.max(0, Math.min(1, (from - r.top) / (from - to))) * END;
-      wheel.style.setProperty('--p', p.toFixed(4));
-      marks.forEach(function (m) { m.el.classList.toggle('on', p >= m.at - 0.002); });
+    var sec = $(document, '[data-year]');
+    if (!sec || calm) return; // still: the ring and the four panels, listed
+    var dial = $(sec, '[data-dial]'), ring = $(sec, '[data-ring]');
+    var panels = $$(sec, '[data-panel]'), shots = $$(sec, '[data-shot]');
+    var stops = $$(sec, '[data-stop]'), sticks = $$(sec, '[data-stick]');
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var AT = [3, 7, 10, 11];                  // the stops: Apr, Aug, Nov, Dec
+    var REST = [0.26, 0.56, 0.81, 0.97];      // where each stop rests on the scroll track
+    var KP = [0, 0.2, 0.32, 0.5, 0.62, 0.76, 0.86, 0.93, 1], KV = [0, 3, 3, 7, 7, 10, 10, 11, 11];
+    var STAR = '<svg viewBox="0 0 24 24" width="12" height="12"><path fill="currentColor" d="M12 0 14.3 9.7 24 12 14.3 14.3 12 24 9.7 14.3 0 12 9.7 9.7Z"/></svg>';
+    var pinned = window.matchMedia('(min-width: 860px) and (min-height: 620px)');
+    var pos = 3, stage = -1, queued = false, tween = 0;
+
+    var html = '';
+    MONTHS.forEach(function (m, i) {
+      var k = AT.indexOf(i);
+      html += '<span class="dial-m' + (k >= 0 ? ' cp' : '') + '" style="--i:' + i + '" data-m="' + i + '">' + (k >= 0 ? '<i>' + (k < 3 ? k + 1 : STAR) + '</i>' : '') + m + '</span>';
+      if (i < 11) for (var t = 1; t <= 3; t++) html += '<span class="dial-t" style="--i:' + (i + t / 4) + '"></span>';
+    });
+    ring.innerHTML = html;
+
+    function nearest(m) {
+      var best = 0;
+      AT.forEach(function (a, k) { if (Math.abs(a - m) < Math.abs(AT[best] - m)) best = k; });
+      return best;
     }
-    function ask() { if (seen && !queued) { queued = true; requestAnimationFrame(draw); } }
-    new IntersectionObserver(function (en) { seen = en[0].isIntersecting; ask(); }, { rootMargin: '120px' }).observe(wheel);
+    function render(p) {
+      pos = Math.max(0, Math.min(11, p));
+      sec.style.setProperty('--pos', pos.toFixed(3));
+      var k = pos < 5 ? 0 : pos < 8.5 ? 1 : pos < 10.5 ? 2 : 3;
+      if (k === stage) return;
+      stage = k;
+      panels.forEach(function (el, i) { el.classList.toggle('on', i === k); });
+      shots.forEach(function (el, i) { el.classList.toggle('on', i === k); el.setAttribute('aria-hidden', i === k ? 'false' : 'true'); });
+      stops.forEach(function (el, i) { el.setAttribute('aria-pressed', i === k ? 'true' : 'false'); });
+      sticks.forEach(function (el) { el.classList.toggle('on', +el.getAttribute('data-stick') === k); });
+    }
+    function track() { var r = sec.getBoundingClientRect(); return { top: r.top + window.scrollY, span: r.height - window.innerHeight }; }
+    function fromScroll() {
+      queued = false;
+      if (!pinned.matches) return;
+      var t = track(), p = t.span > 0 ? Math.max(0, Math.min(1, (window.scrollY - t.top) / t.span)) : 0;
+      for (var i = 1; i < KP.length; i++) {
+        if (p <= KP[i]) {
+          var u = (p - KP[i - 1]) / (KP[i] - KP[i - 1]);
+          u = u * u * (3 - 2 * u);
+          return render(KV[i - 1] + (KV[i] - KV[i - 1]) * u);
+        }
+      }
+      render(11);
+    }
+    function glide(to) {
+      cancelAnimationFrame(tween);
+      var from = pos, t0 = performance.now();
+      (function step(now) {
+        var u = Math.min(1, (now - t0) / 420);
+        render(from + (to - from) * (1 - Math.pow(1 - u, 3)));
+        if (u < 1) tween = requestAnimationFrame(step);
+      })(t0);
+    }
+    function go(k) {
+      k = Math.max(0, Math.min(3, k));
+      if (pinned.matches) { var t = track(); window.scrollTo({ top: t.top + REST[k] * t.span, behavior: 'smooth' }); }
+      else glide(AT[k]);
+    }
+
+    stops.forEach(function (b, k) {
+      b.addEventListener('click', function () { go(k); });
+      b.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        var n = Math.max(0, Math.min(3, k + d));
+        stops[n].focus({ preventScroll: true });
+        go(n);
+      });
+    });
+
+    // Drag or swipe the dial; a plain click on a month goes to its nearest stop.
+    var drag = null;
+    dial.addEventListener('pointerdown', function (e) {
+      drag = { x: e.clientX, y: e.clientY, pos: pos, scroll: window.scrollY, moved: false, id: e.pointerId, m: e.target.closest ? e.target.closest('[data-m]') : null };
+    });
+    dial.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var dx = e.clientX - drag.x, dy = e.clientY - drag.y, wide = pinned.matches;
+      if (!drag.moved && Math.abs(wide ? dy : dx) > 6) {
+        drag.moved = true;
+        cancelAnimationFrame(tween);
+        if (dial.setPointerCapture) dial.setPointerCapture(drag.id);
+      }
+      if (!drag.moved) return;
+      if (wide) window.scrollTo(0, drag.scroll - dy * 3);
+      else render(drag.pos - dx / 80);
+    });
+    function release() {
+      if (!drag) return;
+      var d = drag;
+      drag = null;
+      if (d.moved) { if (!pinned.matches) go(nearest(pos)); }
+      else if (d.m) go(nearest(+d.m.getAttribute('data-m')));
+    }
+    dial.addEventListener('pointerup', release);
+    dial.addEventListener('pointercancel', release);
+
+    function ask() { if (!queued) { queued = true; requestAnimationFrame(fromScroll); } }
+    function mode() { if (pinned.matches) fromScroll(); else render(AT[nearest(pos)]); }
     window.addEventListener('scroll', ask, { passive: true });
     window.addEventListener('resize', ask);
-    draw();
+    if (pinned.addEventListener) pinned.addEventListener('change', mode);
+    render(3);
+    mode();
   })();
 
   // ---- Scroll intro: the Q draws, the name appears, the hero settles ----

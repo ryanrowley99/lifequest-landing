@@ -71,13 +71,13 @@
 </ul>
 </section>
 
-<section class="year" id="year" aria-labelledby="year-h">
-<div class="year-copy">
-<h2 class="cond" id="year-h">A year in Questree.</h2>
-<p class="lede">One main objective, three checkpoints on the way, and a target date at the end. Daily quests fill the months in between.</p>
-</div>
-<figure class="year-fig">
-<svg class="wheel" data-wheel viewBox="0 0 440 440" role="img" aria-label="A year as a ring of twelve months, January to December. Checkpoint 1 in April, checkpoint 2 in August, checkpoint 3 in November, and the target date in December. Daily quests run all the way round.">
+<section class="year" id="year" aria-labelledby="year-h" data-year>
+<div class="year-stage">
+<div class="dial" data-dial aria-hidden="true"><div class="dial-ring" data-ring></div><span class="dial-now"></span></div>
+<div class="year-mid">
+<h2 class="eyebrow" id="year-h">A year in Questree</h2>
+<p class="year-obj"><span class="coin"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0 14.3 9.7 24 12 14.3 14.3 12 24 9.7 14.3 0 12 9.7 9.7Z"/></svg></span><span><small>Main objective</small>Run a half marathon</span></p>
+<svg class="wheel" viewBox="0 0 440 440" role="img" aria-label="A year as a ring of twelve months, January to December. Checkpoint 1 in April, checkpoint 2 in August, checkpoint 3 in November, and the target date in December. Daily quests run all the way round.">
 <circle class="w-quests" cx="220" cy="220" r="126" pathLength="120"/>
 <circle class="w-months" cx="220" cy="220" r="150" pathLength="360" transform="rotate(-89 220 220)"/>
 <circle class="w-fill" cx="220" cy="220" r="150" pathLength="1" transform="rotate(-90 220 220)"/>
@@ -100,10 +100,61 @@
 <g class="w-cp on" data-at="0.8750"><circle cx="113.9" cy="113.9" r="15"/><text x="113.9" y="119.9">3</text></g>
 <g class="w-cp w-end on" data-at="0.9583"><circle cx="181.2" cy="75.1" r="17"/><path transform="translate(172.2 66.1) scale(.75)" d="M12 0 14.3 9.7 24 12 14.3 14.3 12 24 9.7 14.3 0 12 9.7 9.7Z"/></g>
 <text class="w-lab" x="220" y="212">Main objective</text>
-<text class="w-goal" x="220" y="244">Your one goal</text>
+<text class="w-goal" x="220" y="244">Run a half marathon</text>
 </svg>
-<figcaption class="w-key"><span><i class="k-cp">1</i>Checkpoints</span><span><i class="k-end"><svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0 14.3 9.7 24 12 14.3 14.3 12 24 9.7 14.3 0 12 9.7 9.7Z"/></svg></i>Target date</span><span><i class="k-q"></i>Daily quests</span></figcaption>
-</figure>
+<div class="stops" role="group" aria-label="Jump to a checkpoint">
+<button type="button" class="stop" data-stop="0" aria-pressed="true"><i>1</i>Apr<span class="sr">: checkpoint</span></button>
+<button type="button" class="stop" data-stop="1" aria-pressed="false"><i>2</i>Aug<span class="sr">: checkpoint</span></button>
+<button type="button" class="stop" data-stop="2" aria-pressed="false"><i>3</i>Nov<span class="sr">: checkpoint</span></button>
+<button type="button" class="stop" data-stop="3" aria-pressed="false"><i><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0 14.3 9.7 24 12 14.3 14.3 12 24 9.7 14.3 0 12 9.7 9.7Z"/></svg></i>Dec<span class="sr">: target date</span></button>
+</div>
+<ol class="panels">
+<li class="panel on" data-panel="0">
+<p class="eyebrow">Checkpoint 1 · April</p>
+<h3 class="cond">First quests, running.</h3>
+<p class="lede">Small daily quests, all pointed at the half marathon. The first checkpoint is ticked.</p>
+<div class="menu" role="group" aria-label="Today's quests, Health"><button type="button" class="menu-q" data-q aria-pressed="false"><svg class="menu-tick" viewBox="0 0 38 38" width="22" height="22" aria-hidden="true" focusable="false"><path pathLength="1" d="M11 19.5 16.5 25 27.5 13.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="menu-t">Run 2 km</span><span class="menu-xp" aria-hidden="true">+10 XP</span></button><button type="button" class="menu-q" data-q aria-pressed="false"><svg class="menu-tick" viewBox="0 0 38 38" width="22" height="22" aria-hidden="true" focusable="false"><path pathLength="1" d="M11 19.5 16.5 25 27.5 13.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="menu-t">Stretch for 5 min</span><span class="menu-xp" aria-hidden="true">+10 XP</span></button><button type="button" class="menu-q" data-q aria-pressed="false"><svg class="menu-tick" viewBox="0 0 38 38" width="22" height="22" aria-hidden="true" focusable="false"><path pathLength="1" d="M11 19.5 16.5 25 27.5 13.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="menu-t">Drink a glass of water</span><span class="menu-xp" aria-hidden="true">+10 XP</span></button></div>
+<p class="menu-hint" role="status" data-hint data-idle="Tap a quest to log it.">Tap a quest to log it.</p>
+</li>
+<li class="panel" data-panel="1">
+<p class="eyebrow">Checkpoint 2 · August</p>
+<h3 class="cond">Missed a week. Nothing lost.</h3>
+<p class="lede">There is no streak to reset. Your XP, skill trees and days showed up are where you left them.</p>
+<div class="menu" role="group" aria-label="After a week away">
+<button type="button" class="menu-q lit" data-continue>Continue</button>
+<span class="menu-q off"><s>Start over</s><span class="sr"> is not an option in Questree</span></span>
+</div>
+<p class="menu-hint" role="status" data-hint data-idle="Other apps send you back to day one.">Other apps send you back to day one.</p>
+</li>
+<li class="panel" data-panel="2">
+<p class="eyebrow">Checkpoint 3 · November</p>
+<h3 class="cond">Nearly there.</h3>
+<p class="lede">Three checkpoints ticked. A year of quests shows in your skill trees.</p>
+<div class="menu" role="group" aria-label="Today's quests, Health"><button type="button" class="menu-q" data-q aria-pressed="false"><svg class="menu-tick" viewBox="0 0 38 38" width="22" height="22" aria-hidden="true" focusable="false"><path pathLength="1" d="M11 19.5 16.5 25 27.5 13.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="menu-t">Run 2 km</span><span class="menu-xp" aria-hidden="true">+10 XP</span></button><button type="button" class="menu-q" data-q aria-pressed="false"><svg class="menu-tick" viewBox="0 0 38 38" width="22" height="22" aria-hidden="true" focusable="false"><path pathLength="1" d="M11 19.5 16.5 25 27.5 13.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="menu-t">Walk for 30 min</span><span class="menu-xp" aria-hidden="true">+10 XP</span></button><button type="button" class="menu-q" data-q aria-pressed="false"><svg class="menu-tick" viewBox="0 0 38 38" width="22" height="22" aria-hidden="true" focusable="false"><path pathLength="1" d="M11 19.5 16.5 25 27.5 13.5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="menu-t">Be in bed by 10pm</span><span class="menu-xp" aria-hidden="true">+10 XP</span></button></div>
+<p class="menu-hint" role="status" data-hint data-idle="Tap a quest to log it.">Tap a quest to log it.</p>
+</li>
+<li class="panel" data-panel="3">
+<p class="eyebrow">Target date · December</p>
+<h3 class="cond">Half marathon. Done.</h3>
+<p class="lede">Target date reached. Everything you built along the way is still yours.</p>
+</li>
+</ol>
+</div>
+<div class="year-phone">
+<div class="frame">
+<img class="on" data-shot="0" src="shots/standin-home-cp1.webp" width="288" height="628" decoding="async" loading="lazy" alt="Questree Home in April. Main objective: Run a half marathon, 29% of the way to December 2027, checkpoint 1 passed. Today's quests: Run 2 km and Read 10 pages.">
+<img data-shot="1" src="shots/standin-home-cp2.webp" width="288" height="628" decoding="async" loading="lazy" alt="Questree Home in August after a week with nothing logged. The objective is 62% of the way to December 2027, checkpoint 2 passed, and today's quests are waiting.">
+<img data-shot="2" src="shots/standin-home-cp3.webp" width="288" height="628" decoding="async" loading="lazy" alt="Questree Home in November. The objective is 87% of the way to December 2027 with all three checkpoints passed and 171 days showed up.">
+<img data-shot="3" src="shots/standin-you.webp" width="288" height="628" decoding="async" loading="lazy" alt="Questree You screen in December: Level 9, Run a half marathon with 3 of 3 checkpoints, and 188 days showed up on a 16-week grid.">
+</div>
+<span class="stick gold round" data-stick="0" aria-hidden="true" style="--x:-104px;--y:54px;--r:-10deg">Badge earned</span>
+<span class="stick pill" data-stick="0" aria-hidden="true" style="--x:-128px;--y:430px;--r:7deg">Checkpoint 1</span>
+<span class="stick round" data-stick="1" aria-hidden="true" style="--x:-112px;--y:70px;--r:9deg">Nothing lost</span>
+<span class="stick pill line" data-stick="1" aria-hidden="true" style="--x:-120px;--y:440px;--r:-6deg">No streak</span>
+<span class="stick pill" data-stick="2" aria-hidden="true" style="--x:-96px;--y:80px;--r:-8deg">Almost</span>
+<span class="stick gold round" data-stick="3" aria-hidden="true" style="--x:-116px;--y:60px;--r:8deg">Objective reached</span>
+</div>
+</div>
 </section>
 
 <section class="run" aria-label="Questree in one line">
