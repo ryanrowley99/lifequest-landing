@@ -19,21 +19,19 @@
   --line: rgba(255, 255, 255, 0.09);
   --glass: rgba(255, 255, 255, 0.05);
   --error: #f5a77a;
-  /* App grounds, as shipped (lib/homeTrial SCREEN_GROUND_DEFAULT).
-     S95 colour pick B: Ocean on every screen (blue to teal, no violet),
-     three stops at 0 / 50 / 100%. Was Classic / Current / Tide / Deep lagoon. */
-  --home-top: #2f49c4;      /* Home: Ocean */
-  --home-mid: #1d58ad;
-  --home-bottom: #0a6670;
-  --daily-top: #2f49c4;     /* Quests and Daily quests: Ocean */
-  --daily-mid: #1d58ad;
-  --daily-bottom: #0a6670;
-  --skills-top: #2f49c4;    /* Skills: Ocean */
-  --skills-mid: #1d58ad;
-  --skills-bottom: #0a6670;
-  --you-top: #2f49c4;       /* You: Ocean */
-  --you-mid: #1d58ad;
-  --you-bottom: #0a6670;
+  /* App grounds, as shipped (lib/homeTrial SCREEN_GROUND_DEFAULT, pick A).
+     S96: Current's bottom stop darkened in its own hue #0a8aa0 -> #08697a
+     (78% white body text 3.08:1 -> 4.54:1), as in the app. Ocean (pick B) rejected. */
+  --home-top: #4a3fd8;      /* Home: Classic */
+  --home-bottom: #086878;
+  --daily-top: #4a3fd8;     /* Quests and Daily quests: Current */
+  --daily-bottom: #08697a;
+  --skills-top: #4a3fd8;    /* Skills: Tide */
+  --skills-mid: #2a55c8;
+  --skills-bottom: #096a75;
+  --you-top: #4438d4;       /* You: Deep lagoon */
+  --you-mid: #1f4fb0;
+  --you-bottom: #08605a;
   /* App parts */
   --card: #ffffff;          /* quest cards: White everywhere */
   --card-edge: #8f93a6;
@@ -48,7 +46,7 @@
   --on-track: rgba(255, 255, 255, 0.3);
   --on-wash: rgba(255, 255, 255, 0.16);
   --area-health: #a9c98a;
-  --area-social: #d88bb0;
+  --area-social: #d3a7be;   /* S96: the app's Social rose (lib/pillars), was #d88bb0 */
   --area-growth: #8fbfcf;
   --area-work: #cdb27c;
   --flame: #4fa3ff;
@@ -62,7 +60,7 @@
   --frame: #0b1222;
   --rule: #2a3756;
   --cream-hover: #f4f3dc;
-  --tree-shadow: #1b3a8f;   /* S95: bluer, to sit on Ocean (was #1d2a8f) */
+  --tree-shadow: #1d2a8f;
   --notch: #000000;
   --display: "Barlow Condensed", "Arial Narrow", sans-serif;
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
